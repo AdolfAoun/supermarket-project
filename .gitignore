@@ -1,0 +1,23 @@
+# Never commit secrets or local environment
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!**/.env.example
+node_modules/
+.expo/
+dist/
+build/
+coverage/
+*.log
+.DS_Store
+.vscode/settings.json
+backend/uploads/
+receipts/
+*.tsbuildinfo
+*.tmp
+*.temp
+*.sql.local
+mobile/ios/
+mobile/android/

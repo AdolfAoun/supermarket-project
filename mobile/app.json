@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "Lebanon Supermarket",
+    "slug": "lebanon-supermarket",
+    "scheme": "supermarket",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "plugins": [
+      "expo-router",
+      "expo-status-bar",
+      "expo-font"
+    ],
+    "web": {
+      "output": "single"
+    }
+  }
+}
