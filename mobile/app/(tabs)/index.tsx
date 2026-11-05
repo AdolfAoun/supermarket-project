@@ -1,4 +1,7 @@
+import { ConnectionStatus } from '../../components/ConnectionStatus';
 import { PlaceholderScreen } from '../../components/PlaceholderScreen';
 export default function Home() {
-  return <PlaceholderScreen title="Lebanon Supermarket Price Comparison" description="Welcome to your shopping companion." />;
+  return <PlaceholderScreen title="Lebanon Supermarket Price Comparison" description="Welcome to your shopping companion.">
+    <ConnectionStatus />
+  </PlaceholderScreen>;
 }

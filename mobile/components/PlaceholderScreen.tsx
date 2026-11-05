@@ -1,11 +1,13 @@
+import type { ReactNode } from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export function PlaceholderScreen({ title, description }: { title: string; description: string }) {
+export function PlaceholderScreen({ title, description, children }: { title: string; description: string; children?: ReactNode }) {
   return <SafeAreaView style={styles.page} edges={['left', 'right', 'bottom']}>
     <ScrollView contentContainerStyle={styles.content}>
       <Text accessibilityRole="header" style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
+      {children}
     </ScrollView>
   </SafeAreaView>;
 }

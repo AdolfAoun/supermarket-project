@@ -1,6 +1,6 @@
 # Implementation roadmap
 
-**Status:** T01 is **implemented but awaiting final database verification**. Backend checks and SDK 58 migration checks passed; the owner confirmed physical-iPhone operation. MySQL authentication is deliberately deferred. Verification is recorded in `docs/t01-verification.md`. Later milestones remain unstarted. Owner coordinates planning with ChatGPT; Codex implements; Claude may independently review complex modules.
+**Status:** T01 is **complete and manually verified by the owner**. Backend checks and SDK 58 migration checks passed; the owner confirmed physical-iPhone operation. MySQL connectivity succeeds, and the owner confirms final manual verification of the mobile API connection check. Verification is recorded in `docs/t01-verification.md`. Later milestones remain unstarted. Owner coordinates planning with ChatGPT; Codex implements; Claude may independently review complex modules.
 
 ## Working method
 - Start with a small app shell and API health checks.
@@ -11,7 +11,7 @@
 ## Milestones
 | ID | Milestone | Scope | Acceptance criteria | Status |
 |---|---|---|---|---|
-| T01 | Repo/app/server foundation | Expo Router tabs; Express TS; MySQL config; health/db check; docs; secrets hygiene | Mobile launches, backend responds, DB check succeeds, tests run or blockers documented | Implemented but awaiting final database verification |
+| T01 | Repo/app/server foundation | Expo Router tabs; Express TS; MySQL config; health/db check; docs; secrets hygiene | Mobile launches, backend responds, DB check succeeds, tests run or blockers documented | Complete; manually verified by owner |
 | T02 | Catalog and price comparison | Core 5 tables, seed data, product search/detail, verified branch prices and timestamps | Search -> product -> branch comparison works end to end; missing/invalid data handled | Not started |
 | T03 | User accounts and lists | Simple email login; list CRUD; basket comparison | User lists persist; totals calculated only for complete eligible baskets | Not started |
 | T04 | Receipt contribution | Free OCR candidate, photo/upload, review/match/catalog picker, duplicate/quality checks, protected price submission | Known alias matched; unknown product manually chosen; suspect price not auto-verified | Not started |

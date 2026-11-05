@@ -1,5 +1,25 @@
 # T01 verification — 2026-11-04
 
+## Owner acceptance — 2026-11-05
+
+The owner confirms T01 is fully implemented and manually verified, completing the pending physical-device acceptance below. T01 is complete; T02 remains unstarted. The owner authorized review, commit, and push to main with subject `feat: complete T01 mobile API connectivity verification`. Historical blockers below are retained as session history and are superseded by this acceptance and the successful live database check.
+
+## Mobile connection verification update — 2026-11-05
+
+This update supersedes the database blockers in the historical entries below. The owner reports the database/account setup and phone-to-backend browser check now work. This session independently requested the running `GET /api/health/db` at loopback port 3000 and received `{"status":"ok","database":"connected"}`. No credentials or database configuration were changed.
+
+Home now checks `/health/db` using the existing `getApiUrl()` configuration, displaying Checking connection, Backend and database connected, or Connection failed with an actionable message. It handles non-success HTTP responses, network errors, invalid JSON/payloads, and a 10-second timeout. Failed checks offer retry; unmount cancels the request. The existing five tabs and shared styling remain intact, with an optional children slot added to the placeholder layout. No dependencies or architecture changes; T02 remains unstarted.
+
+Checks this session:
+- Mobile and backend `npm run typecheck`: passed.
+- Backend `npm run build`: passed.
+- Backend `npm test`: blocked by sandbox worker-spawn EPERM. The same suite via `node --import tsx --test --test-isolation=none tests/health.test.ts`: 7/7 passed.
+- Live database health: connected, as described above.
+- `git diff --check`: passed (line-ending notices only).
+- `git check-ignore mobile/.env backend/.env`: both ignored; `git ls-files '*env*'` confirms local environment files are untracked. No local configuration or examples modified.
+
+Remaining manual acceptance: restart Expo to load local environment configuration if necessary, open Home on the phone, and confirm the connected message. Stop Express temporarily and retry/reopen Home to confirm a useful failure message; restart Express and tap Retry connection to confirm recovery. Phone rendering and these device error/retry interactions have not been verified in this session. T01 final device acceptance remains pending; no commit or push performed.
+
 ## Session checkpoint — 2026-11-05
 
 **Current status: T01 is implemented but awaiting final database verification.** The owner explicitly authorized saving, committing, and pushing all completed work while postponing MySQL authentication. This supersedes the earlier conditional checkpoint restriction below. Earlier Git/installation statements are historical snapshots, not current completion claims.
