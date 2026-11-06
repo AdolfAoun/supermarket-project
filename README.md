@@ -2,14 +2,15 @@
 
 University Computer Science capstone. Mobile-first application to browse registered products, compare **branch-specific** supermarket prices, build shopping lists and eventually process receipts and evaluate grocery/travel costs.
 
-> **Current state:** T01 is **implemented but awaiting final database verification**. Backend tests (7/7), TypeScript, and production build pass; Expo SDK 58 migration and Expo Doctor (20/20) pass; physical-iPhone operation is owner-confirmed. MySQL is reachable on port 3306, but authentication and successful database health remain unverified. Current work is being checkpointed independently of that deferred verification; see [T01 verification](docs/t01-verification.md). No business features or tables.
+> **Current state:** T01 and T02-A are complete and owner-verified. The T02-A migration and demonstration seed have been imported into local WampServer MySQL; all five table counts match expectations. See [T01 verification](docs/t01-verification.md), [T02-A verification](docs/t02a-verification.md), and [database execution instructions](database/README.md). T02-B has not started; product APIs and UI remain unimplemented.
 
 ## Documentation
 - [`AGENTS.md`](AGENTS.md): coding-agent rules
 - [`docs/requirements.md`](docs/requirements.md): exact 28 submitted requirements and rationales
 - [`docs/architecture.md`](docs/architecture.md): technical architecture
 - [`docs/frontend.md`](docs/frontend.md): screen hierarchy and requirement/button mapping
-- [`docs/database.md`](docs/database.md): proposed MySQL entities and constraints
+- [`docs/database.md`](docs/database.md): implemented catalog schema and later proposed entities
+- [`database/README.md`](database/README.md): migration/seed execution and database verification
 - [`docs/api.md`](docs/api.md): initial REST contracts
 - [`docs/roadmap.md`](docs/roadmap.md): milestones and first Codex task
 - [`docs/decisions.md`](docs/decisions.md): confirmed/open architecture choices
@@ -95,7 +96,7 @@ WAMP MySQL uses port **3306**, confirmed by the owner. The backend default, envi
 - **Address already in use:** stop the previous process with Ctrl+C or select another backend `PORT` and update the mobile URL.
 
 ## Implementation boundaries
-`mobile/app/` contains navigation/screens; `mobile/components/` shares placeholder styling; `mobile/services/` holds public API configuration. `backend/src/modules/health/` owns the health routes; `config/` owns environment and pool setup; `middleware/` handles JSON errors and unknown routes. `database/setup/` contains manual administrative SQL. Empty future directories are intentionally omitted until used. No schema migrations, seeds, authentication, OCR or other feature work has begun.
+`mobile/app/` contains navigation/screens; `mobile/components/` shares placeholder styling; `mobile/services/` holds public API configuration. `backend/src/modules/health/` owns the health routes; `config/` owns environment and pool setup; `middleware/` handles JSON errors and unknown routes. `database/setup/` contains T01 administrative SQL; `database/migrations/`, `database/seeds/` and `database/tests/` contain the T02-A foundation. No business endpoints, authentication or OCR have been implemented.
 
 ## Security
 Do not commit credentials, `.env`, unredacted personal receipts or database dumps containing user data.
