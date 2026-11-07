@@ -1,6 +1,10 @@
 # Implementation roadmap
 
-**Status:** T01 is **complete and manually verified by the owner**. Backend checks and SDK 58 migration checks passed; the owner confirmed physical-iPhone operation. MySQL connectivity succeeds, and the owner confirms final manual verification of the mobile API connection check. Verification is recorded in `docs/t01-verification.md`. T02-A is **complete, imported into local WampServer MySQL, and manually verified by the owner**, with all five table counts matching expectations; see `docs/t02a-verification.md`. T02-B has not started. Owner coordinates planning with ChatGPT; Codex implements; Claude may independently review complex modules.
+On 2026-11-07 the owner confirmed successful physical-iPhone testing, including
+the corrected Product Details and Supermarkets headers, and approved the complete
+T02 milestone. See the [acceptance record](t02cde-verification.md#2026-11-07--final-owner-acceptance).
+
+**Status:** T01 and the complete T02 milestone are finished and owner-accepted. T02 includes catalog SQL/APIs/mobile flows, integration/audit hardening, strict/UTC database sessions and the iPhone header correction. Recorded checks passed: 31 backend tests, 31 mobile tests, 6 live checks and 4 browser groups, package typechecks/builds and Expo compatibility. The owner confirmed final physical-iPhone acceptance. T03 is not started. See `docs/t02-final-cleanup.md`, `docs/t02cde-verification.md` and the historical `docs/t02f-audit.md`.
 
 ## Working method
 - Start with a small app shell and API health checks.
@@ -12,8 +16,8 @@
 | ID | Milestone | Scope | Acceptance criteria | Status |
 |---|---|---|---|---|
 | T01 | Repo/app/server foundation | Expo Router tabs; Express TS; MySQL config; health/db check; docs; secrets hygiene | Mobile launches, backend responds, DB check succeeds, tests run or blockers documented | Complete; manually verified by owner |
-| T02 | Catalog and price comparison | Core 5 tables, seed data, product search/detail, verified branch prices and timestamps | Search -> product -> branch comparison works end to end; missing/invalid data handled | T02-A complete, imported and manually verified; T02-B not started; full T02 acceptance pending |
-| T03 | User accounts and lists | Simple email login; list CRUD; basket comparison | User lists persist; totals calculated only for complete eligible baskets | Not started |
+| T02 | Catalog and price comparison | Core 5 tables, seed data, product search/detail, verified branch prices and timestamps | Search -> product -> branch comparison works end to end; missing/invalid data handled | Complete; owner-approved 2026-11-07 after successful physical-iPhone testing, including corrected headers |
+| T03 | User accounts and lists | Simple email login; list CRUD; basket comparison | User lists persist; totals calculated only for complete eligible baskets | Not started; T02-F R1–R8 proposals require owner approval |
 | T04 | Receipt contribution | Free OCR candidate, photo/upload, review/match/catalog picker, duplicate/quality checks, protected price submission | Known alias matched; unknown product manually chosen; suspect price not auto-verified | Not started |
 | T05 | Cost optimization | 1–2 stores; simple preference controls; basket split and missing-data treatment | Tested example reproduces lowest eligible basket cost | Not started |
 | T06 | Routing and fuel | Origin/destination, branch detours, fuel input, additional travel cost | Costs and constraints verifiable; provider cost/billing clarified | Not started |

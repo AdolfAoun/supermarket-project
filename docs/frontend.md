@@ -1,6 +1,63 @@
 # Frontend screen map and requirements traceability
 
-**Status:** proposed information architecture, not final visual design. Five tabs are a design choice, not five independent systems. Assistant entry point and routing screens come later.
+**Status:** Complete T02 is owner-accepted following successful physical-iPhone testing on 2026-11-07, including both corrected headers. The later feature map below remains planning guidance, not an implementation claim; T03 has not started.
+
+Owner iPhone functional tests passed, with header overlap found on Product Details
+and Supermarket Browsing. The root stack now uses `headerTransparent: false`;
+native navigation owns the top inset while existing left/right/bottom safe areas
+remain unchanged. No extra top padding or automatic scroll inset is added. The
+tab layout is unchanged. The owner verified both corrected layouts on the iPhone;
+see [the layout-fix record](t02cde-verification.md#2026-11-07--owner-iphone-header-layout-correction).
+
+## Implemented catalog flow
+
+Five existing tabs remain. Home retains the backend/database check and adds
+Browse Products and Browse Supermarkets. Explore (`/(tabs)/explore`) uses a
+virtualized catalog from `/api/products`, with 350 ms debounced server search,
+trimmed/encoded input, a 255-character bound, clear, retry and pull-to-refresh.
+Each card displays brand/name/variant/package identity and navigates by canonical
+ID. No price requests occur while browsing. Optional missing/failed images use a
+placeholder. At most 100 products are requested; a cap notice asks users to narrow
+search when 100 rows return. No unsupported pagination is invented.
+
+Root-stack routes (no additional bottom tab):
+
+| Route | Data | Behavior |
+|---|---|---|
+| `/products/:id` | Product detail by ID | Full package identity, Compare branch prices |
+| `/products/:id/prices` | Product detail + comparison in parallel | Server order, all exact minimum ties, observation dates, demo/freshness/availability metadata |
+| `/supermarkets` | Chains with nested branches | Chain/branch names, optional address, nullable coordinates, no maps |
+
+Use `router.navigate` to avoid unnecessary duplicate entries. Headers go back
+through the existing stack; a direct link without history returns to Explore
+(or Home for supermarkets). Back to Explore preserves input; refocusing refreshes
+from the backend. Invalid route IDs perform no fetch; absent/inactive records show
+a safe error and retry/back recovery. Shopping List, Receipts and Profile remain
+placeholders with no misleading new feature actions.
+
+`services/api.ts` centralizes GET, safe errors, a 10-second deadline covering
+headers/body, cancellation and JSON parsing. `services/contracts.ts` validates
+unknown responses before rendering. Decimal strings stay strings; amounts are
+never calculated with floating point. Server ranking is preserved, unexpected
+unsorted/duplicate/malformed comparisons fail closed, and all tied first-price
+amounts receive the same lowest-displayed label. Missing amounts are never zero.
+
+`hooks/useRemote.ts` owns one `services/resource.ts` controller per screen.
+States distinguish idle/loading/loaded/empty/error/refreshing. Refresh retains
+only the same record while loading; failure is an error, not empty success.
+Focus/key changes immediately invalidate request generations (including the
+debounce window); cleanup aborts requests and timers. Late ignored aborts cannot
+publish state after blur/unmount or overwrite a new request. No global store or
+cache is introduced. API demo booleans drive wording, observed timestamps are
+shown in UTC, freshness is not evaluated, and availability says Check with store.
+
+See [T02-C/D/E verification](t02cde-verification.md) for exact automated results,
+the engineering audit, limitations and the required iPhone checklist.
+
+T02-F extends optional-image validation to blank strings and strengthens browser
+coverage to prove server search completion, absence of catalog price prefetch,
+connection-reset recovery and multiple tied labels. The state/navigation design
+remains unchanged; [T02-F](t02f-audit.md) records current results and T03 proposals.
 
 ## Navigation
 
@@ -45,7 +102,7 @@ The mobile shell targets Expo SDK 58. Its existing JavaScript tabs, screen files
 | UR-27 | Backend/admin/source integrations | Receipts, online source when available, validated user contribution; no separate user button required |
 | UR-28 | Comparison/Optimization Results | Price, currency, branch, dates, status, travel, total, missing item marker |
 
-## First prototype only
+## T01 prototype sequence (historical)
 - Implement bottom tabs + simple Home / Explore / Shopping List / Receipts / Profile placeholders.
 - Then deliver one complete flow: Explore -> Search Product -> Product Details -> Price Comparison using backend data.
 - Do not build polished screens for every later requirement at once.

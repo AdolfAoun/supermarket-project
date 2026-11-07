@@ -8,7 +8,9 @@ credentials changes or removal of existing contents is included.
 and manually verified by the owner. All five counts match expectations; see
 [the verification record](../docs/t02a-verification.md). The instructions below
 are for a fresh database; do not rerun the migration or seed in the populated
-local catalog. T02-B has not started.
+local catalog. T02-B now provides read-only catalog APIs; see
+[backend verification](../docs/t02b-verification.md). Its integration tests use
+SELECT-only fixtures and do not require the schema privileges of the T02-A tests.
 
 ## Execute through local phpMyAdmin
 
@@ -51,8 +53,10 @@ local catalog. T02-B has not started.
    establish no real-world prices, availability or actual outlet information.
 
 Both imports enable strict SQL mode and UTC **only for their executing session**.
-Future write connections must set strict mode and UTC independently; this does
-not change server settings or the Express connection pool.
+The Express pool now configures each checkout independently with the same strict/
+date modes and UTC, plus mysql2 `timezone:'Z'`. This changes neither global settings
+nor existing timestamps. Other standalone clients must configure their own
+sessions. See [final cleanup](../docs/t02-final-cleanup.md).
 
 ## Verification
 

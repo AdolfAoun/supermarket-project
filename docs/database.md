@@ -1,6 +1,16 @@
 # MySQL data model
 
-**Status:** T02-A is implemented, imported into local WampServer MySQL, and manually verified by the owner. Counts match: 36 products, 12 aliases, 3 supermarkets, 4 branches and 125 price observations. See [T02-A verification](t02a-verification.md) and [execution instructions](../database/README.md). Other entities below remain proposals; T02-B has not started. No business API or mobile changes.
+**Status:** T02-A is implemented, imported into local WampServer MySQL, and manually verified by the owner. Counts match: 36 products, 12 aliases, 3 supermarkets, 4 branches and 125 price observations. See [T02-A verification](t02a-verification.md) and [execution instructions](../database/README.md). T02-B exposes SELECT-only APIs, now consumed by the T02-C mobile catalog; T02-D/E tests/audit change no schema or data. See [API contracts](api.md) and [integration verification](t02cde-verification.md). Other entities remain proposals.
+
+## Application session configuration
+
+Final T02 cleanup (2026-11-07) configures every pool checkout before use:
+preserve existing modes and add `STRICT_TRANS_TABLES`, `NO_ZERO_DATE`,
+`NO_ZERO_IN_DATE`; set session `time_zone='+00:00'` and driver `timezone:'Z'`.
+This covers new, reused and replacement connections without global configuration
+changes. Setup errors discard the connection and fail the request. Existing
+UTC-convention DATETIME observations and records are not converted or rewritten.
+See [cleanup verification](t02-final-cleanup.md) for regression results/limitations.
 
 ## T02-A implemented foundation
 
@@ -10,7 +20,7 @@
 - Aliases have a stored generated, globally unique normalized key: lowercase, remove ASCII spaces and hyphens. Curated aliases retain size/pack information; collisions fail rather than reassign. Other punctuation, tabs, transliteration and fuzzy matching are not handled. Future exact lookups must use this same normalization. Text comparison follows the case/accent-insensitive collation.
 - Chain names are unique; `(supermarket_id, name)` identifies branches. Required addresses; coordinates must be both absent or both present and bounded. Demo coordinates remain absent instead of being invented.
 - Strictly positive `price DECIMAL(12,2)` is the price of **one complete catalog package**, not receipt line total or a per-kg conversion. Currency permits USD/LBP codes, but the seed uses **USD only**; permitting a code defines no conversion policy. Status is constrained to `pending` (default), `verified`, `flagged`, `rejected`; `outdated` remains derived from future freshness rules.
-- Required `observed_at` records source time; defaulted `created_at` records ingestion time, both `DATETIME(6)` under a UTC convention. Observations cannot predate 1970; future-date plausibility is deferred server validation. Future connections must independently use strict mode/UTC. There are no auto-updated observation timestamps.
+- Required `observed_at` records source time; defaulted `created_at` records ingestion time, both `DATETIME(6)` under a UTC convention. Observations cannot predate 1970; future-date plausibility is deferred server validation. Application pool checkouts now enforce strict mode/UTC; independent tools must configure their own sessions. There are no auto-updated observation timestamps.
 - Current sources: `seed`, `manual`, `online`. Seed notes must begin `DEMONSTRATION DATA`. Receipt source and `receipt_item_id` are deferred **together** until their FK can be enforced; this milestone cannot store unlinked receipt-derived observations.
 - Indexes cover name (identity prefix), brand/category browsing, aliases, branch identity, product/branch/status/time and branch/product. No unique product/branch or product/branch/time constraint: new observations preserve history. Normal operations must insert observations rather than overwrite/delete amounts. No immutability triggers, grants changes or verification workflows are added; privileged SQL can still modify rows. Future server workflows must enforce normal-operation immutability.
 - Seed: 36 products in six categories, 12 aliases, three chains, four fictional Lebanese branch scenarios, 125 explicitly labeled USD observations. Simulated statuses and January 2026 dates are not real verification/freshness claims. Branch four deliberately lacks products 13–36, illustrating incomplete coverage.
@@ -79,6 +89,7 @@ receipt_items 1--0..N prices  (price observation may cite source receipt item)
 4. Supporting tables as features are scheduled.
 
 ## Explicit open decisions
+- T02-F inspected actual EXPLAIN plans, FK/index metadata, row counts and local privileges without record/schema changes. No new indexes were justified. The later final cleanup resolves the non-strict/SYSTEM-timezone application-session finding without global changes. Other historical observations and future proposals remain in [the audit](t02f-audit.md); grants/network settings were not changed or reaudited during cleanup.
 - Future canonical unit conversion, catalog identity edits and alias collision review; T02-A implements the curated identity/normalization described above.
 - Currency conversion policy (including LBP rounding, manual rate update, provenance).
 - Date-of-observation vs upload date; price freshness window.

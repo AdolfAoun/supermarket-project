@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "typeRoots": ["../backend/node_modules/@types"]
+  },
+  "include": ["tests/**/*.ts", "services/**/*.ts"],
+  "exclude": []
+}

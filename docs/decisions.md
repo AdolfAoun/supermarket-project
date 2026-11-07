@@ -27,6 +27,77 @@
 
 ## New decisions protocol
 
+### 2026-11-07 — T02 final session consistency and repository preparation
+The assigned cleanup explicitly authorizes strict SQL mode and UTC application
+sessions, not global/server/credential changes. Configure each callback-pool
+checkout before its existing promise interface returns it: retain current modes,
+add STRICT_TRANS_TABLES/NO_ZERO_DATE/NO_ZERO_IN_DATE and set UTC. Reapply on reuse
+rather than rely on a fire-and-forget async connection event. A setup failure
+destroys the connection and propagates an error; the extra SET per checkout is
+acceptable for this capstone. mysql2 Date conversion also uses timezone Z.
+Historical DATETIME meaning, price policies, records and schema are unchanged.
+The new/extended regressions and requested package checks pass; full owner/iPhone
+acceptance remains pending. No T03, new dependency or broader audit is introduced.
+See [final cleanup](t02-final-cleanup.md).
+
+### 2026-11-06 — T02-F audit corrections and open T03 proposals
+The audit reproduces text-protocol escaping failure under a session-local
+NO_BACKSLASH_ESCAPES mode and blank optional images rejecting valid products.
+Use mysql2 prepared `execute` binding and a blank-image placeholder; keep SQL,
+eligibility, verification, freshness and currency policies unchanged. Stronger
+browser assertions prove completed server search, no price prefetch, transport
+recovery and tied labels. Add read-only EXPLAIN/metadata tooling and typecheck
+backend tests/scripts; no dependencies or speculative indexes.
+The audit records excess local app DDL privileges, wildcard MySQL listeners and
+non-strict/SYSTEM-timezone sessions; no account/service setting is changed.
+[T02-F](t02f-audit.md) proposes R1–R8 for owner approval: canonical whole-package
+list quantities, inactive-item behavior, explicit incomplete/demo basket totals,
+owner-scoped authorization, password hashing, session/storage/expiry choices and
+logout request isolation. The opaque-session recommendation is an alternative to
+D11's proposed JWT approach, not a confirmed replacement. Guest browsing and
+source/freshness/conversion remain open. No T03 feature or new production table
+is implemented; no formal requirement or approved business policy is changed.
+
+### 2026-11-06 — T02-C/D/E mobile integration and hardening
+The assigned task selects the existing five-tab mobile architecture with root
+stack screens for product details, comparison and supermarkets. Use canonical
+IDs and `navigate`, with direct-link back fallbacks. One shared GET client and
+small runtime readers replace duplicated fetch logic; no validation library or
+global store is needed. A screen-local request controller combines aborts with
+generation checks, including during debounce, instead of trusting cancellation
+alone. Search is server-side, trimmed, 350 ms debounced and capped at the existing
+API maximum of 100; pagination remains unsupported and visible as a limitation.
+Amounts remain decimal strings; exact ties use the first backend-ranked amount,
+and invalid ordering fails the contract rather than being silently sorted.
+The client displays backend demo/freshness/availability metadata without deciding
+price eligibility or introducing a freshness cutoff. Reuse installed backend
+tsx/Node test tools rather than adding a mobile test framework; optional rendered
+browser checks use Chrome's existing debugging protocol and a disposable proxy.
+The audit confirmed malformed URL-encoded IDs returned 500; a narrow central
+error correction returns sanitized 400 without touching SQL or price policies.
+These are in-scope implementation choices supporting UR-03/04/05/13/26/28; no
+formal requirement, paid integration, schema, authentication or future milestone
+scope changes. The owner's task confirms T02-B live checks. T02 acceptance still
+requires the owner/iPhone checklist in [verification](t02cde-verification.md).
+
+### 2026-11-06 — T02-B read-only catalog backend
+The assigned task authorizes active product search/detail, nested supermarket
+branches and USD demonstration comparisons. Use existing Express app-factory,
+mysql2, error middleware, Node test runner and Supertest conventions. Simple SQL
+normalization mirrors generated aliases; literal substring search includes name,
+brand, category and aliases, without inferring product equivalence. `EXISTS`
+avoids alias duplicates. Default limit 50, maximum 100, stable ordering and strict
+ID/query validation bound reads. Inactive product details/prices return 404.
+Filter verified USD seed observations before ranking per branch; timestamp then
+observation ID resolve ties. Return decimal-string amounts, UTC observation times,
+explicit demo labeling and check-with-store availability. No freshness policy or
+currency conversion is inferred. A LEFT JOIN nests branches under chains,
+including empty chains, avoiding an additional branch endpoint. These are
+implementation choices within T02-B supporting UR-03/04/05/13/26/28; no formal
+requirements, broader architecture or deferred policies change. SELECT-only MySQL
+CTE fixtures replace temporary writes for adversarial tests. Owner API review
+remains pending; see [verification](t02b-verification.md).
+
 ### 2026-11-06 — T02-A implemented and manually verified
 The assigned task authorizes the five catalog tables, plain numbered SQL migration,
 USD demonstration seed and database checks. Identity includes name, brand,

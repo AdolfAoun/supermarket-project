@@ -7,8 +7,9 @@ export const notFound: RequestHandler = (_req, res) => {
 export const errorHandler: ErrorRequestHandler = (error: unknown, _req, res, _next) => {
   const malformedJson = error instanceof SyntaxError &&
     'type' in error && error.type === 'entity.parse.failed';
-  res.status(malformedJson ? 400 : 500).json({
+  const invalidUrl = error instanceof URIError && 'status' in error && error.status === 400;
+  res.status(malformedJson || invalidUrl ? 400 : 500).json({
     status: 'error',
-    message: malformedJson ? 'Invalid JSON body' : 'Internal server error',
+    message: malformedJson ? 'Invalid JSON body' : invalidUrl ? 'Invalid URL parameter' : 'Internal server error',
   });
 };

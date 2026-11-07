@@ -1,6 +1,35 @@
 # System architecture
 
-**Status:** initial agreed direction; individual integrations are not implemented yet.
+**Status:** T01 and complete T02 are owner-accepted, including final physical-iPhone verification of the corrected headers on 2026-11-07. T03 and external integrations remain unimplemented.
+
+T02-B implements the existing modular-monolith boundary in
+`backend/src/modules/catalog/`: Express routes validate input and format public
+responses; a repository owns parameterized SELECT queries. The repository is
+injectable through the existing app factory for HTTP tests. Real MySQL tests use
+read-only CTE fixtures without changing imported data. No framework, schema or
+mobile architecture changes; health endpoints and centralized errors are reused.
+
+T02-C/D/E extends the existing mobile service boundary with one GET client,
+lightweight runtime contract readers and a screen-local request controller/hook.
+Networking and validation remain separate from presentation. Routes use canonical
+IDs; the Express repository alone selects eligible observations. No global state,
+cache, ORM, framework or package dependency was added. Tests reuse the backend's
+installed tsx/Node tooling; optional Chrome smoke tests use built-in Node APIs.
+The T02-C/D/E backend correction classifies malformed URL parameters as HTTP 400.
+
+T02-F additionally uses mysql2 `execute` for server-bound catalog values, keeping
+SQL/DTOs/policies unchanged. A small injected SQL reader lets regression tests
+exercise the actual production binding under different session SQL modes. Optional
+blank images use placeholders. The read-only plan/metadata audit and backend test
+typecheck add no dependencies. See [T02-F](t02f-audit.md) for environmental security
+findings and **unapproved** T03 alternatives; authentication architecture has not
+been implemented or changed by this audit.
+
+Final T02 cleanup configures strict/date SQL modes and UTC on every pool checkout,
+awaiting the session SET before lending a connection. The existing promise-pool
+interface remains unchanged; setup failure discards that connection. Driver Date
+conversion also uses UTC. No records, globals, credentials or architecture layers
+change. See [cleanup verification](t02-final-cleanup.md).
 
 ## Purpose
 Mobile-first Lebanese supermarket price comparison system, supporting branch-specific prices, receipt-sourced observations, shopping lists, and eventually route-aware multi-store optimization. Build a useful end-to-end MVP before optional sophistication.

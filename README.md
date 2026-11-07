@@ -2,7 +2,18 @@
 
 University Computer Science capstone. Mobile-first application to browse registered products, compare **branch-specific** supermarket prices, build shopping lists and eventually process receipts and evaluate grocery/travel costs.
 
-> **Current state:** T01 and T02-A are complete and owner-verified. The T02-A migration and demonstration seed have been imported into local WampServer MySQL; all five table counts match expectations. See [T01 verification](docs/t01-verification.md), [T02-A verification](docs/t02a-verification.md), and [database execution instructions](database/README.md). T02-B has not started; product APIs and UI remain unimplemented.
+**Latest iPhone check:** the owner confirmed successful testing of the corrected
+Product Details and Supermarkets headers and approved complete T02 on 2026-11-07.
+See [final owner acceptance](docs/t02cde-verification.md#2026-11-07--final-owner-acceptance).
+
+> **Current state:** T01 and the complete T02 milestone are finished and owner-accepted. Catalog search/details, USD demonstration price comparison, branch browsing, integration/audit hardening and final iPhone layout corrections are verified. T03 has not started. See [T02 verification](docs/t02cde-verification.md), [T01 verification](docs/t01-verification.md), [T02-A verification](docs/t02a-verification.md), [T02-B verification](docs/t02b-verification.md), and [database instructions](database/README.md).
+
+Final T02 cleanup now configures strict SQL mode and UTC on every application
+pool checkout. Current cleanup checks pass: 31 backend tests, 31 mobile tests and
+6 live API checks, plus package typechecks/build and Expo compatibility. See
+[final cleanup](docs/t02-final-cleanup.md) for results, repository preparation and
+confirmed owner/iPhone acceptance. T02-F's historical findings and future proposals
+remain in [the audit](docs/t02f-audit.md). T03 remains unimplemented.
 
 ## Documentation
 - [`AGENTS.md`](AGENTS.md): coding-agent rules
@@ -14,6 +25,7 @@ University Computer Science capstone. Mobile-first application to browse registe
 - [`docs/api.md`](docs/api.md): initial REST contracts
 - [`docs/roadmap.md`](docs/roadmap.md): milestones and first Codex task
 - [`docs/decisions.md`](docs/decisions.md): confirmed/open architecture choices
+- [`docs/t02f-audit.md`](docs/t02f-audit.md): system audit, query plans, security findings and T03 approval proposals
 
 ## Intended stack
 React Native + Expo + TypeScript; Node.js + Express + TypeScript; MySQL (WAMP locally); future free OCR option and Google Maps (subject to usage/cost validation).
@@ -42,7 +54,7 @@ Start WAMP and confirm its MySQL service is running on **3306**. Open local phpM
 
 Edit `backend/.env`: set `DB_PASSWORD` to that same password; keep `DB_HOST=127.0.0.1`, `DB_PORT=3306`, `DB_NAME=supermarket_comparison`, `DB_USER=supermarket_app`. Empty passwords deliberately make database health unavailable. The example uses `HOST=0.0.0.0` so the phone can reach Express on the LAN; without a local environment file the backend binds only to loopback. Never forward MySQL or Express ports through your router.
 
-Run `ipconfig` and find the computer's active Wi-Fi/Ethernet IPv4 address. In `mobile/.env`, replace the example address with it, e.g. `EXPO_PUBLIC_API_URL=http://192.168.1.100:3000/api`. This URL is public configuration, never a place for passwords. All future HTTP calls should use `mobile/services/api.ts`. Placeholder screens do not fetch business data.
+Run `ipconfig` and find the computer's active Wi-Fi/Ethernet IPv4 address. In `mobile/.env`, replace the example address with it, e.g. `EXPO_PUBLIC_API_URL=http://192.168.1.100:3000/api`. This URL is public configuration, never a place for passwords. The shared `mobile/services/api.ts` handles all API calls. Explore, product detail/comparison and supermarket screens retrieve real backend data. Preserve existing environment files when already configured.
 
 ## Run (two PowerShell terminals)
 Backend, starting at repository root:
@@ -96,7 +108,7 @@ WAMP MySQL uses port **3306**, confirmed by the owner. The backend default, envi
 - **Address already in use:** stop the previous process with Ctrl+C or select another backend `PORT` and update the mobile URL.
 
 ## Implementation boundaries
-`mobile/app/` contains navigation/screens; `mobile/components/` shares placeholder styling; `mobile/services/` holds public API configuration. `backend/src/modules/health/` owns the health routes; `config/` owns environment and pool setup; `middleware/` handles JSON errors and unknown routes. `database/setup/` contains T01 administrative SQL; `database/migrations/`, `database/seeds/` and `database/tests/` contain the T02-A foundation. No business endpoints, authentication or OCR have been implemented.
+`mobile/app/` contains the five tabs and catalog stack screens; `mobile/components/` shares presentation; `mobile/services/` holds the GET client, runtime readers and request controller; `mobile/hooks/` binds request ownership to screen focus. `backend/src/modules/health/` owns health routes; `backend/src/modules/catalog/` owns read-only catalog/branch SQL. `database/` retains T02-A SQL. Authentication, write workflows, OCR and T03+ remain unimplemented. Run mobile tests after installing both packages: `npm test` and `npm run typecheck:tests` in `mobile/`. Live/browser commands and iPhone acceptance are in [T02-C/D/E verification](docs/t02cde-verification.md).
 
 ## Security
 Do not commit credentials, `.env`, unredacted personal receipts or database dumps containing user data.
