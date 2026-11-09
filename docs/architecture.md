@@ -1,6 +1,29 @@
 # System architecture
 
-**Status:** T01 and complete T02 are owner-accepted, including final physical-iPhone verification on 2026-11-07. T03-A backend authentication and private shopping lists are complete and owner-approved after the owner imported migration 002 and verified the API on 2026-11-09. T03-B basket calculations, T03-C mobile integration and external integrations remain unimplemented.
+**Status:** T01, complete T02 and T03-A are owner-accepted. T03-B backend single-branch basket comparison and fixed USD/LBP normalization are complete and owner-approved after local API acceptance on 2026-11-09. T03-C mobile integration and external integrations remain unimplemented; overall T03 remains in progress.
+
+## T03-B basket calculation boundary
+
+`modules/basket/repository.ts` batch-loads an owned list, its product details,
+catalog branches and latest eligible price matrix in four SELECTs. Its transaction
+sets REPEATABLE READ for that transaction only, acquires the parent `FOR SHARE`
+lock, then establishes a consistent snapshot on the item read. The lock is
+compatible with concurrent comparisons and blocks existing T03-A list mutations
+until snapshot materialization commits. Product activity and prices are read from
+that same snapshot. No migration, record writes or global isolation changes.
+
+`modules/basket/compare.ts` is a pure single-branch coverage/ranking calculation.
+Inactive required items block the whole comparison; missing eligible prices yield
+unranked diagnostics without subtotals. Complete branches rank by exact totals;
+branch ID breaks ordering ties and dense ranks expose equal totals. Only verified
+seed observations qualify, with deterministic timestamp/ID selection. T03-B admits
+both approved currencies; the T02 USD-only API remains unchanged.
+
+`modules/shared/money.ts` centralizes the fixed 90,000 rate and uses BigInt common
+units of 1/9,000,000 USD, exactly representing every existing DECIMAL(12,2) price.
+Only display formatting rounds; calculation and ties stay exact. No new dependency.
+Snapshot lookup and monetary primitives can support later T05 one-stop/exactly-two/
+automatic modes without adding that optimizer now. See [verification](t03b-verification.md).
 
 ## T03-A backend boundaries
 

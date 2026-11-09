@@ -6,7 +6,7 @@ University Computer Science capstone. Mobile-first application to browse registe
 Product Details and Supermarkets headers and approved complete T02 on 2026-11-07.
 See [final owner acceptance](docs/t02cde-verification.md#2026-11-07--final-owner-acceptance).
 
-> **Current state:** T01 and complete T02 are owner-accepted. T03-A backend authentication and private shopping lists are complete and owner-approved after successful migration 002 import and manual API checks on 2026-11-09. Basket calculations (T03-B) and mobile auth/list screens (T03-C) are not implemented. See [T03-A verification and owner steps](docs/t03a-verification.md), [T02 verification](docs/t02cde-verification.md), and [database instructions](database/README.md).
+> **Current state:** T01, complete T02 and T03-A are owner-accepted. T03-B backend single-branch basket comparison and exact fixed USD/LBP conversion are complete and owner-approved after successful local API acceptance on 2026-11-09. Overall T03 remains in progress; mobile auth/list/comparison screens (T03-C) are not implemented. See [T03-B verification and owner steps](docs/t03b-verification.md), [T03-A acceptance](docs/t03a-verification.md), and [database instructions](database/README.md).
 
 Final T02 cleanup now configures strict SQL mode and UTC on every application
 pool checkout. Current cleanup checks pass: 31 backend tests, 31 mobile tests and
@@ -108,7 +108,7 @@ WAMP MySQL uses port **3306**, confirmed by the owner. The backend default, envi
 - **Address already in use:** stop the previous process with Ctrl+C or select another backend `PORT` and update the mobile URL.
 
 ## Implementation boundaries
-`mobile/app/` contains the five tabs and catalog stack screens; `mobile/components/` shares presentation; `mobile/services/` holds the GET client, runtime readers and request controller; `mobile/hooks/` binds request ownership to screen focus. `backend/src/modules/health/` owns health routes; `catalog/` owns read-only catalog/branch SQL; `auth/` owns email/password and opaque sessions; `shopping-lists/` owns private list/item CRUD. `database/` retains T02-A SQL and adds migration 002. No mobile functionality changed in T03-A. Basket calculations, mobile auth/lists and OCR remain deferred. Run mobile tests after installing both packages: `npm test` and `npm run typecheck:tests` in `mobile/`. Live/browser commands and iPhone acceptance are in [T02-C/D/E verification](docs/t02cde-verification.md).
+`mobile/app/` contains the five tabs and catalog stack screens; `mobile/components/` shares presentation; `mobile/services/` holds the GET client, runtime readers and request controller; `mobile/hooks/` binds request ownership to screen focus. `backend/src/modules/health/` owns health routes; `catalog/` owns read-only catalog/branch SQL; `auth/` owns email/password and opaque sessions; `shopping-lists/` owns private list/item CRUD; `basket/` owns single-branch comparison; `shared/money.ts` owns exact fixed-rate arithmetic. T03-B needs no new migration. Mobile functionality is unchanged; mobile auth/lists/comparison, multi-store optimization and OCR remain deferred. Run mobile tests after installing both packages: `npm test` and `npm run typecheck:tests` in `mobile/`. Live/browser commands and iPhone acceptance are in [T02-C/D/E verification](docs/t02cde-verification.md).
 
 ## Security
 Do not commit credentials, `.env`, unredacted personal receipts or database dumps containing user data.

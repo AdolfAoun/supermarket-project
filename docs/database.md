@@ -28,6 +28,16 @@ deletes a product. See [API contracts](api.md).
 
 ## Application session configuration
 
+T03-B adds no schema, migration, seed or observation changes. Basket comparison
+reuses the existing list/product/branch/price keys and indexes. Its four SELECTs
+run in one transaction: owned parent `FOR SHARE`, list/product detail, branches,
+latest eligible price batch. A scoped `SET TRANSACTION ISOLATION LEVEL REPEATABLE
+READ` ensures the nonlocking reads share the item-read snapshot regardless of the
+server default. Existing list writes acquire the same parent exclusively and wait.
+Only transaction/session state changes; price history and stored currencies remain
+unchanged. Selected DECIMAL amounts remain strings and conversion happens in
+backend BigInt arithmetic, with no double conversion in SQL or mysql2.
+
 Final T02 cleanup (2026-11-07) configures every pool checkout before use:
 preserve existing modes and add `STRICT_TRANS_TABLES`, `NO_ZERO_DATE`,
 `NO_ZERO_IN_DATE`; set session `time_zone='+00:00'` and driver `timezone:'Z'`.
@@ -98,7 +108,7 @@ receipt_items 1--0..N prices  (price observation may cite source receipt item)
 ## Nonnegotiable data-quality rules
 - MySQL 8 with InnoDB foreign keys; use integer keys, timestamps, appropriate `UNIQUE` and `CHECK` constraints, indexed common searches, and parameterized queries.
 - `price >= 0` is only a safety floor; business validation may require strictly positive values. Explicitly distinguish unit price from receipt line total.
-- Compare currencies only after explicit conversion. T03-B is approved to use fixed 1 USD = 90,000 LBP, USD-normalized amounts and preserved originals; implementation and rounding/provenance documentation remain deferred. T03-A performs no conversion.
+- T03-B uses fixed 1 USD = 90,000 LBP, exact BigInt USD normalization and preserved original amounts/currencies. The rate is owner-approved demonstration policy, not live market data. Display rounds half up at two decimals; rankings use exact units. T03-A CRUD and T02 USD-only comparison remain unchanged.
 - Keep source observations and verification state. Store `pending`, `verified`, `flagged`, `rejected`; compute `outdated` from age + freshness policy (TBD).
 - Latest verified price for **same product and branch** is candidate for normal comparison, subject to freshness, source policy and conversions. Do not mix different package sizes.
 - Do not count a store's subtotal as a complete basket total if it lacks one or more required items.
@@ -116,7 +126,7 @@ receipt_items 1--0..N prices  (price observation may cite source receipt item)
 ## Explicit open decisions
 - T02-F inspected actual EXPLAIN plans, FK/index metadata, row counts and local privileges without record/schema changes. No new indexes were justified. The later final cleanup resolves the non-strict/SYSTEM-timezone application-session finding without global changes. Other historical observations and future proposals remain in [the audit](t02f-audit.md); grants/network settings were not changed or reaudited during cleanup.
 - Future canonical unit conversion, catalog identity edits and alias collision review; T02-A implements the curated identity/normalization described above.
-- T03-B LBP rounding and fixed-rate provenance/presentation details; fixed 90,000 rate is approved.
+- Future real-world exchange-rate updates and source/freshness policies; T03-B's fixed-rate provenance and rounding are documented in `api.md` and `t03b-verification.md`.
 - Date-of-observation vs upload date; price freshness window.
 - T03-A confirms public T02 browsing and authenticated private lists; no guest list storage.
 - Source trust rules for manually entered vs receipt/online observations.

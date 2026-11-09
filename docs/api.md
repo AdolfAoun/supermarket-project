@@ -1,6 +1,6 @@
 # REST API contracts
 
-**Status:** Complete T02 is owner-accepted after successful physical-iPhone testing on 2026-11-07. T03-A backend authentication and private lists are complete and owner-approved after migration 002 import and manual API checks on 2026-11-09. Mobile auth/lists and basket comparison remain deferred. Cursor/offset pagination remains deferred.
+**Status:** Complete T02 and T03-A are owner-accepted. T03-B single-branch basket comparison and fixed USD/LBP normalization are complete and owner-approved after local API acceptance on 2026-11-09. Mobile auth/lists/comparison remain deferred to T03-C. Cursor/offset pagination remains deferred.
 
 T01 database health returns HTTP 200 with `{"status":"ok","database":"connected"}` or HTTP 503 with `{"status":"error","database":"unavailable"}`. Process health works independently of MySQL. Unknown routes return HTTP 404 with `{"status":"error","message":"Route not found"}`. Unexpected errors return a sanitized HTTP 500; malformed JSON returns HTTP 400. No raw errors are returned. Local browser CORS uses `CORS_ORIGINS`; native requests without Origin are supported.
 
@@ -65,7 +65,6 @@ T01 database health returns HTTP 200 with `{"status":"ok","database":"connected"
 - Use consistent validation, meaningful HTTP status codes, and helpful error messages (without sensitive internals).
 
 ## Deferred route groups (design placeholders, not finalized contracts)
-- `/api/shopping-lists/*` basket comparison only; authentication and CRUD are implemented below.
 - `/api/receipts/*` intake/review/confirmation; `/api/prices/*` reporting, alerts, verification.
 - `/api/optimization/*` basket and route options; `/api/preferences/*`, `/api/favorites/*`.
 - AI assistant is postponed until core backend functions exist.
@@ -119,8 +118,8 @@ items (including items belonging to another list) return the same 404:
 `Shopping list or item not found`. Missing products on addition return 404
 `Product not found`; inactive additions return 400. Existing inactive items are
 preserved, returned with `product.isActive=false`, and may be edited or removed.
-There are no prices, substitutions, inventory statements or basket totals in list
-responses. Empty lists return `items: []`; users without lists get `shoppingLists: []`.
+There are no prices, substitutions, inventory statements or basket totals in CRUD
+responses; the separate T03-B comparison route is documented below. Empty lists return `items: []`; users without lists get `shoppingLists: []`.
 Lists are ordered by ID; items by item ID. No pagination is implemented.
 
 Illustrative registration request and response:
@@ -160,3 +159,81 @@ PATCH item body: `{"quantity":3}`. Detail response shape:
 POST/PATCH item responses wrap that same item under `item`. Summaries contain all
 list fields except `items`. Item operations also update the parent `updatedAt`.
 See [T03-A verification](t03a-verification.md) for commands and test evidence.
+
+## T03-B single-branch basket comparison
+
+`GET /api/shopping-lists/:id/compare` requires the existing bearer session and list
+ownership. It accepts no query parameters or JSON body (400 if supplied); prices,
+totals and users are derived by the server. Missing/foreign lists share T03-A's
+404 `Shopping list or item not found`. Invalid IDs return 400; missing/invalid/
+expired/revoked authentication returns 401. Empty lists return 400 `Shopping list
+is empty`. Unexpected SQL/monetary failures use sanitized 500. Responses are
+`Cache-Control: no-store`.
+
+Price eligibility retains T02's `status='verified' AND source_type='seed'`, with
+**both USD and LBP supported for T03-B**. T02's product-price API stays USD-only.
+Filter eligible observations before selecting one per `(product_id,branch_id)`
+by `observed_at DESC, id DESC`, across currencies together. Never select the
+cheapest historical value or combine physical branches. No freshness cutoff,
+source-policy expansion or inventory inference is introduced.
+
+| Response field | Meaning |
+|---|---|
+| `shoppingList` | `id`, `name`, `updatedAt`, and all required `items` with the T03-A item/product fields, sorted by product ID |
+| `outcome` | `complete`, `no_complete_branches`, or `inactive_products` |
+| `eligibleBranches` | Complete branches only; sorted by exact total, then branch ID. Each contains branch/chain IDs and names, dense `rank`, `totalUsd`, `totalUsdUnits`, and cost `items` |
+| Cost `items` | `productId`, package `quantity`, `originalPrice`, `originalCurrency`, `unitPriceUsd`, `unitPriceUsdUnits`, `lineTotalUsd`, `lineTotalUsdUnits`, UTC `observedAt`, `status:"verified"`, `sourceType:"seed"`, `demonstrationData:true` |
+| `incompleteBranches` | Branch/chain IDs/names and sorted `missingProductIds`; branches are ordered by ID. No partial subtotal or rank |
+| `cheapestBranchIds` | All exact minimum ties in branch-ID order; empty when nothing qualifies |
+| `inactiveProductIds` | Sorted inactive required IDs. Any inactive item blocks the entire basket, preserving all items; eligible/incomplete arrays and cheapest IDs are empty |
+| `displayCurrency` | `USD` |
+| `exchangeRate` | Fixed USD base/LBP quote, `quotePerBase:"90000"`, `policy:"owner_approved_fixed_rate"`, `live:false` |
+| `monetaryPolicy` | `usdUnitDenominator:"9000000"`, `displayDecimals:2`, `rounding:"half_up"`, `ranking:"exact_units"` |
+| `demonstrationData`, `dataLabel`, `freshness` | `true`, explicit invented-data/simulated-verification label, `not_evaluated` |
+| `availabilityNotice` | Exactly one top-level reminder: "Product availability is not verified in real time. Please check with the supermarket before visiting." |
+
+All catalog branches are considered, including those with zero eligible prices.
+If no complete branch exists, return HTTP 200 with empty eligible/cheapest arrays
+and missing-price diagnostics, without a recommendation. Missing coverage means
+missing eligible prices, never an out-of-stock statement. No catalog branches also
+produces `no_complete_branches`. Any inactive required product produces HTTP 200
+`inactive_products`; do not rank a smaller active-only basket.
+
+Monetary strings preserve the original DECIMAL amounts/currencies. Exact integer
+units represent **1/9,000,000 USD** each: USD hundredths multiply by 90,000;
+LBP hundredths already are units. BigInt sums/multiplication/comparison prevent
+binary floating-point error and repeating-decimal truncation. `*UsdUnits` fields
+are decimal integer **strings**, divided by `usdUnitDenominator` for exact USD.
+Only displayed `*Usd` fields round half up to two decimals. Unit/line display
+values must never be summed to reconstruct a basket: only the exact values are
+authoritative. Rounded totals may look equal while ranks differ; exact ties share
+one dense rank and all minimum ties appear in `cheapestBranchIds`.
+
+Illustrative **response excerpt** for one product at quantity two (omitted fields
+are defined above; this is not a claim about current real prices):
+
+```json
+{
+  "outcome": "complete",
+  "eligibleBranches": [{
+    "branchId": 3, "rank": 1, "totalUsd": "3.20", "totalUsdUnits": "28800000",
+    "items": [{
+      "productId": 1, "quantity": 2,
+      "originalPrice": "1.60", "originalCurrency": "USD",
+      "unitPriceUsd": "1.60", "unitPriceUsdUnits": "14400000",
+      "lineTotalUsd": "3.20", "lineTotalUsdUnits": "28800000",
+      "observedAt": "2026-01-15T12:00:00.000000Z",
+      "status": "verified", "sourceType": "seed", "demonstrationData": true
+    }]
+  }],
+  "cheapestBranchIds": [3],
+  "availabilityNotice": "Product availability is not verified in real time. Please check with the supermarket before visiting."
+}
+```
+
+Comparison reads the owned parent under `FOR SHARE` in a scoped REPEATABLE READ
+transaction, then reads items/products, branches and prices on the same consistent
+snapshot. T03-A mutations require the parent's exclusive lock and wait until
+these reads finish. The transaction commits before pure calculation; later edits
+cannot change the already materialized response inputs. See
+[T03-B verification](t03b-verification.md) for precision proofs and owner commands.

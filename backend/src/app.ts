@@ -8,6 +8,8 @@ import { createAuthRepository, type AuthRepository } from './modules/auth/reposi
 import { authRoutes } from './modules/auth/routes.js';
 import { createShoppingListRepository, type ShoppingListRepository } from './modules/shopping-lists/repository.js';
 import { shoppingListRoutes } from './modules/shopping-lists/routes.js';
+import { createBasketRepository, type BasketRepository } from './modules/basket/repository.js';
+import { basketRoutes } from './modules/basket/routes.js';
 
 export function createApp(
   checkDatabase: () => Promise<void>,
@@ -15,6 +17,7 @@ export function createApp(
   catalog: CatalogRepository = createCatalogRepository(),
   auth: AuthRepository = createAuthRepository(),
   shoppingLists: ShoppingListRepository = createShoppingListRepository(),
+  basket: BasketRepository = createBasketRepository(),
 ) {
   const app = express();
   app.disable('x-powered-by');
@@ -25,6 +28,7 @@ export function createApp(
   app.use('/api/health', healthRoutes(checkDatabase));
   app.use('/api', catalogRoutes(catalog));
   app.use('/api/auth', authRoutes(auth));
+  app.use('/api/shopping-lists', basketRoutes(basket, auth));
   app.use('/api/shopping-lists', shoppingListRoutes(shoppingLists, auth));
   app.use(notFound);
   app.use(errorHandler);

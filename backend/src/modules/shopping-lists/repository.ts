@@ -25,7 +25,7 @@ const dates = (alias: string) => `DATE_FORMAT(${alias}.created_at, '%Y-%m-%dT%H:
 function listDto(row: RowDataPacket): ShoppingList {
   return { id: row.id, name: row.name, createdAt: row.created, updatedAt: row.updated };
 }
-async function items(connection: PoolConnection, listId: number): Promise<ListItem[]> {
+export async function readListItems(connection: PoolConnection, listId: number): Promise<ListItem[]> {
   const [rows] = await connection.execute<RowDataPacket[]>(`SELECT i.id, i.product_id, i.quantity, ${dates('i')},
     p.name, p.brand, p.variant, p.size, p.unit, p.pack_quantity, p.category, p.image_url, p.is_active
     FROM shopping_list_items i JOIN products p ON p.id = i.product_id
@@ -60,7 +60,7 @@ export function createShoppingListRepository(database: Pool = pool): ShoppingLis
     await connection.execute('UPDATE shopping_lists SET updated_at = UTC_TIMESTAMP(6) WHERE id = ?', [id]);
   }
   async function findItem(connection: PoolConnection, id: number, itemId: number): Promise<ListItem> {
-    const item = (await items(connection, id)).find(item => item.id === itemId);
+    const item = (await readListItems(connection, id)).find(item => item.id === itemId);
     if (!item) throw missing();
     return item;
   }
@@ -83,7 +83,7 @@ export function createShoppingListRepository(database: Pool = pool): ShoppingLis
       } catch (error) { await connection.rollback(); throw error; }
       finally { connection.release(); }
     },
-    get: (userId, id) => owned(userId, id, async (connection, list) => ({ ...list, items: await items(connection, id) })),
+    get: (userId, id) => owned(userId, id, async (connection, list) => ({ ...list, items: await readListItems(connection, id) })),
     rename: (userId, id, name) => owned(userId, id, async connection => {
       await connection.execute('UPDATE shopping_lists SET name = ?, updated_at = UTC_TIMESTAMP(6) WHERE id = ?', [name, id]);
       const [[row]] = await connection.execute<RowDataPacket[]>(`SELECT l.id, l.name, ${dates('l')}

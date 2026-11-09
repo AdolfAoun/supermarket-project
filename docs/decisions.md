@@ -17,15 +17,50 @@
 | D11 | CONFIRMED | Email/password with scrypt and hashed opaque bearer sessions; seven-day expiry | T03-A task selects opaque sessions; built-in scrypt avoids a new dependency; supersedes provisional Argon2id/JWT ideas |
 | D12 | RECOMMENDED | Free OCR using Google ML Kit, with Tesseract fallback | Test Expo native integration and real receipt accuracy; no per-call fee |
 | D13 | OPEN | AI assistant model/provider | Postpone; OpenAI API may cost money |
-| D14 | RECOMMENDED | Evaluate max two supermarket stops initially | Document any formal UR-18/UR-19 scope limitation and seek approval if needed |
+| D14 | CONFIRMED | Future optimization supports one, exactly two, or automatic one/two physical-branch modes, never exceeding two stops | Owner's T03-B task explicitly approves this boundary; T05 implementation is deferred |
 | D15 | RECOMMENDED | Historical, branch-specific, source-linked price observations | Supports validation/traceability |
 | D16 | CONFIRMED | T02 catalog/price/supermarket browsing remains public; lists require authentication | Explicit T03-A task; no guest list persistence |
-| D17 | CONFIRMED / PARTLY OPEN | T03-B uses fixed 1 USD = 90,000 LBP and USD-normalized basket comparisons, preserving original amounts/currencies | Conversion implementation, rounding and provenance documentation deferred to T03-B |
+| D17 | CONFIRMED | T03-B uses fixed 1 USD = 90,000 LBP, exact BigInt common units and preserved original amounts/currencies | Owner-approved fixed policy, not live data; display rounds half up to cents, ranking/ties use unrounded units |
 | D18 | OPEN | Price freshness cutoff, trust/verification rules and promotion policy | Needed before real price recommendations |
 | D19 | OPEN | Receipt storage retention/privacy/redaction, image quality/duplicate handling | Needed for receipts to meet UR-08 |
 | D20 | OPEN | Advisor-approved scope simplifications and current spec wording | Formal URs remain authoritative until amended |
 
 ## New decisions protocol
+
+### 2026-11-09 — T03-B single-branch comparison and exact currency arithmetic
+
+The owner task authorizes authenticated owned-list comparison without changing
+T02 or authentication contracts. Keep verified **seed** source eligibility, no
+freshness cutoff; admit both USD/LBP to T03-B only as required by the approved
+conversion scope. Latest eligible `(product,branch)` observation wins by timestamp
+then ID across currencies; there is no cheaper-history or per-currency selection.
+
+Choose BigInt arithmetic rather than a decimal library: both currencies have
+DECIMAL(12,2) observations and a fixed integral rate of 90,000. One unit is exactly
+1/9,000,000 USD, so all conversion, package multiplication, sums, comparisons and
+ties are lossless. Original amount/currency and exact units remain in the response;
+two-decimal half-up formatting is display only. Rounding values before summation
+can reverse rankings and is explicitly tested. Dense rank ties order by branch ID.
+
+Only complete individual branches qualify. Incomplete branches expose missing IDs
+without subtotals; no complete branch means no recommendation. Empty lists use
+400; inactive required items yield an explicit blocked 200 with all items retained
+and no active-subset ranking. The single required availability notice appears at
+the response top level. Stock is not tracked. No schema or owner record changes.
+
+A scoped REPEATABLE READ transaction locks the owned parent FOR SHARE before
+establishing the item/product snapshot, then batch-reads branches/prices on the
+same view. Existing parent-exclusive list writes wait; comparisons can coexist.
+Commit before pure calculation to release locks early. This was chosen over
+independent repository reads that could mix quantities, product state and prices.
+
+UR-17's backend single-store basket calculation and supporting UR-04/05/13/28
+behavior are implemented without changing the original requirements. The task
+also confirms future one-stop, exactly-two-stop and automatic one/two-stop modes,
+combined complete coverage and a maximum of two physical branches. Final-stop
+purchase constraints, optimization, routing and mobile flows remain deferred.
+T03-B owner acceptance passed on 2026-11-09; overall T03 remains in progress. See
+[verification](t03b-verification.md).
 
 ### 2026-11-09 — T03-A authentication and shopping-list foundation
 

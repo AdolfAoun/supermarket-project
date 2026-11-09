@@ -4,7 +4,7 @@ On 2026-11-07 the owner confirmed successful physical-iPhone testing, including
 the corrected Product Details and Supermarkets headers, and approved the complete
 T02 milestone. See the [acceptance record](t02cde-verification.md#2026-11-07--final-owner-acceptance).
 
-**Status:** T01, complete T02 and T03-A are owner-accepted. On 2026-11-09 the owner confirmed migration 002 import, creation of all four tables and successful manual authentication/list checks, including duplicate increments and HTTP 401 after logout. T03-A is complete (63 backend tests previously passed, including disposable-MySQL and read-only WAMP checks). Overall T03 remains in progress; T03-B and T03-C are not started. See [T03-A acceptance](t03a-verification.md#2026-11-09--owner-acceptance) and the historical T02 verification records.
+**Status:** T01, complete T02 and T03-A are owner-accepted. T03-B is complete and owner-approved on 2026-11-09 after the accepted 3.90/4.20/4.50 USD basket and missing-product-13 exclusion; its full automated run passed 91 backend tests. Overall T03 remains in progress; T03-C is not started. See [T03-A acceptance](t03a-verification.md#2026-11-09--owner-acceptance), [T03-B verification](t03b-verification.md) and the historical T02 records.
 
 ## Working method
 - Start with a small app shell and API health checks.
@@ -17,7 +17,7 @@ T02 milestone. See the [acceptance record](t02cde-verification.md#2026-11-07--fi
 |---|---|---|---|---|
 | T01 | Repo/app/server foundation | Expo Router tabs; Express TS; MySQL config; health/db check; docs; secrets hygiene | Mobile launches, backend responds, DB check succeeds, tests run or blockers documented | Complete; manually verified by owner |
 | T02 | Catalog and price comparison | Core 5 tables, seed data, product search/detail, verified branch prices and timestamps | Search -> product -> branch comparison works end to end; missing/invalid data handled | Complete; owner-approved 2026-11-07 after successful physical-iPhone testing, including corrected headers |
-| T03 | User accounts and lists | Simple email login; list CRUD; basket comparison | User lists persist; totals calculated only for complete eligible baskets | In progress: T03-A complete and owner-approved 2026-11-09; T03-B/C not started |
+| T03 | User accounts and lists | Simple email login; list CRUD; basket comparison | User lists persist; totals calculated only for complete eligible baskets | In progress: T03-A complete/owner-approved; T03-B complete/owner-approved 2026-11-09; T03-C not started |
 | T04 | Receipt contribution | Free OCR candidate, photo/upload, review/match/catalog picker, duplicate/quality checks, protected price submission | Known alias matched; unknown product manually chosen; suspect price not auto-verified | Not started |
 | T05 | Cost optimization | 1–2 stores; simple preference controls; basket split and missing-data treatment | Tested example reproduces lowest eligible basket cost | Not started |
 | T06 | Routing and fuel | Origin/destination, branch detours, fuel input, additional travel cost | Costs and constraints verifiable; provider cost/billing clarified | Not started |
