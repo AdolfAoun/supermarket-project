@@ -1,6 +1,27 @@
 # System architecture
 
-**Status:** T01 and complete T02 are owner-accepted, including final physical-iPhone verification of the corrected headers on 2026-11-07. T03 and external integrations remain unimplemented.
+**Status:** T01 and complete T02 are owner-accepted, including final physical-iPhone verification on 2026-11-07. T03-A backend authentication and private shopping lists are complete and owner-approved after the owner imported migration 002 and verified the API on 2026-11-09. T03-B basket calculations, T03-C mobile integration and external integrations remain unimplemented.
+
+## T03-A backend boundaries
+
+`modules/auth` owns password hashing, opaque sessions and reusable bearer middleware.
+`modules/shopping-lists` owns private list/item routes and transactional SQL.
+Both repositories are injected through the existing app factory; centralized errors
+keep the existing `{status,message}` envelope. `modules/shared/validation.ts` provides
+the small write-input validators. No dependency, mobile or catalog behavior change.
+
+Passwords use asynchronous built-in Node scrypt with random salts, fixed versioned
+parameters and timing-safe verification. Tokens contain 32 random bytes; only their
+SHA-256 hashes are stored. Database UTC time defines a fixed seven-day expiry;
+logout deletes the current session. Registration requires an explicit login.
+
+Private routes derive users exclusively from sessions. Transactions lock an owned
+list row before reads/mutations, serializing additions, quantity replacement and
+deletion. Product shared locks prevent activity changes during additions. The unique
+list/product constraint backs duplicate identity; application checks and SQL CHECKs
+bound quantities to 1–999 whole registered packages. Existing inactive items remain
+visible and editable/removable; adding inactive products is rejected. T02 endpoints
+remain public. See [verification and migration instructions](t03a-verification.md).
 
 T02-B implements the existing modular-monolith boundary in
 `backend/src/modules/catalog/`: Express routes validate input and format public
@@ -46,7 +67,7 @@ Mobile-first Lebanese supermarket price comparison system, supporting branch-spe
 | Coding | Codex | Claude optional for independent code review |
 
 ## Future/investigational (not initial dependencies)
-- Authentication: simple email/password; Argon2id password hashing and JWT proposed. Implement later and check secure token storage/refresh design before coding.
+- Mobile authentication/storage: T03-C must choose secure device token storage and isolate requests on logout/account changes. Backend scrypt and opaque sessions are implemented in T03-A; earlier Argon2id/JWT ideas were provisional.
 - OCR: Google ML Kit on-device text recognition is the preferred free candidate; Expo development build/native package compatibility needs verification. If too complex, evaluate free Tesseract in backend. Extraction and product interpretation are separate steps.
 - Assistant: postponed; OpenAI API can incur usage charges. A free/low-cost approach is to be evaluated after core features work.
 - Routing: Google Maps pricing and billing may apply; no assumption of unlimited free use.

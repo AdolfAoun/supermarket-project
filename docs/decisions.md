@@ -14,18 +14,47 @@
 | D08 | CONFIRMED | Controlled product catalog; simple normalization/aliases; unknown OCR matches require user selection | Avoid unnecessary ML/fuzzy matcher |
 | D09 | RECOMMENDED | Five bottom tabs: Home, Explore, Shopping List, Receipts, Profile | Subject to UX review; global assistant later |
 | D10 | RECOMMENDED | Modular-monolith Express API and three-tier separation | Simpler than microservices |
-| D11 | RECOMMENDED | Email/password with server hashing (Argon2id), token/session design to finalize | User account required by UR-01; implementation details not final |
+| D11 | CONFIRMED | Email/password with scrypt and hashed opaque bearer sessions; seven-day expiry | T03-A task selects opaque sessions; built-in scrypt avoids a new dependency; supersedes provisional Argon2id/JWT ideas |
 | D12 | RECOMMENDED | Free OCR using Google ML Kit, with Tesseract fallback | Test Expo native integration and real receipt accuracy; no per-call fee |
 | D13 | OPEN | AI assistant model/provider | Postpone; OpenAI API may cost money |
 | D14 | RECOMMENDED | Evaluate max two supermarket stops initially | Document any formal UR-18/UR-19 scope limitation and seek approval if needed |
 | D15 | RECOMMENDED | Historical, branch-specific, source-linked price observations | Supports validation/traceability |
-| D16 | OPEN | Guest browsing vs mandatory login | Guest browsing suggested, not owner-confirmed |
-| D17 | OPEN | USD/LBP exchange rate source, rounding and rate timestamp | Needed before trustworthy mixed-currency comparisons |
+| D16 | CONFIRMED | T02 catalog/price/supermarket browsing remains public; lists require authentication | Explicit T03-A task; no guest list persistence |
+| D17 | CONFIRMED / PARTLY OPEN | T03-B uses fixed 1 USD = 90,000 LBP and USD-normalized basket comparisons, preserving original amounts/currencies | Conversion implementation, rounding and provenance documentation deferred to T03-B |
 | D18 | OPEN | Price freshness cutoff, trust/verification rules and promotion policy | Needed before real price recommendations |
 | D19 | OPEN | Receipt storage retention/privacy/redaction, image quality/duplicate handling | Needed for receipts to meet UR-08 |
 | D20 | OPEN | Advisor-approved scope simplifications and current spec wording | Formal URs remain authoritative until amended |
 
 ## New decisions protocol
+
+### 2026-11-09 — T03-A authentication and shopping-list foundation
+
+The owner task explicitly authorizes backend registration/login/logout/me, hashed
+opaque sessions and four additive tables. Use Node's built-in asynchronous scrypt
+(N=131072, r=8, p=1, 16-byte random salt, 64-byte output) instead of adding an Argon2
+dependency. D11 previously recommended Argon2id without finalizing it. Fixed
+parameters are stored in the hash format. Passwords are 8–128 Unicode code points,
+at most 512 UTF-8 bytes, with no trimming or composition requirements. Registration
+does not log in. Emails use ordinary ASCII syntax, trim/lowercase normalization
+and case-insensitive database uniqueness. Sessions use 32 random bytes, SHA-256
+storage, database-clock seven-day expiry, no sliding extension, and current-session
+deletion on logout. Mobile secure storage is T03-C.
+
+Whole-package quantities are 1–999. Parent list row locks plus transactions and a
+unique list/product key serialize duplicate additions and reject overflow without
+partial changes. PATCH replaces quantities. Foreign/inaccessible resources share
+404; client user IDs are rejected. Inactive products stay in existing lists, can
+have quantities changed or be removed, and cannot be added again. Names may repeat.
+No catalog observation or original requirement is changed. The owner manually
+imports migration 002; automated writes use only a verified disposable server.
+
+The task also confirms future T03-B complete-branch coverage (every required active
+product; inactive required products prevent completeness), no eligible recommendation
+when none qualifies, no inventory inference, a small availability reminder, and
+fixed USD/LBP conversion at 90,000 LBP per USD with original amounts preserved.
+These policies are recorded for future work; calculations and mobile screens are
+not implemented. UR-01 and the list portion of UR-17 are supported; complete T03
+and formal requirement fulfillment are not claimed. See [verification](t03a-verification.md).
 
 ### 2026-11-07 — T02 final session consistency and repository preparation
 The assigned cleanup explicitly authorizes strict SQL mode and UTC application

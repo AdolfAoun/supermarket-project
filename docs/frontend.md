@@ -1,6 +1,6 @@
 # Frontend screen map and requirements traceability
 
-**Status:** Complete T02 is owner-accepted following successful physical-iPhone testing on 2026-11-07, including both corrected headers. The later feature map below remains planning guidance, not an implementation claim; T03 has not started.
+**Status:** Complete T02 is owner-accepted following successful physical-iPhone testing on 2026-11-07, including both corrected headers. T03-A backend auth/lists are implemented; mobile auth/list screens remain deferred to T03-C. The later feature map below remains planning guidance, not an implementation claim.
 
 Owner iPhone functional tests passed, with header overlap found on Product Details
 and Supermarket Browsing. The root stack now uses `headerTransparent: false`;
@@ -108,6 +108,6 @@ The mobile shell targets Expo SDK 58. Its existing JavaScript tabs, screen files
 - Do not build polished screens for every later requirement at once.
 
 ## Open UX decisions
-- Guest browsing is **recommended but not confirmed**; UR-01 does not require login for browsing.
+- T03-A confirms guest T02 browsing; private lists require login. Device token storage and logout/account request isolation will be implemented in T03-C.
 - Initial active list vs multiple-list controls, detail-screen presentation and brand styling are provisional.
 - Price availability is only shown when reliable; otherwise use the explicit check-with-store caveat.

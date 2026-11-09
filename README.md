@@ -6,14 +6,14 @@ University Computer Science capstone. Mobile-first application to browse registe
 Product Details and Supermarkets headers and approved complete T02 on 2026-11-07.
 See [final owner acceptance](docs/t02cde-verification.md#2026-11-07--final-owner-acceptance).
 
-> **Current state:** T01 and the complete T02 milestone are finished and owner-accepted. Catalog search/details, USD demonstration price comparison, branch browsing, integration/audit hardening and final iPhone layout corrections are verified. T03 has not started. See [T02 verification](docs/t02cde-verification.md), [T01 verification](docs/t01-verification.md), [T02-A verification](docs/t02a-verification.md), [T02-B verification](docs/t02b-verification.md), and [database instructions](database/README.md).
+> **Current state:** T01 and complete T02 are owner-accepted. T03-A backend authentication and private shopping lists are complete and owner-approved after successful migration 002 import and manual API checks on 2026-11-09. Basket calculations (T03-B) and mobile auth/list screens (T03-C) are not implemented. See [T03-A verification and owner steps](docs/t03a-verification.md), [T02 verification](docs/t02cde-verification.md), and [database instructions](database/README.md).
 
 Final T02 cleanup now configures strict SQL mode and UTC on every application
 pool checkout. Current cleanup checks pass: 31 backend tests, 31 mobile tests and
 6 live API checks, plus package typechecks/build and Expo compatibility. See
 [final cleanup](docs/t02-final-cleanup.md) for results, repository preparation and
 confirmed owner/iPhone acceptance. T02-F's historical findings and future proposals
-remain in [the audit](docs/t02f-audit.md). T03 remains unimplemented.
+remain in [the audit](docs/t02f-audit.md). T03-A now extends the backend only.
 
 ## Documentation
 - [`AGENTS.md`](AGENTS.md): coding-agent rules
@@ -108,7 +108,7 @@ WAMP MySQL uses port **3306**, confirmed by the owner. The backend default, envi
 - **Address already in use:** stop the previous process with Ctrl+C or select another backend `PORT` and update the mobile URL.
 
 ## Implementation boundaries
-`mobile/app/` contains the five tabs and catalog stack screens; `mobile/components/` shares presentation; `mobile/services/` holds the GET client, runtime readers and request controller; `mobile/hooks/` binds request ownership to screen focus. `backend/src/modules/health/` owns health routes; `backend/src/modules/catalog/` owns read-only catalog/branch SQL. `database/` retains T02-A SQL. Authentication, write workflows, OCR and T03+ remain unimplemented. Run mobile tests after installing both packages: `npm test` and `npm run typecheck:tests` in `mobile/`. Live/browser commands and iPhone acceptance are in [T02-C/D/E verification](docs/t02cde-verification.md).
+`mobile/app/` contains the five tabs and catalog stack screens; `mobile/components/` shares presentation; `mobile/services/` holds the GET client, runtime readers and request controller; `mobile/hooks/` binds request ownership to screen focus. `backend/src/modules/health/` owns health routes; `catalog/` owns read-only catalog/branch SQL; `auth/` owns email/password and opaque sessions; `shopping-lists/` owns private list/item CRUD. `database/` retains T02-A SQL and adds migration 002. No mobile functionality changed in T03-A. Basket calculations, mobile auth/lists and OCR remain deferred. Run mobile tests after installing both packages: `npm test` and `npm run typecheck:tests` in `mobile/`. Live/browser commands and iPhone acceptance are in [T02-C/D/E verification](docs/t02cde-verification.md).
 
 ## Security
 Do not commit credentials, `.env`, unredacted personal receipts or database dumps containing user data.

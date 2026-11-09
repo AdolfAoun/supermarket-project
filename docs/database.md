@@ -1,6 +1,30 @@
 # MySQL data model
 
-**Status:** T02-A is implemented, imported into local WampServer MySQL, and manually verified by the owner. Counts match: 36 products, 12 aliases, 3 supermarkets, 4 branches and 125 price observations. See [T02-A verification](t02a-verification.md) and [execution instructions](../database/README.md). T02-B exposes SELECT-only APIs, now consumed by the T02-C mobile catalog; T02-D/E tests/audit change no schema or data. See [API contracts](api.md) and [integration verification](t02cde-verification.md). Other entities remain proposals.
+**Status:** The owner-verified T02 catalog remains unchanged: 36 products, 12 aliases, 3 supermarkets, 4 branches and 125 observations. T03-A adds migration 002 for users, sessions and shopping lists, tested on disposable MySQL 8.4.7. The owner successfully imported it into local WampServer MySQL and confirmed all four tables on 2026-11-09; Codex did not apply it to the application database. See [T03-A verification](t03a-verification.md) and [execution instructions](../database/README.md). Receipt/supporting entities remain proposals.
+
+## T03-A implemented migration (owner-imported 2026-11-09)
+
+`002_users_and_shopping_lists.sql` runs once after 001, with no seed, ALTER of T02
+tables, catalog writes, database creation or account/grant changes. Four InnoDB
+tables use `INT UNSIGNED` primary keys matching `products.id`, UTC-convention
+`DATETIME(6)` creation/update fields and strict import sessions:
+
+| Table | Constraints and indexes |
+|---|---|
+| `users` | `display_name VARCHAR(80)` nonblank; normalized ASCII `email VARCHAR(254)` case-insensitive UNIQUE; `password_hash VARCHAR(255)` required; created/updated timestamps |
+| `sessions` | User FK CASCADE; unique binary-collated 64-character token hash; user and expiry indexes; creation/expiry timestamps; CHECK expiry > creation |
+| `shopping_lists` | User FK CASCADE; nonblank `name VARCHAR(120)`; `(user_id,id)` index; repeated names allowed; created/updated timestamps |
+| `shopping_list_items` | List FK CASCADE; product FK RESTRICT; unique `(shopping_list_id,product_id)`; product index; `quantity SMALLINT UNSIGNED` CHECK 1–999; created/updated timestamps |
+
+Only hashed tokens are stored. Expiry is seven days from login by database UTC
+time, validated on every authenticated request. Logout deletes a session; expired
+rows remain inert until future maintenance. No automatic cleanup job is added.
+All private mutations and detail reads first lock the owned list row in a
+transaction. Duplicate additions combine quantities under that lock; excess
+quantity rolls back. Product shared locks protect active status during additions.
+List update timestamps also change for item operations. Existing inactive items
+remain retrievable by canonical ID with `product.isActive=false`; removal never
+deletes a product. See [API contracts](api.md).
 
 ## Application session configuration
 
@@ -48,9 +72,10 @@ source/freshness rules and must separate currencies until conversion is defined.
 | `supermarkets` | id PK; name unique | Chain |
 | `branches` | id PK; supermarket_id FK; name; address; latitude; longitude | Chain 1:N branches; unique chain+branch identity |
 | `prices` | id PK; product_id FK; branch_id FK; price DECIMAL; currency; observed_at; status; source_type; source_note; created_at | Append-only normal operations; manual/online/seed sources now, receipt_item_id FK and receipt source later; validated eligible records only for comparison |
-| `users` | id PK; name; email unique; password_hash; created_at | Auth after core catalog |
-| `shopping_lists` | id PK; user_id FK; name; created_at | User 1:N lists |
-| `shopping_list_items` | id PK; shopping_list_id FK; product_id FK; quantity positive | Unique (shopping_list_id, product_id) |
+| `users` | id PK; display_name; normalized email unique; password_hash; created_at; updated_at | T03-A implemented, owner-imported 2026-11-09 |
+| `sessions` | id PK; user_id FK; token_hash unique; created_at; expires_at | Seven-day opaque sessions; user delete cascades |
+| `shopping_lists` | id PK; user_id FK; name; created_at; updated_at | User 1:N lists; user delete cascades |
+| `shopping_list_items` | id PK; shopping_list_id FK; product_id FK; quantity 1–999; timestamps | Unique (shopping_list_id, product_id); list delete cascades; product delete restricted |
 | `receipts` | id PK; user_id FK; branch_id nullable FK; purchase_date; image_path; content_fingerprint; status; created_at | Receipt duplicate checks, private image storage |
 | `receipt_items` | id PK; receipt_id FK; product_id nullable FK; extracted_name; quantity; unit_price; total_price | Original OCR monetary fields preserved; manual product selection permitted |
 
@@ -73,7 +98,7 @@ receipt_items 1--0..N prices  (price observation may cite source receipt item)
 ## Nonnegotiable data-quality rules
 - MySQL 8 with InnoDB foreign keys; use integer keys, timestamps, appropriate `UNIQUE` and `CHECK` constraints, indexed common searches, and parameterized queries.
 - `price >= 0` is only a safety floor; business validation may require strictly positive values. Explicitly distinguish unit price from receipt line total.
-- Compare currencies only after conversion with a **rate and rate timestamp**; conversion strategy/rate source remain to be decided. Do not silently treat USD and LBP as equal.
+- Compare currencies only after explicit conversion. T03-B is approved to use fixed 1 USD = 90,000 LBP, USD-normalized amounts and preserved originals; implementation and rounding/provenance documentation remain deferred. T03-A performs no conversion.
 - Keep source observations and verification state. Store `pending`, `verified`, `flagged`, `rejected`; compute `outdated` from age + freshness policy (TBD).
 - Latest verified price for **same product and branch** is candidate for normal comparison, subject to freshness, source policy and conversions. Do not mix different package sizes.
 - Do not count a store's subtotal as a complete basket total if it lacks one or more required items.
@@ -84,14 +109,14 @@ receipt_items 1--0..N prices  (price observation may cite source receipt item)
 
 ## Rollout
 1. `products`, `product_aliases`, `supermarkets`, `branches`, `prices` (without receipt FK until receipts migration).
-2. `users`, `shopping_lists`, `shopping_list_items`.
+2. `users`, `sessions`, `shopping_lists`, `shopping_list_items` (migration 002 implemented; owner-imported 2026-11-09).
 3. `receipts`, `receipt_items`; add receipt source foreign key to `prices`.
 4. Supporting tables as features are scheduled.
 
 ## Explicit open decisions
 - T02-F inspected actual EXPLAIN plans, FK/index metadata, row counts and local privileges without record/schema changes. No new indexes were justified. The later final cleanup resolves the non-strict/SYSTEM-timezone application-session finding without global changes. Other historical observations and future proposals remain in [the audit](t02f-audit.md); grants/network settings were not changed or reaudited during cleanup.
 - Future canonical unit conversion, catalog identity edits and alias collision review; T02-A implements the curated identity/normalization described above.
-- Currency conversion policy (including LBP rounding, manual rate update, provenance).
+- T03-B LBP rounding and fixed-rate provenance/presentation details; fixed 90,000 rate is approved.
 - Date-of-observation vs upload date; price freshness window.
-- Whether and when guest access is supported.
+- T03-A confirms public T02 browsing and authenticated private lists; no guest list storage.
 - Source trust rules for manually entered vs receipt/online observations.

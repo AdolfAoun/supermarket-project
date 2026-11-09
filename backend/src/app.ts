@@ -4,11 +4,17 @@ import { errorHandler, notFound } from './middleware/errors.js';
 import { healthRoutes } from './modules/health/routes.js';
 import { catalogRoutes } from './modules/catalog/routes.js';
 import { createCatalogRepository, type CatalogRepository } from './modules/catalog/repository.js';
+import { createAuthRepository, type AuthRepository } from './modules/auth/repository.js';
+import { authRoutes } from './modules/auth/routes.js';
+import { createShoppingListRepository, type ShoppingListRepository } from './modules/shopping-lists/repository.js';
+import { shoppingListRoutes } from './modules/shopping-lists/routes.js';
 
 export function createApp(
   checkDatabase: () => Promise<void>,
   origins: string[] = [],
   catalog: CatalogRepository = createCatalogRepository(),
+  auth: AuthRepository = createAuthRepository(),
+  shoppingLists: ShoppingListRepository = createShoppingListRepository(),
 ) {
   const app = express();
   app.disable('x-powered-by');
@@ -18,6 +24,8 @@ export function createApp(
   app.use(express.json({ limit: '16kb' }));
   app.use('/api/health', healthRoutes(checkDatabase));
   app.use('/api', catalogRoutes(catalog));
+  app.use('/api/auth', authRoutes(auth));
+  app.use('/api/shopping-lists', shoppingListRoutes(shoppingLists, auth));
   app.use(notFound);
   app.use(errorHandler);
   return app;

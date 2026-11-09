@@ -1,5 +1,22 @@
 # T02-A catalog SQL
 
+The owner successfully imported migration 002 and confirmed all four new tables
+on 2026-11-09, then approved T03-A after manual API checks. Do not rerun it on the
+current installation. The instructions below are retained for fresh installations.
+
+**T03-A:** Existing populated installations must import only
+[`migrations/002_users_and_shopping_lists.sql`](migrations/002_users_and_shopping_lists.sql)
+after owner review. Do not rerun migration 001, seed 001 or setup scripts. Select
+the existing application database in local phpMyAdmin using the existing schema
+administrator, confirm the four new tables are absent, then import 002 once.
+Inspect `users`, `sessions`, `shopping_lists`, `shopping_list_items`, their keys
+and empty counts; recheck unchanged catalog counts 36/12/3/4/125. DDL commits
+implicitly: stop and inspect any partial failure rather than rerunning blindly.
+No account/grant/server configuration changes are required or authorized.
+See [T03-A verification](../docs/t03a-verification.md) for complete owner commands
+and disposable-server testing. The catalog instructions below describe T02 history
+and fresh installs; they are not instructions to reinitialize the owner's catalog.
+
 Requires MySQL **8.0.16+** for enforced `CHECK` constraints; tested on **8.4.7**.
 Use WAMP's MySQL instance, not MariaDB. No database/user creation, grants changes,
 credentials changes or removal of existing contents is included.
