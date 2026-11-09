@@ -19,7 +19,7 @@ export const ui = StyleSheet.create({
   image: { width: 72, height: 72, borderRadius: 8, backgroundColor: '#e8f1ed' },
 });
 
-export function PageHeader({ title, fallback = '/(tabs)/explore' }: { title: string; fallback?: '/(tabs)/explore' | '/(tabs)' }) {
+export function PageHeader({ title, fallback = '/(tabs)/explore' }: { title: string; fallback?: '/(tabs)/explore' | '/(tabs)' | '/(tabs)/shopping-list' }) {
   return <Stack.Screen options={{ headerShown: true, title, headerLeft: () =>
     <Pressable accessibilityRole="button" accessibilityLabel="Go back" hitSlop={12}
       onPress={() => router.canGoBack() ? router.back() : router.replace(fallback)}>

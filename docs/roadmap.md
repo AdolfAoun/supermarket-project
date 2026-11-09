@@ -4,7 +4,7 @@ On 2026-11-07 the owner confirmed successful physical-iPhone testing, including
 the corrected Product Details and Supermarkets headers, and approved the complete
 T02 milestone. See the [acceptance record](t02cde-verification.md#2026-11-07--final-owner-acceptance).
 
-**Status:** T01, complete T02 and T03-A are owner-accepted. T03-B is complete and owner-approved on 2026-11-09 after the accepted 3.90/4.20/4.50 USD basket and missing-product-13 exclusion; its full automated run passed 91 backend tests. Overall T03 remains in progress; T03-C is not started. See [T03-A acceptance](t03a-verification.md#2026-11-09--owner-acceptance), [T03-B verification](t03b-verification.md) and the historical T02 records.
+**Status:** T01, T02 and all of T03 (A/B/C) are complete and owner-accepted. T03-C passed final physical-iPhone acceptance on 2026-11-09; see [T03-C verification](t03c-verification.md). T04 two-supermarket optimization, T05 routing/fuel and T06 receipt OCR have not started.
 
 ## Working method
 - Start with a small app shell and API health checks.
@@ -17,10 +17,10 @@ T02 milestone. See the [acceptance record](t02cde-verification.md#2026-11-07--fi
 |---|---|---|---|---|
 | T01 | Repo/app/server foundation | Expo Router tabs; Express TS; MySQL config; health/db check; docs; secrets hygiene | Mobile launches, backend responds, DB check succeeds, tests run or blockers documented | Complete; manually verified by owner |
 | T02 | Catalog and price comparison | Core 5 tables, seed data, product search/detail, verified branch prices and timestamps | Search -> product -> branch comparison works end to end; missing/invalid data handled | Complete; owner-approved 2026-11-07 after successful physical-iPhone testing, including corrected headers |
-| T03 | User accounts and lists | Simple email login; list CRUD; basket comparison | User lists persist; totals calculated only for complete eligible baskets | In progress: T03-A complete/owner-approved; T03-B complete/owner-approved 2026-11-09; T03-C not started |
-| T04 | Receipt contribution | Free OCR candidate, photo/upload, review/match/catalog picker, duplicate/quality checks, protected price submission | Known alias matched; unknown product manually chosen; suspect price not auto-verified | Not started |
-| T05 | Cost optimization | 1–2 stores; simple preference controls; basket split and missing-data treatment | Tested example reproduces lowest eligible basket cost | Not started |
-| T06 | Routing and fuel | Origin/destination, branch detours, fuel input, additional travel cost | Costs and constraints verifiable; provider cost/billing clarified | Not started |
+| T03 | User accounts and lists | Simple email login; list CRUD; basket comparison | User lists persist; totals calculated only for complete eligible baskets | Complete; T03-A/B/C owner-approved, with final physical-iPhone acceptance on 2026-11-09 |
+| T04 | Two-supermarket optimization | One, exactly two, or automatic one/two physical branches; simple preferences; basket split and missing-data treatment | Tested example reproduces lowest eligible basket cost within the approved two-stop limit | Not started |
+| T05 | Routing and fuel | Origin/destination, branch detours, fuel input, additional travel cost | Costs and constraints verifiable; provider cost/billing clarified | Not started |
+| T06 | Receipt OCR and contribution | Free OCR candidate, photo/upload, review/match/catalog picker, duplicate/quality/privacy checks, protected price submission | Known alias matched; unknown product manually chosen; suspect price not auto-verified | Not started |
 | T07 | Supporting functions | Favorites, alerts, history, price reports, savings highlight | Each mapped requirement gets a documented acceptance check | Not started |
 | T08 | Natural-language assistant | Evaluate affordable/free design and supported requests | Uses actual backend facts; no invented prices; costs approved first | Not started |
 | T09 | Testing and demo readiness | Security, UX, integration, performance, offline/error handling, docs and coverage | Critical journeys demonstrated; unresolved requirement gaps explicitly documented | Not started |

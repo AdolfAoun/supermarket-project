@@ -1,6 +1,22 @@
 # REST API contracts
 
-**Status:** Complete T02 and T03-A are owner-accepted. T03-B single-branch basket comparison and fixed USD/LBP normalization are complete and owner-approved after local API acceptance on 2026-11-09. Mobile auth/lists/comparison remain deferred to T03-C. Cursor/offset pagination remains deferred.
+**Status:** T02 and all of T03 (A/B/C) are complete and owner-accepted, including final T03-C physical-iPhone acceptance on 2026-11-09. No backend wire contract changed in T03-C. Cursor/offset pagination remains deferred.
+
+## T03-C mobile contract handling
+
+The shared transport adds POST/PATCH/DELETE, JSON bodies, per-request bearer headers
+and empty 204 support without adding authentication to public catalog requests.
+Private readers validate list/item/product IDs, quantities, UTC timestamps, activity,
+money strings and the complete basket structure. They validate server exact-unit
+ordering, dense ranks and cheapest IDs using BigInt only for contract checks, never
+to compute totals or conversions. Mutation responses must match requested identities.
+
+Mobile POST duplicate additions use the returned combined quantity; PATCH replaces
+explicitly. Writes are not automatically retried. Server errors use safe local
+messages instead of trusting raw response text. Protected HTTP 401 invalidates only
+the session generation that issued that request. A late former-session response
+is cancelled rather than overwriting newer private state. Network/500 failures do
+not erase the saved session. See [verification](t03c-verification.md).
 
 T01 database health returns HTTP 200 with `{"status":"ok","database":"connected"}` or HTTP 503 with `{"status":"error","database":"unavailable"}`. Process health works independently of MySQL. Unknown routes return HTTP 404 with `{"status":"error","message":"Route not found"}`. Unexpected errors return a sanitized HTTP 500; malformed JSON returns HTTP 400. No raw errors are returned. Local browser CORS uses `CORS_ORIGINS`; native requests without Origin are supported.
 

@@ -1,6 +1,35 @@
 # System architecture
 
-**Status:** T01, complete T02 and T03-A are owner-accepted. T03-B backend single-branch basket comparison and fixed USD/LBP normalization are complete and owner-approved after local API acceptance on 2026-11-09. T03-C mobile integration and external integrations remain unimplemented; overall T03 remains in progress.
+**Status:** T01, T02 and all of T03 (A/B/C) are complete and owner-accepted, including final T03-C physical-iPhone acceptance on 2026-11-09. T04 optimization, T05 routing/fuel and T06 receipt OCR remain unimplemented.
+
+## T03-C mobile integration
+
+The existing five tabs remain. Profile hosts registration/login/logout; Shopping
+List opens saved lists. Root-stack list editor, catalog picker, product-to-list
+selector and basket comparison screens reuse the existing header/safe-area pattern
+with `headerTransparent:false`. T02 catalog routes and guest behavior are preserved.
+
+The existing API transport now also supports authenticated GET/POST/PATCH/DELETE
+and empty 204 responses. Public catalog calls still carry no bearer token. Separate
+private contract readers validate IDs, quantities, activity, timestamps, money
+strings, complete coverage, exact-unit ordering, dense ranks and cheapest IDs.
+The app displays server monetary strings and never calculates authoritative totals.
+
+One small session controller plus React context/external-store subscription replaces
+the need for a state library. Native tokens persist in Expo SecureStore 58.0.2;
+only the token is saved, not passwords or profiles. Startup validates through me.
+Browser sessions are memory-only because SecureStore has no web implementation.
+Private rendering is gated and keyed by session generation; requests are aborted
+and late continuations rejected on logout/account transitions. An old 401 cannot
+invalidate a new login. Only current-session 401 clears an invalid credential;
+unrelated network/500 errors preserve storage with retry support.
+
+Focus-owned resource and mutation controllers reject stale results and prevent
+repeat taps synchronously. Confirmed item responses update affected rows in place;
+focus/manual reads reconcile list state in the background, without
+optimistic quantity math or automatic retry of incrementing POSTs. A timeout may
+have reached the server, so errors ask the user to reload before repeating a write.
+See [T03-C verification](t03c-verification.md).
 
 ## T03-B basket calculation boundary
 
@@ -22,7 +51,7 @@ both approved currencies; the T02 USD-only API remains unchanged.
 `modules/shared/money.ts` centralizes the fixed 90,000 rate and uses BigInt common
 units of 1/9,000,000 USD, exactly representing every existing DECIMAL(12,2) price.
 Only display formatting rounds; calculation and ties stay exact. No new dependency.
-Snapshot lookup and monetary primitives can support later T05 one-stop/exactly-two/
+Snapshot lookup and monetary primitives can support later T04 one-stop/exactly-two/
 automatic modes without adding that optimizer now. See [verification](t03b-verification.md).
 
 ## T03-A backend boundaries
@@ -90,7 +119,7 @@ Mobile-first Lebanese supermarket price comparison system, supporting branch-spe
 | Coding | Codex | Claude optional for independent code review |
 
 ## Future/investigational (not initial dependencies)
-- Mobile authentication/storage: T03-C must choose secure device token storage and isolate requests on logout/account changes. Backend scrypt and opaque sessions are implemented in T03-A; earlier Argon2id/JWT ideas were provisional.
+- Mobile authentication/storage: T03-C implements native SecureStore and session-scoped request isolation; the owner verified physical-iPhone persistence after restarting Expo Go. Backend scrypt and opaque sessions are unchanged.
 - OCR: Google ML Kit on-device text recognition is the preferred free candidate; Expo development build/native package compatibility needs verification. If too complex, evaluate free Tesseract in backend. Extraction and product interpretation are separate steps.
 - Assistant: postponed; OpenAI API can incur usage charges. A free/low-cost approach is to be evaluated after core features work.
 - Routing: Google Maps pricing and billing may apply; no assumption of unlimited free use.

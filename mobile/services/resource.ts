@@ -22,7 +22,7 @@ export function createResource<T>(
     controller?.abort(); controller = undefined;
   }
   function emit(next: ResourceState<T>) { state = next; publish(next); }
-  function start(key: string, load: (signal: AbortSignal) => Promise<T>, options: { delay?: number; refresh?: boolean } = {}) {
+  function start(key: string, load: (signal: AbortSignal) => Promise<T>, options: { delay?: number; refresh?: boolean; retainOnError?: boolean } = {}) {
     cancel();
     const ownGeneration = generation;
     controller = new AbortController();
@@ -36,12 +36,22 @@ export function createResource<T>(
         if (generation === ownGeneration) emit({ key, status: isEmpty(value) ? 'empty' : 'loaded', data: value, error: null });
       } catch (error) {
         if (generation !== ownGeneration) return;
-        emit({ key, status: 'error', data: null,
+        emit({ key, status: 'error', data: options.retainOnError ? previous : null,
           error: error instanceof ApiError ? error.message : 'Unable to load this information. Please retry.' });
       }
     };
     if (options.delay) clearDelay = later(() => { void run(); }, options.delay);
     else void run();
   }
-  return { start, cancel };
+  function update(key: string, change: (current: T) => T): boolean {
+    if (state.key !== key || state.data === null) return false;
+    cancel(); // A read started before this confirmed change must not overwrite it.
+    const data = change(state.data);
+    // Invalidating an old read is enough when no visible value changed. Avoid a
+    // page-wide React update merely because an item operation started.
+    if (data === state.data && (state.status === 'loaded' || state.status === 'empty') && state.error === null) return true;
+    emit({ key, data, status: isEmpty(data) ? 'empty' : 'loaded', error: null });
+    return true;
+  }
+  return { start, cancel, update };
 }

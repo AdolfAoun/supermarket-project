@@ -18,11 +18,15 @@ export const schedule: Schedule = (callback, milliseconds) => {
   const timer = setTimeout(callback, milliseconds);
   return () => clearTimeout(timer);
 };
-interface ClientOptions {
+export interface ClientOptions {
   baseUrl?: () => string;
   fetch?: typeof fetch;
   timeoutMs?: number;
   schedule?: Schedule;
+}
+export interface RequestOptions {
+  method?: 'GET' | 'POST' | 'PATCH' | 'DELETE'; body?: object; token?: string;
+  signal?: AbortSignal; errorMessage?: (status: number) => string;
 }
 function httpError(status: number): ApiError {
   const message = status === 404 ? 'This item was not found or is no longer active.'
@@ -32,12 +36,13 @@ function httpError(status: number): ApiError {
   return new ApiError('http', message, status);
 }
 
-export function createApiClient(options: ClientOptions = {}) {
-  const transport = options.fetch ?? ((...args: Parameters<typeof fetch>) => fetch(...args));
-  const later = options.schedule ?? schedule;
-  async function get<T>(path: string, read: (value: unknown) => T, signal?: AbortSignal): Promise<T> {
+export function createApiClient(clientOptions: ClientOptions = {}) {
+  const transport = clientOptions.fetch ?? ((...args: Parameters<typeof fetch>) => fetch(...args));
+  const later = clientOptions.schedule ?? schedule;
+  async function request<T>(path: string, read: (value: unknown) => T, options: RequestOptions = {}): Promise<T> {
+    const signal = options.signal;
     if (signal?.aborted) throw new ApiError('cancelled', 'Request cancelled.');
-    const base = (options.baseUrl ?? getApiUrl)();
+    const base = (clientOptions.baseUrl ?? getApiUrl)();
     const controller = new AbortController();
     let rejectAbort: (error: ApiError) => void = () => {};
     const aborted = new Promise<never>((_resolve, reject) => { rejectAbort = reject; });
@@ -49,10 +54,15 @@ export function createApiClient(options: ClientOptions = {}) {
     const clearDeadline = later(() => {
       rejectAbort(new ApiError('timeout', 'The request timed out. Check your connection and retry.'));
       controller.abort();
-    }, options.timeoutMs ?? 10_000);
+    }, clientOptions.timeoutMs ?? 10_000);
     const work = async () => {
-      const response = await transport(`${base}${path}`, { method: 'GET', signal: controller.signal, headers: { Accept: 'application/json' } });
-      if (!response.ok) throw httpError(response.status);
+      const response = await transport(`${base}${path}`, { method: options.method ?? 'GET', signal: controller.signal,
+        headers: { Accept: 'application/json', ...(options.body ? { 'Content-Type': 'application/json' } : {}),
+          ...(options.token ? { Authorization: `Bearer ${options.token}` } : {}) },
+        ...(options.body ? { body: JSON.stringify(options.body) } : {}) });
+      if (!response.ok) throw options.errorMessage
+        ? new ApiError('http', options.errorMessage(response.status), response.status) : httpError(response.status);
+      if (response.status === 204) return read(undefined);
       let value: unknown;
       try { value = await response.json(); }
       catch { throw new ApiError('invalid_response', 'The server returned invalid data. Please retry.'); }
@@ -69,7 +79,7 @@ export function createApiClient(options: ClientOptions = {}) {
       signal?.removeEventListener('abort', cancel);
     }
   }
-  return { get };
+  return { request, get: <T>(path: string, read: (value: unknown) => T, signal?: AbortSignal) => request(path, read, { signal }) };
 }
 
 export const CATALOG_LIMIT = 100;

@@ -17,7 +17,7 @@
 | D11 | CONFIRMED | Email/password with scrypt and hashed opaque bearer sessions; seven-day expiry | T03-A task selects opaque sessions; built-in scrypt avoids a new dependency; supersedes provisional Argon2id/JWT ideas |
 | D12 | RECOMMENDED | Free OCR using Google ML Kit, with Tesseract fallback | Test Expo native integration and real receipt accuracy; no per-call fee |
 | D13 | OPEN | AI assistant model/provider | Postpone; OpenAI API may cost money |
-| D14 | CONFIRMED | Future optimization supports one, exactly two, or automatic one/two physical-branch modes, never exceeding two stops | Owner's T03-B task explicitly approves this boundary; T05 implementation is deferred |
+| D14 | CONFIRMED | Future optimization supports one, exactly two, or automatic one/two physical-branch modes, never exceeding two stops | Owner's T03-B task approves this boundary; revised roadmap places it in T04, still unimplemented |
 | D15 | RECOMMENDED | Historical, branch-specific, source-linked price observations | Supports validation/traceability |
 | D16 | CONFIRMED | T02 catalog/price/supermarket browsing remains public; lists require authentication | Explicit T03-A task; no guest list persistence |
 | D17 | CONFIRMED | T03-B uses fixed 1 USD = 90,000 LBP, exact BigInt common units and preserved original amounts/currencies | Owner-approved fixed policy, not live data; display rounds half up to cents, ranking/ties use unrounded units |
@@ -26,6 +26,44 @@
 | D20 | OPEN | Advisor-approved scope simplifications and current spec wording | Formal URs remain authoritative until amended |
 
 ## New decisions protocol
+
+### 2026-11-09 — T03-C mobile authentication, lists and basket results
+
+After owner acceptance, T03-B was committed/pushed as `e0e597b` before any T03-C
+changes. The owner explicitly authorized continuing T03-C separately. Preserve
+five tabs; put auth forms in Profile, saved lists in Shopping List, and additional
+list/product-picking/comparison screens in the root stack. Keep the accepted
+nontransparent iOS headers and existing safe-area edges. No backend/schema change.
+
+Add only `expo-secure-store ~58.0.2`, matching the installed SDK 58 native manifest
+and official Expo Go compatibility. Use the OS-backed native storage without custom
+encryption/biometrics. Persist only the opaque token; validate it via `/auth/me`
+on startup. Browser sessions remain in memory, with a visible explanation, because
+SecureStore does not support web. No insecure persistent browser substitute.
+
+Use a small injected session controller with React context/useSyncExternalStore,
+serialized storage writes, generation guards and aborts instead of a state library.
+Hide private UI immediately at logout, remove local credentials, and attempt server
+revocation. A remote failure is reported without restoring private UI. Native
+storage failures are reported; failed/obsolete login saves are cleaned up and their
+issued server tokens revoked on a best-effort basis. Current protected-request 401
+invalidates the session; unrelated failures preserve it. An old account's late 401
+cannot clear a newer login.
+
+Reuse existing catalog search and request controllers. POST adds/increments while
+PATCH explicitly replaces quantities; no optimistic aggregation or automatic
+increment retries. Validate private responses and exact-unit ranks while keeping
+all monetary display values as strings; backend remains authoritative. Render
+all server cheapest ties, inactive/no-complete outcomes, named missing coverage,
+demo/freshness labels and one backend availability notice at the result bottom.
+
+These changes implement mobile portions of UR-01/04/17/28 while preserving the
+original requirements and T02 guest access. No future optimization, inventory,
+receipt, routing or assistant scope is introduced. The owner approved T03-C after
+final physical-iPhone testing on 2026-11-09, completing overall T03, and authorized
+a separate commit/push. The revised sequence is T04 two-supermarket optimization,
+T05 routing/fuel, T06 receipt OCR; none is implemented by this checkpoint. See
+[verification](t03c-verification.md).
 
 ### 2026-11-09 — T03-B single-branch comparison and exact currency arithmetic
 

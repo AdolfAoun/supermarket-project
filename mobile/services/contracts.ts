@@ -20,7 +20,7 @@ export interface Comparison {
 
 export class InvalidPayload extends Error {}
 function invalid(): never { throw new InvalidPayload('Invalid API response'); }
-function object(value: unknown): Record<string, unknown> {
+export function object(value: unknown): Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value)
     ? value as Record<string, unknown> : invalid();
 }
@@ -49,7 +49,7 @@ function image(value: unknown): string | null {
     return ['http:', 'https:'].includes(parsed.protocol) && !parsed.username && !parsed.password ? url : null;
   } catch { return null; } // An unusable optional image must not hide a valid product.
 }
-function readProduct(value: unknown): Product {
+export function readProduct(value: unknown): Product {
   const row = object(value);
   const packQuantity = positive(row.packQuantity);
   if (!Number.isInteger(packQuantity) || packQuantity > 65535) invalid();
@@ -76,7 +76,7 @@ function amount(value: unknown): string {
 function compareAmounts(a: string, b: string): number {
   return a.length - b.length || (a < b ? -1 : a > b ? 1 : 0);
 }
-function timestamp(value: unknown): string {
+export function timestamp(value: unknown): string {
   const s = text(value);
   if (!/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{6}Z$/.test(s)) invalid();
   // The API preserves MySQL microseconds; ECMAScript guarantees parsing only

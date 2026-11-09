@@ -1,0 +1,235 @@
+import assert from 'node:assert/strict';
+import http from 'node:http';
+import fs from 'node:fs';
+import path from 'node:path';
+import os from 'node:os';
+import { spawn } from 'node:child_process';
+import { once } from 'node:events';
+
+// Called only by the verified disposable-MySQL integration fixture. This proxy
+// may forward writes, so it explicitly refuses the owner's ordinary API port.
+export async function runPrivateBrowser(api: string) {
+  const target = new URL(api);
+  assert.equal(target.hostname, '127.0.0.1'); assert.notEqual(target.port, '3000'); assert.ok(target.port);
+  const root = path.resolve('dist/web'); assert.ok(fs.existsSync(path.join(root, 'index.html')));
+  let itemGate: Promise<void> | undefined, releaseItem = () => {}, failNextAddition = false, additionRequests = 0, detailReads = 0;
+  let itemWrites = 0;
+  function holdItemRequest() { itemGate = new Promise<void>(resolve => { releaseItem = () => { itemGate = undefined; resolve(); }; }); }
+  const server = http.createServer(async (req, res) => {
+    try {
+      const url = new URL(req.url!, 'http://localhost');
+      if (url.pathname.startsWith('/api/')) {
+        const chunks: Buffer[] = []; for await (const chunk of req) chunks.push(Buffer.from(chunk));
+        const body = Buffer.concat(chunks);
+        if ((req.method === 'PATCH' || req.method === 'DELETE') && url.pathname.includes('/items/')) itemWrites++;
+        if (req.method === 'GET' && /^\/api\/shopping-lists\/\d+$/.test(url.pathname)) detailReads++;
+        if (req.method === 'POST' && url.pathname.endsWith('/items')) {
+          additionRequests++;
+          if (failNextAddition) { failNextAddition = false; res.writeHead(500).end('Private test failure'); return; }
+        }
+        if ((req.method === 'PATCH' || req.method === 'POST' || req.method === 'DELETE') && url.pathname.includes('/items') && itemGate) await itemGate;
+        const response = await fetch(`${api}${url.pathname.slice(4)}${url.search}`, { method: req.method,
+          headers: { 'Content-Type': 'application/json', ...(req.headers.authorization ? { Authorization: req.headers.authorization } : {}) },
+          ...(body.length ? { body } : {}) });
+        res.writeHead(response.status, { 'Content-Type': 'application/json' }); res.end(await response.text()); return;
+      }
+      const file = path.resolve(root, `.${decodeURIComponent(url.pathname)}`);
+      if (file !== root && !file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
+      const selected = fs.existsSync(file) && fs.statSync(file).isFile() ? file : path.join(root, 'index.html');
+      const type: Record<string, string> = { '.js': 'application/javascript', '.html': 'text/html', '.ttf': 'font/ttf', '.png': 'image/png' };
+      res.writeHead(200, { 'Content-Type': type[path.extname(selected)] ?? 'application/octet-stream' }); fs.createReadStream(selected).pipe(res);
+    } catch { res.writeHead(502).end('Test proxy unavailable'); }
+  });
+  server.listen(0, '127.0.0.1'); await once(server, 'listening');
+  const origin = `http://127.0.0.1:${(server.address() as import('node:net').AddressInfo).port}`;
+  const profile = fs.mkdtempSync(path.join(os.tmpdir(), 't03c-browser-'));
+  const chrome = spawn(process.env.BROWSER_EXECUTABLE ?? 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+    ['--headless=new', '--disable-gpu', '--no-first-run', '--disable-background-networking', '--no-default-browser-check',
+      '--remote-debugging-port=0', '--remote-debugging-address=127.0.0.1', `--user-data-dir=${profile}`, 'about:blank'], { windowsHide: true, stdio: 'ignore' });
+  const closed = once(chrome, 'close'); let socket: WebSocket | undefined;
+  let call!: (method: string, params?: object) => Promise<any>;
+  try {
+    const portFile = path.join(profile, 'DevToolsActivePort'), started = Date.now();
+    while (!fs.existsSync(portFile)) {
+      assert.ok(Date.now() - started < 15000, 'Chrome startup timed out'); await new Promise(resolve => setTimeout(resolve, 50));
+    }
+    const port = fs.readFileSync(portFile, 'utf8').split('\n')[0];
+    const pages = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json() as { type: string; webSocketDebuggerUrl: string }[];
+    socket = new WebSocket(pages.find(p => p.type === 'page')!.webSocketDebuggerUrl); await once(socket, 'open');
+    let sequence = 0; const pending = new Map<number, { resolve: (v: any) => void; reject: (e: Error) => void }>();
+    const errors: string[] = [];
+    socket.addEventListener('message', event => {
+      const message = JSON.parse(String(event.data));
+      if (message.id) { const task = pending.get(message.id); pending.delete(message.id);
+        if (message.error) task?.reject(new Error(message.error.message)); else task?.resolve(message.result); }
+      if (message.method === 'Runtime.exceptionThrown') errors.push(message.params.exceptionDetails.text);
+    });
+    call = (method, params = {}) => new Promise((resolve, reject) => {
+      const id = ++sequence; pending.set(id, { resolve, reject }); socket!.send(JSON.stringify({ id, method, params }));
+    });
+    const evaluate = async (expression: string) => {
+      const result = await call('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true });
+      assert.ok(!result.exceptionDetails, 'Browser evaluation failed'); return result.result.value;
+    };
+    const wait = async (expression: string) => {
+      const start = Date.now();
+      while (!await evaluate(expression)) {
+        if (Date.now() - start > 15000) throw new Error(`Browser condition failed: ${expression}; page: ${await evaluate('document.body.innerText.slice(0, 1600)')}`);
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+    };
+    const text = (value: string) => `document.body.innerText.toLowerCase().includes(${JSON.stringify(value.toLowerCase())})`;
+    const element = (label: string) => `Array.from(document.querySelectorAll('[role="button"],button,a,[role="tab"]')).find(e => e.getClientRects().length && !e.closest('[aria-hidden="true"],[inert]') && (e.getAttribute('aria-label') === ${JSON.stringify(label)} || e.textContent.trim().toLowerCase() === ${JSON.stringify(label.toLowerCase())}))`;
+    const click = async (label: string, twice = false) => {
+      await wait(`!!(${element(label)}) && !(${element(label)}).disabled && (${element(label)}).getAttribute('aria-disabled') !== 'true'`);
+      await evaluate(`(() => {const e=${element(label)}; e.click(); ${twice ? 'e.click();' : ''}})()`);
+    };
+    const fill = async (label: string, value: string) => {
+      const selector = JSON.stringify(`input[aria-label="${label}"]`);
+      const input = `Array.from(document.querySelectorAll(${selector})).find(e => e.getClientRects().length && !e.closest('[aria-hidden="true"],[inert]') && !e.disabled)`;
+      await wait(`!!(${input})`);
+      await evaluate(`(() => { const e=${input}; Object.getOwnPropertyDescriptor(HTMLInputElement.prototype,'value').set.call(e,${JSON.stringify(value)}); e.dispatchEvent(new Event('input',{bubbles:true})); })()`);
+    };
+    await call('Runtime.enable'); await call('Page.enable');
+    await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+    await call('Page.addScriptToEvaluateOnNewDocument', { source: `const originalFetch=window.fetch.bind(window); window.fetch=(input,options)=>{ const url=new URL(String(input),location.href); return originalFetch(url.pathname.startsWith('/api/')?location.origin+url.pathname+url.search:input,options); };` });
+    await call('Page.navigate', { url: origin + '/profile' }); await wait(text('Create an account'));
+    await click('Create an account'); await fill('Display name', 'Browser Demo'); await fill('Email', 'browser@example.com'); await fill('Password', 'password123');
+    assert.equal(await evaluate(`document.querySelector('input[aria-label="Password"]').type`), 'password');
+    await click('Register'); await wait(text('Account created.'));
+    await fill('Password', 'password123'); await click('Log in'); await wait(text('My shopping lists'));
+    await click('My shopping lists'); await wait(text('No shopping lists yet.'));
+    await fill('Create list', 'Browser basket'); await click('Create list'); await wait(text('This shopping list is empty.'));
+    await fill('Rename list', 'Browser acceptance'); await click('Rename list'); await wait(text('Browser acceptance'));
+    await click('Add products'); await fill('Search products to add', 'Coke 1.5L'); await fill('Quantity to add', '2');
+    await wait(text('Coca-Cola')); holdItemRequest();
+    await click('Add Coca-Cola', true); await wait(`(${element('Add Coca-Cola')})?.getAttribute('aria-disabled') === 'true'`);
+    assert.equal(await evaluate(`!!document.querySelector('[aria-label="Adding Coca-Cola"]')`), false);
+    assert.equal(await evaluate(`!!document.querySelector('[data-testid="product-add-confirmation"]')`), false);
+    releaseItem(); await wait(text('Saved in this list: 2 packages'));
+    await wait(text('✓ Coca-Cola added to Browser acceptance')); assert.equal(additionRequests, 1);
+    assert.equal(await evaluate(`getComputedStyle(document.querySelector('[data-testid="product-add-confirmation"]')).pointerEvents`), 'none');
+    await wait(`!document.querySelector('[data-testid="product-add-confirmation"]')`);
+    assert.equal(await evaluate(`document.querySelector('input[aria-label="Search products to add"]').value`), 'Coke 1.5L');
+    failNextAddition = true; await click('Add Coca-Cola'); await wait(text('The backend could not complete'));
+    assert.equal(await evaluate(`!!document.querySelector('[data-testid="product-add-confirmation"]')`), false);
+    await wait(text('Saved in this list: 2 packages'));
+    await fill('Quantity to add', '3'); await click('Add Coca-Cola'); await wait(text('Saved in this list: 5 packages'));
+    await click('Go back'); await wait(text('Saved quantity: 5 complete packages'));
+    await fill('Quantity for Coca-Cola', '2'); await click('Save quantity'); await wait(text('Saved quantity: 2 complete packages'));
+    await click('Add products'); await fill('Search products to add', 'Master'); await fill('Quantity to add', '1');
+    await click('Add Master Potato Chips, Salted, 90 g'); await wait(text('Saved in this list: 1 packages')); await click('Go back');
+    await wait(text('Saved quantity: 1 complete packages'));
+    const listNode = `Array.from(document.querySelectorAll('[data-testid="shopping-list-scroll"]')).find(e => e.getClientRects().length && !e.closest('[aria-hidden="true"],[inert]'))`;
+    await evaluate(`(() => {window.__uxScroll=${listNode}; window.__uxRow=window.__uxScroll.querySelector('[data-testid^="list-item-"]'); window.__uxScroll.scrollTop=100; window.__uxTop=window.__uxScroll.scrollTop;})()`);
+    assert.ok(await evaluate('window.__uxTop > 0'));
+    const readsBeforeQuantityChange = detailReads;
+    await evaluate(`(() => {window.__uxOther=window.__uxScroll.querySelectorAll('[data-testid^="list-item-"]')[1]; window.__uxOtherChanges=[];
+      window.__uxOtherObserver=new MutationObserver(records=>window.__uxOtherChanges.push(...records));
+      window.__uxOtherObserver.observe(window.__uxOther,{subtree:true,childList:true,characterData:true});})()`);
+    holdItemRequest(); await click('Increase Coca-Cola quantity'); await wait(`(${element('Increase Coca-Cola quantity')})?.getAttribute('aria-disabled') === 'true'`);
+    assert.equal(await evaluate(`!!document.querySelector('[aria-label="Saving Coca-Cola"]')`), false);
+    assert.equal(await evaluate(`window.__uxScroll === (${listNode}) && window.__uxScroll.contains(window.__uxRow)`), true);
+    assert.equal(await evaluate('window.__uxScroll.scrollTop === window.__uxTop'), true);
+    assert.equal(await evaluate(`window.__uxScroll.querySelector('input[aria-label="Quantity for Potato Chips"]').disabled`), false);
+    assert.equal(await evaluate(`window.__uxScroll.innerText.includes('Saved quantity: 2 complete packages')`), true);
+    releaseItem(); await wait(text('Saved quantity: 3 complete packages'));
+    assert.equal(await evaluate(`window.__uxScroll === (${listNode}) && window.__uxScroll.contains(window.__uxRow)`), true);
+    assert.equal(await evaluate('window.__uxScroll.scrollTop === window.__uxTop'), true);
+    assert.equal(detailReads, readsBeforeQuantityChange, 'A confirmed item update must not trigger a full-list fetch');
+    assert.equal(await evaluate('window.__uxOtherChanges.length'), 0, 'Unrelated product text must not be rebuilt');
+    await evaluate('window.__uxOtherObserver.disconnect()');
+    // Exercise decreases independently, including 2 -> 1 where the old UI
+    // inserted a helper paragraph and changed row geometry.
+    const captureButtons = () => evaluate(`(() => { window.__buttons=Array.from((${listNode}).querySelectorAll('[role="button"],button')).map(node=>({
+      node, text:node.textContent, color:getComputedStyle(node.firstElementChild ?? node).color,
+      opacity:getComputedStyle(node).opacity, background:getComputedStyle(node).backgroundColor})); })()`);
+    const assertPendingButtons = async () => {
+      assert.equal(await evaluate(`window.__buttons.every(b=>b.node.isConnected && b.node.textContent===b.text
+        && getComputedStyle(b.node.firstElementChild ?? b.node).color===b.color
+        && getComputedStyle(b.node).opacity===b.opacity && getComputedStyle(b.node).backgroundColor===b.background)`), true,
+      'Pending requests must keep every button mounted with unchanged text, color and opacity');
+    };
+    const assertDecrease = async (expected: number) => {
+      const readsBefore = detailReads, routeBefore = await evaluate('location.pathname');
+      const writesBefore = itemWrites;
+      await captureButtons();
+      await evaluate(`(() => {window.__decreaseScroll=${listNode}; window.__decreaseRow=window.__decreaseScroll.querySelector('[data-testid^="list-item-"]');
+        window.__decreaseOther=window.__decreaseScroll.querySelectorAll('[data-testid^="list-item-"]')[1];
+        window.__decreaseName=window.__decreaseScroll.querySelector('input[aria-label="Rename list"]');
+        window.__decreaseHeight=window.__decreaseRow.getBoundingClientRect().height; window.__decreaseChanges=[];
+        window.__decreaseObserver=new MutationObserver(records=>window.__decreaseChanges.push(...records));
+        window.__decreaseObserver.observe(window.__decreaseOther,{subtree:true,childList:true,characterData:true,attributes:true});
+        window.__decreaseRow.querySelector('input').focus();})()`);
+      holdItemRequest(); await click('Decrease Coca-Cola quantity', true);
+      await wait(`(${element('Decrease Coca-Cola quantity')})?.getAttribute('aria-disabled') === 'true'`);
+      await assertPendingButtons();
+      assert.equal(await evaluate(`(${element('Compare Basket')}).getAttribute('aria-disabled')`), 'true');
+      assert.equal(await evaluate(`window.__decreaseRow.innerText.includes('Saved quantity: ${expected + 1} complete packages')`), true);
+      assert.equal(await evaluate(`window.__decreaseScroll.contains(window.__decreaseOther) && window.__decreaseScroll.contains(window.__decreaseName)`), true);
+      releaseItem(); await wait(`window.__decreaseRow.innerText.includes('Saved quantity: ${expected} complete packages')`);
+      assert.equal(itemWrites, writesBefore + 1, 'Duplicate decrease taps must send only one write');
+      assert.equal(await evaluate('window.__buttons.every(b=>b.node.isConnected && b.node.textContent===b.text)'), true, 'Quantity changes must not remount buttons');
+      if (expected === 1) assert.equal(await evaluate(`(${element('Decrease Coca-Cola quantity')}).getAttribute('aria-disabled')`), 'true', 'The lower bound stays disabled after completion');
+      assert.equal(await evaluate(`window.__decreaseRow.querySelector('input').value`), String(expected));
+      assert.equal(await evaluate(`window.__decreaseRow.getBoundingClientRect().height === window.__decreaseHeight`), true, 'Decreasing to one must not insert/remove layout content');
+      assert.equal(await evaluate(`window.__decreaseScroll === (${listNode}) && window.__decreaseScroll.contains(window.__decreaseRow) && window.__decreaseScroll.contains(window.__decreaseOther) && window.__decreaseScroll.contains(window.__decreaseName)`), true);
+      assert.equal(await evaluate('window.__decreaseChanges.length'), 0, 'Decrease must not mutate unrelated row content or controls');
+      assert.equal(detailReads, readsBefore); assert.equal(await evaluate('location.pathname'), routeBefore);
+      await evaluate('window.__decreaseObserver.disconnect()');
+    };
+    await assertDecrease(2); await assertDecrease(1);
+    await click('Increase Coca-Cola quantity'); await wait(text('Saved quantity: 2 complete packages'));
+    await click('Compare Basket'); await wait(text('USD 3.90')); await wait(text('Missing price information for: Master Potato Chips'));
+    assert.equal(await evaluate(`document.querySelectorAll('[data-testid="basket-availability-notice"]').length`), 1);
+    await click('View item breakdown'); await wait(text('Original unit price: USD')); await wait(text('Verified demonstration observation'));
+    await click('Edit shopping list'); await wait(text('Saved quantity: 2 complete packages'));
+    const readsBeforeRemoval = detailReads, routeBeforeRemoval = await evaluate('location.pathname');
+    const writesBeforeRemoval = itemWrites;
+    await captureButtons();
+    await evaluate(`(() => {window.__removalScroll=${listNode}; window.__removedRow=window.__removalScroll.querySelector('[data-testid^="list-item-"]');
+      window.__remainingRow=window.__removalScroll.querySelectorAll('[data-testid^="list-item-"]')[1];
+      window.__remainingName=window.__removalScroll.querySelector('input[aria-label="Rename list"]'); window.__removalChanges=[];
+      window.__removalObserver=new MutationObserver(records=>window.__removalChanges.push(...records));
+      window.__removalObserver.observe(window.__remainingRow,{subtree:true,childList:true,characterData:true,attributes:true});
+      window.__removedRow.querySelector('input').focus();})()`);
+    holdItemRequest(); await click('Remove product', true);
+    await wait(`window.__removedRow.querySelector('[aria-label="Remove product"]')?.getAttribute('aria-disabled') === 'true'
+      || Array.from(window.__removedRow.querySelectorAll('[role="button"],button')).some(e=>e.textContent.trim().toLowerCase()==='remove product' && e.getAttribute('aria-disabled')==='true')`);
+    await assertPendingButtons();
+    assert.equal(await evaluate('window.__removalScroll.contains(window.__removedRow) && window.__removalScroll.contains(window.__remainingRow)'), true);
+    releaseItem();
+    await wait(`!(${text('Saved quantity: 2 complete packages')})`);
+    assert.equal(itemWrites, writesBeforeRemoval + 1, 'Duplicate removal taps must send only one write');
+    assert.equal(await evaluate('window.__buttons.filter(b=>!window.__removedRow.contains(b.node)).every(b=>b.node.isConnected && b.node.textContent===b.text && getComputedStyle(b.node.firstElementChild ?? b.node).color===b.color)'), true, 'Removing one row must retain surrounding buttons and colors');
+    assert.equal(await evaluate(`window.__removalScroll === (${listNode}) && window.__removalScroll.innerText.includes('Saved quantity: 1 complete packages')`), true);
+    assert.equal(await evaluate('!window.__removalScroll.contains(window.__removedRow) && window.__removalScroll.contains(window.__remainingRow) && window.__removalScroll.contains(window.__remainingName)'), true);
+    assert.equal(await evaluate('window.__removalChanges.length'), 0, 'Removal must not rebuild or modify the remaining row');
+    assert.equal(detailReads, readsBeforeRemoval); assert.equal(await evaluate('location.pathname'), routeBeforeRemoval);
+    await evaluate('window.__removalObserver.disconnect()');
+    await click('Delete list'); await wait(text('This cannot be undone.')); await click('Cancel');
+    await click('Delete list'); await click('Confirm delete list'); await wait(text('No shopping lists yet.'));
+    await evaluate(`Array.from(document.querySelectorAll('[role="tab"]')).find(e=>e.textContent.includes('Explore')).click()`);
+    await fill('Search products', 'Coke 1.5L');
+    const productSelector = '[role="button"][aria-label*="1.5 L"][aria-label*="Product details"]';
+    await wait(`!!document.querySelector(${JSON.stringify(productSelector)})`); await evaluate(`document.querySelector(${JSON.stringify(productSelector)}).click()`);
+    await click('Add to Shopping List'); await wait(text('You have no shopping lists.'));
+    await fill('Create list', 'From Explore'); await click('Create list'); await click('Add to From Explore');
+    await wait(text('✓ Coca-Cola added to From Explore'));
+    assert.equal(await evaluate('location.pathname'), '/products/1/add');
+    await click('Open From Explore');
+    await wait(text('Saved quantity: 1 complete packages'));
+    await click('Delete list'); await click('Confirm delete list'); await wait(text('No shopping lists yet.'));
+    await evaluate(`Array.from(document.querySelectorAll('[role="tab"]')).find(e=>e.textContent.includes('Profile')).click()`);
+    await click('Log out'); await wait(text('Create an account'));
+    await evaluate(`Array.from(document.querySelectorAll('[role="tab"]')).find(e=>e.textContent.includes('Shopping List')).click()`);
+    await wait(text('Log in or register to save lists'));
+    await click('Browse products'); await wait(`!!document.querySelector('input[aria-label="Search products"]')`);
+    assert.deepEqual(errors, []);
+  } finally {
+    if (socket?.readyState === WebSocket.OPEN) { void call('Browser.close').catch(() => {}); socket.close(); } else chrome.kill();
+    await closed; await new Promise<void>(resolve => { server.close(() => resolve()); server.closeAllConnections(); });
+    assert.ok(path.resolve(profile).startsWith(path.resolve(os.tmpdir()) + path.sep) && /^t03c-browser-/.test(path.basename(profile)));
+    fs.rmSync(profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
+  }
+}

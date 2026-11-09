@@ -1,6 +1,30 @@
 # Frontend screen map and requirements traceability
 
-**Status:** Complete T02 is owner-accepted following successful physical-iPhone testing on 2026-11-07, including both corrected headers. T03-A backend auth/lists are implemented; mobile auth/list screens remain deferred to T03-C. The later feature map below remains planning guidance, not an implementation claim.
+**Status:** T02 and all of T03 (A/B/C) are complete and owner-accepted, including final T03-C physical-iPhone acceptance on 2026-11-09. Later features in the map below remain planning guidance.
+
+## Implemented T03-C flow (owner accepted)
+
+- Profile: register (display name/email/password), explicit login after registration,
+  logged-in profile, logout, session restoration/retry and safe status messages.
+- Shopping List tab: saved lists, empty/error/loading states, create/open/reload.
+- `/lists/:id`: item/package identities, inactive labels, explicit quantity editor,
+  increment/decrement controls bounded 1–999, remove, rename, confirmed list deletion,
+  add products and nonempty-list Compare Basket.
+- `/lists/:id/add`: existing server catalog search with debounce/cap, package-aware
+  picker and quantity to add. Duplicate POST follows backend increments; saved
+  quantities come from responses. Accessibility labels distinguish variants/sizes.
+- `/products/:id/add`: product-details Add to Shopping List action, authenticated
+  list choice and create-list offer when none exist. Guest users see a login prompt.
+- `/lists/:id/compare`: backend ranks/cheapest ties, string-valued USD totals,
+  expandable original/converted unit and line cost details with UTC observations,
+  inactive/no-complete explanations, named missing coverage, demonstration label
+  and a single availability reminder at the bottom. No mobile basket calculation.
+
+The five-tab structure, T02 screens and `headerTransparent:false` are preserved.
+Keyboard-aware forms/scrolling and native stack insets are used without an extra
+top safe-area offset. Private screen trees remount for session generations and
+hide immediately on logout; focus changes cancel obsolete loads/writes. See
+[device checklist](t03c-verification.md).
 
 Owner iPhone functional tests passed, with header overlap found on Product Details
 and Supermarket Browsing. The root stack now uses `headerTransparent: false`;
@@ -108,6 +132,6 @@ The mobile shell targets Expo SDK 58. Its existing JavaScript tabs, screen files
 - Do not build polished screens for every later requirement at once.
 
 ## Open UX decisions
-- T03-A confirms guest T02 browsing; private lists require login. Device token storage and logout/account request isolation will be implemented in T03-C.
+- T03-C preserves guest T02 browsing and implements native secure token storage and logout/account request isolation; physical-iPhone acceptance includes persistence after restarting Expo Go.
 - Initial active list vs multiple-list controls, detail-screen presentation and brand styling are provisional.
 - Price availability is only shown when reliable; otherwise use the explicit check-with-store caveat.

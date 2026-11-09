@@ -14,6 +14,7 @@ function Details({ id }: { id: number }) {
     {resource.data && <>
       <ProductIdentity product={resource.data} />
       <Button title="Compare branch prices" color="#17634c" onPress={() => router.navigate(priceRoute(id))} />
+      <Button title="Add to Shopping List" color="#17634c" onPress={() => router.navigate({ pathname: '/products/[id]/add', params: { id: String(id) } })} />
       <Text style={ui.muted}>Compare this exact package. A recorded price does not confirm current stock.</Text>
     </>}
   </ScrollView>;
