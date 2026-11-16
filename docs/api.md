@@ -1,6 +1,49 @@
 # REST API contracts
 
-**Status:** T02 and all of T03 (A/B/C) are complete and owner-accepted, including final T03-C physical-iPhone acceptance on 2026-11-09. No backend wire contract changed in T03-C. Cursor/offset pagination remains deferred.
+**Status:** T02–T04 are complete and owner-accepted; T04 physical-iPhone acceptance was confirmed 2026-11-17. T04 adds the optimization endpoint below. Existing T02/T03 wire contracts are preserved. Cursor/offset pagination remains deferred.
+
+## T04 shopping basket optimization
+
+`GET /api/shopping-lists/:id/optimization?maxStores=2` requires the existing bearer
+session and list ownership. `maxStores` is optional (default `2`), and accepts only
+one string `1`, `2` or `3`. Repeated/array/unknown query keys, request bodies and
+noncanonical IDs return 400. User IDs, prices, totals and policies are server-derived.
+Missing/foreign/deleted lists share 404 `Shopping list or item not found`; invalid,
+expired or revoked sessions use 401. Empty/all-inactive lists return 400. Unexpected
+SQL or corrupted persisted inputs use sanitized 500. All responses set no-store.
+
+Above the documented exact-search budget, HTTP 422 returns
+`{"status":"error","message":"Exact optimization exceeds the computation limit. Try a lower maximum branch count"}`.
+No candidate is silently dropped. See [limits and complexity](t04-verification.md#complexity-and-limits).
+
+| Field | Contract |
+|---|---|
+| `comparison` | T03-B comparison shape for **active items only**, complete single branches with exact dense ranks and all `cheapestBranchIds`, plus separate incomplete branch missing IDs. Selected cost lines additionally contain `freshness` and `availability` below. Legacy `freshness: not_evaluated` at comparison level is preserved; T04 uses the per-line derived field. |
+| `excludedItems` | Inactive saved items in ascending product ID order, with the existing complete list-item/product fields. Never removed or charged. Unlike T04, the unchanged `/compare` endpoint still blocks inactive baskets. |
+| `evaluatedAt` | Six-digit UTC timestamp from one server clock per calculation |
+| `maximumStores` | Requested maximum 1–3; default 2; not required number of visits |
+| `freshnessDays` | Configured caution threshold, default 30 (`PRICE_FRESHNESS_DAYS`) |
+| `fuelCostsIncluded`, `availabilityGuaranteed` | Both `false` |
+| `multiStore.status` | `complete` or `no_solution` |
+| `multiStore.solution` | Null only for no solution; otherwise `branchIds`, `totalUsd`, `totalUsdUnits`, `allocations` |
+| Allocation | Branch/chain ID/name fields plus `items`, `subtotalUsd`, `subtotalUsdUnits`; no empty allocations, branch IDs ascending |
+| Cost line | Existing original amount/currency, product ID, quantity, exact/display unit and line costs, observation time, `status:'verified'`, `sourceType:'seed'`, `demonstrationData:true`; adds `availability:'unknown'` and `freshness:'recent'|'older'|'future'` |
+| `multiStore.savings` | `{amountUsd,amountUsdUnits,percentage}` only when solution and complete single baseline exist; otherwise null. Percentage is a two-decimal string. Exact zero uses `amountUsdUnits:'0'`. No invented baseline or negative savings. |
+| `missingProductIds` | Active requested products having no usable price in any branch, sorted. Can be empty with no solution when coverage requires more branches than allowed. |
+
+Both modes select the latest positive verified seed USD/LBP observation by
+timestamp then observation ID, across currencies. They use the same snapshot and
+centralized exact arithmetic. USD/LBP conversion is fixed at 90,000; monetary
+`*Units` strings use denominator 9,000,000. `*Usd` and `percentage` strings are
+display-rounded half up; clients must not reconstruct totals from rounded parts.
+Savings represent potential merchandise savings only. Unknown stock and older
+prices never imply confirmed availability or current shelf pricing.
+
+Every active product appears once with its entire quantity in a complete split.
+Only branches receiving items count as used. Equal exact costs prefer fewer used
+branches, then lexicographic branch IDs. For equal per-product prices within a
+set, lower branch ID wins. Incomplete branches never rank against complete ones.
+No complete single baseline is required to search combined coverage.
 
 ## T03-C mobile contract handling
 
@@ -82,7 +125,7 @@ T01 database health returns HTTP 200 with `{"status":"ok","database":"connected"
 
 ## Deferred route groups (design placeholders, not finalized contracts)
 - `/api/receipts/*` intake/review/confirmation; `/api/prices/*` reporting, alerts, verification.
-- `/api/optimization/*` basket and route options; `/api/preferences/*`, `/api/favorites/*`.
+- `/api/optimization/*` future route options; T04 merchandise optimization is under shopping lists below. `/api/preferences/*`, `/api/favorites/*` remain deferred.
 - AI assistant is postponed until core backend functions exist.
 
 ## T03-A authentication and shopping-list API

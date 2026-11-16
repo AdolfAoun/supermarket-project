@@ -1,6 +1,26 @@
 # System architecture
 
-**Status:** T01, T02 and all of T03 (A/B/C) are complete and owner-accepted, including final T03-C physical-iPhone acceptance on 2026-11-09. T04 optimization, T05 routing/fuel and T06 receipt OCR remain unimplemented.
+**Status:** T01–T04 are complete and owner-accepted. The owner confirmed successful T04 physical-iPhone acceptance on 2026-11-17. T05 routing/fuel and T06 receipt OCR remain unimplemented.
+
+## T04 optimization boundary
+
+The existing owned, consistent basket snapshot feeds both optimization modes.
+`basket/pricing.ts` constructs exact cost lines using the existing centralized
+BigInt money utilities; both accepted comparison and optimization reuse it.
+`basket/optimize.ts` validates canonical items, explicitly excludes inactive
+products for T04, prepares branch/product cost maps, and evaluates bounded sets
+of physical branches. Complete single branches retain exact ranks and all ties.
+The generator exposes feasible allocations for multiple branch sets, including
+more expensive sets, for future T05 travel evaluation. It has no HTTP, network,
+database mutation or routing dependency. Duplicate candidate branch records and
+duplicate persisted products fail closed rather than inventing quantities.
+
+The authenticated GET route orchestrates snapshot retrieval and pure calculation.
+Mobile account API/contract readers validate exact allocation reconciliation;
+the root-stack optimization screen reuses AuthGate, useRemote, AccountPage and
+nontransparent headers. List/account/maximum changes and focus reload invalidate
+previous results. No dependency, new table, persisted optimizer result, routing
+provider or paid service is introduced. See [T04 report](t04-verification.md).
 
 ## T03-C mobile integration
 

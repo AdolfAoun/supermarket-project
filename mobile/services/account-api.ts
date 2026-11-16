@@ -1,6 +1,7 @@
 import { ApiError, createApiClient, parseProductId, type RequestOptions } from './api';
 import { readBasket, readItem, readList, readLists, readListSummary, readLogin, readUser } from './private-contracts';
 import { InvalidPayload } from './contracts';
+import { readOptimization } from './optimization-contracts';
 
 export function validQuantity(value: string): number | null {
   return /^[1-9]\d{0,2}$/.test(value) && Number(value) <= 999 ? Number(value) : null;
@@ -39,6 +40,12 @@ export function createListApi(run: PrivateRequest, client = createApiClient()) {
   };
   return {
     lists: (signal?: AbortSignal) => request('/shopping-lists', readLists, { signal }),
+    optimize: (id: number, maximumStores = 2, signal?: AbortSignal) => {
+      if (![1, 2, 3].includes(maximumStores)) throw new ApiError('http', 'Choose one, two or three branches.', 400);
+      return request(`${listPath(id)}/optimization?maxStores=${maximumStores}`, v => readOptimization(v, id, maximumStores), { signal,
+        errorMessage: status => status === 422 ? 'Exact optimization exceeds the computation limit. Choose fewer branches and retry.'
+          : status === 400 ? 'Add active products to this list before optimizing. Reload the list if it changed.' : errorMessage(status) });
+    },
     create: (name: string, signal?: AbortSignal) => request('/shopping-lists', readListSummary, { method: 'POST', body: { name }, signal }),
     detail: (id: number, signal?: AbortSignal) => request(listPath(id), v => readList(v, id), { signal }),
     rename: (id: number, name: string, signal?: AbortSignal) => request(listPath(id), value => {

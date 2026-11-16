@@ -79,6 +79,7 @@ function Details({ id }: { id: number }) {
         }, summary => resource.update(current => ({ ...current, ...summary })))} />
       <ListActionButton title="Add products" busy={action.pending} onPress={() => router.navigate({ pathname: '/lists/[id]/add', params: { id: String(id) } })} />
       <ListActionButton title="Compare Basket" busy={action.pending} disabled={!list.items.length} onPress={() => router.navigate({ pathname: '/lists/[id]/compare', params: { id: String(id) } })} />
+      <ListActionButton title="Find Cheapest Basket" busy={action.pending} disabled={!list.items.some(item => item.product.isActive)} onPress={() => router.navigate({ pathname: '/lists/[id]/optimization', params: { id: String(id) } })} />
       <Text style={ui.muted}>Quantities count complete registered packages. Different sizes remain separate products.</Text>
       {!list.items.length && <Text style={ui.text}>This shopping list is empty. Add a registered product to compare your basket.</Text>}
       {list.items.map(item => <QuantityEditor key={item.id} item={item}

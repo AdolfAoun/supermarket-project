@@ -1,7 +1,7 @@
 import type { ErrorRequestHandler, RequestHandler } from 'express';
 
 export class HttpError extends Error {
-  constructor(public readonly status: 400 | 401 | 404 | 409, message: string) { super(message); }
+  constructor(public readonly status: 400 | 401 | 404 | 409 | 422, message: string) { super(message); }
 }
 
 export const notFound: RequestHandler = (_req, res) => {

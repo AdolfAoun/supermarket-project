@@ -7,14 +7,14 @@ export function integer(v: unknown, maximum = 4294967295): number {
   return typeof v === 'number' && Number.isInteger(v) && v > 0 && v <= maximum ? v : invalid();
 }
 function bool(v: unknown): boolean { return typeof v === 'boolean' ? v : invalid(); }
-function literal<T extends string | number | boolean>(v: unknown, expected: T): T { return v === expected ? expected : invalid(); }
+export function literal<T extends string | number | boolean>(v: unknown, expected: T): T { return v === expected ? expected : invalid(); }
 function unique<T>(rows: T[], getId: (v: T) => number): T[] {
   return new Set(rows.map(getId)).size === rows.length ? rows : invalid();
 }
-function money(v: unknown): string {
+export function money(v: unknown): string {
   return typeof v === 'string' && /^(0|[1-9]\d{0,30})\.\d{2}$/.test(v) ? v : invalid();
 }
-function units(v: unknown): string {
+export function units(v: unknown): string {
   return typeof v === 'string' && /^[1-9]\d{0,50}$/.test(v) ? v : invalid();
 }
 export interface User { id: number; displayName: string; email: string }
@@ -75,7 +75,7 @@ export interface BasketComparison {
 }
 const sameIds = (a: number[], b: number[]) => a.length === b.length && a.every((id, i) => id === b[i]);
 function ids(v: unknown): number[] { return unique(array(v).map(v => integer(v)), v => v); }
-function branch(v: unknown): BasketBranch {
+export function branch(v: unknown): BasketBranch {
   const row = object(v);
   return { branchId: integer(row.branchId), branch: text(row.branch), supermarketId: integer(row.supermarketId), supermarket: text(row.supermarket) };
 }

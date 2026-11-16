@@ -12,6 +12,7 @@ import { tokenHash } from '../src/modules/auth/routes.js';
 import { createShoppingListRepository } from '../src/modules/shopping-lists/repository.js';
 import { createBasketRepository } from '../src/modules/basket/repository.js';
 import { compareBasket } from '../src/modules/basket/compare.js';
+import { optimizeBasket } from '../src/modules/basket/optimize.js';
 import { createCatalogRepository, createSqlReader } from '../src/modules/catalog/repository.js';
 
 // Same opt-in dedicated server as T03-A, but a separate disposable schema.
@@ -57,6 +58,69 @@ test('T03-B disposable MySQL integration', { skip: !process.env.T03_TEST_PORT },
       return result;
     };
     const original = await snapshotTables();
+    await t.test('corrupted missing product reference fails closed instead of optimizing a smaller basket', async () => {
+      await admin.query('SET SESSION foreign_key_checks = 0');
+      try {
+        await admin.execute('INSERT INTO shopping_list_items (shopping_list_id, product_id, quantity) VALUES (?, 999999, 1)', [list.id]);
+      } finally { await admin.query('SET SESSION foreign_key_checks = 1'); }
+      try {
+        const response = await request(application).get(`/api/shopping-lists/${list.id}/optimization`).set('Authorization', `Bearer ${token}`).expect(500);
+        assert.deepEqual(response.body, { status: 'error', message: 'Internal server error' });
+      } finally { await admin.execute('DELETE FROM shopping_list_items WHERE shopping_list_id = ? AND product_id = 999999', [list.id]); }
+    });
+    await t.test('T04 real SQL optimization preserves exact allocation, eligibility, snapshot data and ownership', async () => {
+      await admin.query(`INSERT INTO products (id,name,brand,size,unit,category) VALUES
+        (951,'T04 Milk','Demo',1,'piece','Test'),(952,'T04 Bread','Demo',1,'piece','Test'),(953,'T04 Eggs','Demo',1,'piece','Test')`);
+      const optimizationList = await lists.create(1, 'T04 SQL example');
+      for (const [productId, quantity] of [[951, 2], [952, 1], [953, 1]]) await lists.addItem(1, optimizationList.id, productId, quantity);
+      await admin.query(`INSERT INTO prices (product_id,branch_id,price,currency,observed_at,status,source_type,source_note) VALUES
+        (951,1,1.99,'USD','2026-11-01','verified','seed','DEMONSTRATION DATA T04 tie first'),
+        (951,1,2.00,'USD','2026-11-01','verified','seed','DEMONSTRATION DATA T04 tie last'),
+        (952,1,1.50,'USD','2026-11-01','verified','seed','DEMONSTRATION DATA T04'),
+        (953,1,3.00,'USD','2026-11-01','verified','seed','DEMONSTRATION DATA T04'),
+        (951,2,162000,'LBP','2026-11-01','verified','seed','DEMONSTRATION DATA T04'),
+        (952,2,1.40,'USD','2026-11-01','verified','seed','DEMONSTRATION DATA T04'),
+        (953,2,3.50,'USD','2026-11-01','verified','seed','DEMONSTRATION DATA T04'),
+        (951,1,0.01,'USD','2026-11-02','pending','seed','DEMONSTRATION DATA T04 pending'),
+        (951,1,0.01,'USD','2026-11-03','flagged','seed','DEMONSTRATION DATA T04 flagged'),
+        (951,1,0.01,'USD','2026-11-04','rejected','seed','DEMONSTRATION DATA T04 rejected'),
+        (951,1,0.01,'USD','2026-11-05','verified','manual',NULL)`);
+      const before = await snapshotTables();
+      const response = await request(application).get(`/api/shopping-lists/${optimizationList.id}/optimization`).set('Authorization', `Bearer ${token}`).expect(200);
+      assert.equal(response.headers['cache-control'], 'no-store');
+      assert.deepEqual(response.body.comparison.eligibleBranches.map((b: { totalUsd: string }) => b.totalUsd), ['8.50', '8.50']);
+      assert.equal(response.body.multiStore.solution.totalUsd, '8.00');
+      assert.equal(response.body.multiStore.savings.percentage, '5.88');
+      assert.deepEqual(response.body.multiStore.solution.branchIds, [1, 2]);
+      assert.deepEqual(await snapshotTables(), before);
+      await request(application).get(`/api/shopping-lists/${optimizationList.id}/optimization`).set('Authorization', `Bearer ${otherToken}`).expect(404);
+      await lists.remove(1, optimizationList.id);
+      await request(application).get(`/api/shopping-lists/${optimizationList.id}/optimization`).set('Authorization', `Bearer ${token}`).expect(404);
+      // Restore this test's disposable fixture, never the owner's observations.
+      await admin.query('DELETE FROM prices WHERE product_id IN (951,952,953)');
+      await admin.query('DELETE FROM products WHERE id IN (951,952,953)');
+    });
+    await t.test('T04 SQL disjoint coverage obeys two/three limits and reports truly missing prices', async () => {
+      await admin.query(`INSERT INTO products (id,name,brand,size,unit,category) VALUES
+        (956,'T04 A','Demo',1,'piece','Test'),(957,'T04 B','Demo',1,'piece','Test'),
+        (958,'T04 C','Demo',1,'piece','Test'),(959,'T04 Missing','Demo',1,'piece','Test')`);
+      await admin.query(`INSERT INTO prices (product_id,branch_id,price,currency,observed_at,status,source_type,source_note) VALUES
+        (956,1,1,'USD','2026-11-01','verified','seed','DEMONSTRATION DATA T04'),
+        (957,2,1,'USD','2026-11-01','verified','seed','DEMONSTRATION DATA T04'),
+        (958,3,1,'USD','2026-11-01','verified','seed','DEMONSTRATION DATA T04')`);
+      const splitList = await lists.create(1, 'T04 disjoint');
+      for (const id of [956, 957, 958]) await lists.addItem(1, splitList.id, id, 1);
+      const data = await basket.snapshot(1, splitList.id);
+      assert.equal(optimizeBasket(data, 2).multiStore.status, 'no_solution');
+      const result = optimizeBasket(data, 3);
+      assert.equal(result.multiStore.solution!.totalUsd, '3.00'); assert.equal(result.multiStore.savings, null);
+      await lists.addItem(1, splitList.id, 959, 1);
+      const missing = optimizeBasket(await basket.snapshot(1, splitList.id), 3);
+      assert.equal(missing.multiStore.status, 'no_solution'); assert.deepEqual(missing.missingProductIds, [959]);
+      await lists.remove(1, splitList.id);
+      await admin.query('DELETE FROM prices WHERE product_id IN (956,957,958,959)');
+      await admin.query('DELETE FROM products WHERE id IN (956,957,958,959)');
+    });
     await t.test('seeded basket compares all physical branches with exact quantity totals and no record changes', async () => {
       const result = compareBasket(await basket.snapshot(1, list.id));
       assert.equal(result.eligibleBranches.length, 4);
@@ -64,6 +128,8 @@ test('T03-B disposable MySQL integration', { skip: !process.env.T03_TEST_PORT },
       assert.equal(branch1.totalUsd, '5.35'); // 1.70*2 + .65*3, not package size*price
       assert.equal(branch1.items[0].originalPrice, '1.70');
       assert.equal(branch1.items[0].observedAt, '2026-01-15T12:00:00.000000Z');
+      // Earlier T04 cases use and clean isolated fixtures; their AUTO_INCREMENT
+      // counters may advance but all catalog/list rows are preserved.
       assert.deepEqual(await snapshotTables(), original);
     });
     await t.test('incomplete cheap branch is excluded with missing product IDs and no subtotal', async () => {
@@ -144,7 +210,7 @@ test('T03-B disposable MySQL integration', { skip: !process.env.T03_TEST_PORT },
         return new Proxy(connection, { get(target, key) {
           if (key === 'execute') return async (sql: string, values?: (string | number)[]) => {
             const result = await target.execute(sql, values);
-            if (sql.includes('FROM shopping_list_items i JOIN products')) {
+            if (sql.includes('FROM shopping_list_items i LEFT JOIN products')) {
               announceRead(); await gate;
             }
             return result;

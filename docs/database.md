@@ -1,5 +1,18 @@
 # MySQL data model
 
+## T04 read-only optimization
+
+No migration, index, seed or observation-history change is required. Optimization
+reuses the T03 basket repository's four batched SELECTs on one REPEATABLE READ
+snapshot, committing before calculation. Existing product/branch/status/time and
+shopping-list keys support the small controlled dataset; no speculative index is
+added. SQL filters positive verified seed USD/LBP observations before timestamp/ID
+ranking. The list-item reader now uses a LEFT JOIN and fails closed if a product
+reference is missing, so corrupt legacy data cannot silently shrink the basket.
+Foreign keys normally prevent that state; a disposable integration test deliberately
+creates it with session-local FK checks disabled, then restores/cleans the fixture.
+Owner catalog, credentials, grants and database service configuration are unchanged.
+
 **Status:** The owner-verified T02 catalog remains unchanged: 36 products, 12 aliases, 3 supermarkets, 4 branches and 125 observations. T03-A adds migration 002 for users, sessions and shopping lists, tested on disposable MySQL 8.4.7. The owner successfully imported it into local WampServer MySQL and confirmed all four tables on 2026-11-09; Codex did not apply it to the application database. See [T03-A verification](t03a-verification.md) and [execution instructions](../database/README.md). Receipt/supporting entities remain proposals.
 
 ## T03-A implemented migration (owner-imported 2026-11-09)

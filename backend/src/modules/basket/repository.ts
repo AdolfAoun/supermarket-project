@@ -41,7 +41,7 @@ export function createBasketRepository(database: Pool = pool): BasketRepository 
               ROW_NUMBER() OVER (PARTITION BY p.product_id, p.branch_id ORDER BY p.observed_at DESC, p.id DESC) AS position
             FROM prices p JOIN shopping_list_items i ON i.product_id = p.product_id
             WHERE i.shopping_list_id = ? AND p.status = 'verified' AND p.source_type = 'seed'
-              AND p.currency IN ('USD', 'LBP')
+              AND p.currency IN ('USD', 'LBP') AND p.price > 0
           ) ranked WHERE position = 1 ORDER BY branch_id, product_id`, [listId]);
         const result: BasketSnapshot = {
           shoppingList,

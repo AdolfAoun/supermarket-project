@@ -17,15 +17,42 @@
 | D11 | CONFIRMED | Email/password with scrypt and hashed opaque bearer sessions; seven-day expiry | T03-A task selects opaque sessions; built-in scrypt avoids a new dependency; supersedes provisional Argon2id/JWT ideas |
 | D12 | RECOMMENDED | Free OCR using Google ML Kit, with Tesseract fallback | Test Expo native integration and real receipt accuracy; no per-call fee |
 | D13 | OPEN | AI assistant model/provider | Postpone; OpenAI API may cost money |
-| D14 | CONFIRMED | Future optimization supports one, exactly two, or automatic one/two physical-branch modes, never exceeding two stops | Owner's T03-B task approves this boundary; revised roadmap places it in T04, still unimplemented |
+| D14 | SUPERSEDED BY T04 TASK | T04 uses maximum 1, 2 (default), or 3 branches, preferring fewer visits at equal cost | New owner assignment explicitly expands the earlier two-stop-only scope; no forced exactly-two mode |
 | D15 | RECOMMENDED | Historical, branch-specific, source-linked price observations | Supports validation/traceability |
 | D16 | CONFIRMED | T02 catalog/price/supermarket browsing remains public; lists require authentication | Explicit T03-A task; no guest list persistence |
 | D17 | CONFIRMED | T03-B uses fixed 1 USD = 90,000 LBP, exact BigInt common units and preserved original amounts/currencies | Owner-approved fixed policy, not live data; display rounds half up to cents, ranking/ties use unrounded units |
-| D18 | OPEN | Price freshness cutoff, trust/verification rules and promotion policy | Needed before real price recommendations |
+| D18 | PARTLY IMPLEMENTED | T04 derives caution after configurable 30 days without excluding older prices; verified seed eligibility stays unchanged | Real-source trust, promotion policy and future production freshness rules remain open |
 | D19 | OPEN | Receipt storage retention/privacy/redaction, image quality/duplicate handling | Needed for receipts to meet UR-08 |
 | D20 | OPEN | Advisor-approved scope simplifications and current spec wording | Formal URs remain authoritative until amended |
 
 ## New decisions protocol
+
+### 2026-11-15 — T04 merchandise optimization
+
+The owner's new T04 assignment supersedes D14's two-stop-only boundary: expose
+maximum 1–3 physical branches, default 2; a maximum never forces that many visits.
+It also explicitly excludes inactive items from optimization, naming the excluded
+packages without modifying the saved list. The accepted T03 comparison endpoint
+continues to block inactive products, preserving its contract. No formal UR is
+rewritten; this implements merchandise portions of UR-17/18/19/28, with travel
+and overall-cost UR-22/25 behavior still deferred to T05.
+
+Reuse verified seed observations, selected by observed_at/id descending before
+any calculation, and fixed exact USD/LBP arithmetic. Reject invalid list states.
+Use 30 days (`PRICE_FRESHNESS_DAYS`) as an MVP caution threshold; old prices stay
+eligible. Future-dated observations get a separate caution, never a recent label.
+Stock remains unknown; no availability field/table is invented. The historical
+demo verification label does not assert real-world validation.
+
+Enumerate useful branch sets exactly, assigning each product's entire quantity
+to its cheapest member. Tie order is exact total, actual branch count, then
+lexicographic ascending branch IDs; per-product equal prices prefer lower branch
+ID. Estimate work before enumeration and return 422 above 10,000,000 estimated
+branch/product checks. Do not truncate candidates or return approximations.
+This avoids a solver dependency while retaining multiple feasible candidate sets
+for T05. No schema change or owner database writes are required. The owner confirmed
+successful physical-iPhone acceptance on 2026-11-17 and authorized T04 finalization,
+commit and push to main; see [verification](t04-verification.md).
 
 ### 2026-11-09 — T03-C mobile authentication, lists and basket results
 

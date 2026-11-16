@@ -27,15 +27,18 @@ function listDto(row: RowDataPacket): ShoppingList {
 }
 export async function readListItems(connection: PoolConnection, listId: number): Promise<ListItem[]> {
   const [rows] = await connection.execute<RowDataPacket[]>(`SELECT i.id, i.product_id, i.quantity, ${dates('i')},
-    p.name, p.brand, p.variant, p.size, p.unit, p.pack_quantity, p.category, p.image_url, p.is_active
-    FROM shopping_list_items i JOIN products p ON p.id = i.product_id
+    p.id AS catalog_product_id, p.name, p.brand, p.variant, p.size, p.unit, p.pack_quantity, p.category, p.image_url, p.is_active
+    FROM shopping_list_items i LEFT JOIN products p ON p.id = i.product_id
     WHERE i.shopping_list_id = ? ORDER BY i.id`, [listId]);
-  return rows.map(row => ({
-    id: row.id, productId: row.product_id, quantity: row.quantity, createdAt: row.created, updatedAt: row.updated,
-    product: { id: row.product_id, name: row.name, brand: row.brand, variant: row.variant,
-      size: Number(row.size), unit: row.unit, packQuantity: row.pack_quantity, category: row.category,
-      imageUrl: row.image_url, isActive: Boolean(row.is_active) },
-  }));
+  return rows.map(row => {
+    if (row.catalog_product_id == null) throw new Error('Invalid shopping list product reference');
+    return {
+      id: row.id, productId: row.product_id, quantity: row.quantity, createdAt: row.created, updatedAt: row.updated,
+      product: { id: row.product_id, name: row.name, brand: row.brand, variant: row.variant,
+        size: Number(row.size), unit: row.unit, packQuantity: row.pack_quantity, category: row.category,
+        imageUrl: row.image_url, isActive: Boolean(row.is_active) },
+    };
+  });
 }
 const missing = () => new HttpError(404, 'Shopping list or item not found');
 

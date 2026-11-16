@@ -6,7 +6,7 @@ University Computer Science capstone. Mobile-first application to browse registe
 Product Details and Supermarkets headers and approved complete T02 on 2026-11-07.
 See [final owner acceptance](docs/t02cde-verification.md#2026-11-07--final-owner-acceptance).
 
-> **Current state:** T01, T02 and all of T03 (A/B/C) are complete and owner-accepted. T03-C mobile authentication, shopping lists and basket results passed final physical-iPhone acceptance on 2026-11-09. Next: T04 two-supermarket optimization, then T05 routing/fuel and T06 receipt OCR; none has started. See [T03-C acceptance and verification](docs/t03c-verification.md), [roadmap](docs/roadmap.md), and [database instructions](database/README.md).
+> **Current state:** T01–T04 are complete and owner-accepted. T04 merchandise optimization supports up to 1–3 branches (default 2) and passed owner acceptance on a physical iPhone, confirmed 2026-11-17. No new database migration or dependency is required. Next: T05 routing/fuel, then T06 receipt OCR; neither has started. See [T04 acceptance and verification](docs/t04-verification.md), [roadmap](docs/roadmap.md), and [database instructions](database/README.md).
 
 Final T02 cleanup now configures strict SQL mode and UTC on every application
 pool checkout. Current cleanup checks pass: 31 backend tests, 31 mobile tests and

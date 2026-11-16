@@ -9,6 +9,7 @@ function port(name: string, fallback: number): number {
 }
 
 export const env = {
+  priceFreshnessDays: port('PRICE_FRESHNESS_DAYS', 30),
   host: process.env.HOST ?? '127.0.0.1',
   port: port('PORT', 3000),
   corsOrigins: (process.env.CORS_ORIGINS ?? 'http://localhost:8081')

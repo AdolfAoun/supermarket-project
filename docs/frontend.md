@@ -1,6 +1,30 @@
 # Frontend screen map and requirements traceability
 
-**Status:** T02 and all of T03 (A/B/C) are complete and owner-accepted, including final T03-C physical-iPhone acceptance on 2026-11-09. Later features in the map below remain planning guidance.
+**Status:** T02–T04 are complete and owner-accepted; successful T04 physical-iPhone acceptance was confirmed 2026-11-17. Other future features in the map remain planning guidance.
+
+## Implemented T04 flow
+
+The saved-list editor opens **Find Cheapest Basket**, a root-stack screen using
+the accepted header/safe-area convention. Maximum-branch buttons offer 1, 2 or 3,
+default 2; buttons wrap on narrow screens. Complete single branches rank by exact
+cost; incomplete branches show named missing package prices separately. The split
+option groups quantities, exact-derived display amounts, branch subtotals and
+potential merchandise savings. One-store zero-saving solutions remain valid.
+Without a complete single baseline, savings are explicitly unavailable.
+
+Each selected line shows source amount/currency, observation date, simulated
+verification, package identity and freshness caution. Visible demo, stock and
+fuel exclusions prevent shelf-price or overall-savings claims. Inactive items
+are excluded and named without deleting them; an entirely inactive/empty list
+has no recommendation. This T04 behavior differs explicitly from accepted T03
+Compare Basket, which continues to block inactive products.
+
+Focus reload, manual refresh, retries, account/list/maximum keys and the existing
+generation/abort controller prevent late responses replacing current results.
+Failures clear optimizer results. Session 401 uses existing logout handling.
+No new native dependency is needed; iOS/Android export checks are automated.
+The owner confirmed successful physical-iPhone acceptance on 2026-11-17.
+Physical Android acceptance has not been reported.
 
 ## Implemented T03-C flow (owner accepted)
 

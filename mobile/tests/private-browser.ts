@@ -8,12 +8,15 @@ import { once } from 'node:events';
 
 // Called only by the verified disposable-MySQL integration fixture. This proxy
 // may forward writes, so it explicitly refuses the owner's ordinary API port.
-export async function runPrivateBrowser(api: string) {
+export async function runPrivateBrowser(api: string, setSplitFixture?: (enabled: boolean) => Promise<void>) {
   const target = new URL(api);
   assert.equal(target.hostname, '127.0.0.1'); assert.notEqual(target.port, '3000'); assert.ok(target.port);
   const root = path.resolve('dist/web'); assert.ok(fs.existsSync(path.join(root, 'index.html')));
   let itemGate: Promise<void> | undefined, releaseItem = () => {}, failNextAddition = false, additionRequests = 0, detailReads = 0;
   let itemWrites = 0;
+  let failNextOptimization = false;
+  let noPriceCoverage = false;
+  const optimizationQueries: string[] = [];
   function holdItemRequest() { itemGate = new Promise<void>(resolve => { releaseItem = () => { itemGate = undefined; resolve(); }; }); }
   const server = http.createServer(async (req, res) => {
     try {
@@ -21,6 +24,10 @@ export async function runPrivateBrowser(api: string) {
       if (url.pathname.startsWith('/api/')) {
         const chunks: Buffer[] = []; for await (const chunk of req) chunks.push(Buffer.from(chunk));
         const body = Buffer.concat(chunks);
+        if (req.method === 'GET' && url.pathname.endsWith('/optimization')) {
+          optimizationQueries.push(url.search);
+          if (failNextOptimization) { failNextOptimization = false; res.writeHead(500).end('Controlled T04 failure'); return; }
+        }
         if ((req.method === 'PATCH' || req.method === 'DELETE') && url.pathname.includes('/items/')) itemWrites++;
         if (req.method === 'GET' && /^\/api\/shopping-lists\/\d+$/.test(url.pathname)) detailReads++;
         if (req.method === 'POST' && url.pathname.endsWith('/items')) {
@@ -31,7 +38,20 @@ export async function runPrivateBrowser(api: string) {
         const response = await fetch(`${api}${url.pathname.slice(4)}${url.search}`, { method: req.method,
           headers: { 'Content-Type': 'application/json', ...(req.headers.authorization ? { Authorization: req.headers.authorization } : {}) },
           ...(body.length ? { body } : {}) });
-        res.writeHead(response.status, { 'Content-Type': 'application/json' }); res.end(await response.text()); return;
+        let responseText = await response.text();
+        // Explicit UI-only no-coverage response fixture. Normal/split flows use
+        // real SQL; this controlled response verifies the rendered empty state.
+        if (noPriceCoverage && response.ok && url.pathname.endsWith('/optimization')) {
+          const result = JSON.parse(responseText), comparison = result.comparison;
+          const missingProductIds = comparison.shoppingList.items.map((i: { productId: number }) => i.productId);
+          comparison.incompleteBranches = [...comparison.eligibleBranches, ...comparison.incompleteBranches]
+            .map(({ branchId, branch, supermarketId, supermarket }: { branchId: number; branch: string; supermarketId: number; supermarket: string }) =>
+              ({ branchId, branch, supermarketId, supermarket, missingProductIds })).sort((a, b) => a.branchId - b.branchId);
+          comparison.eligibleBranches = []; comparison.cheapestBranchIds = []; comparison.outcome = 'no_complete_branches';
+          result.multiStore = { status: 'no_solution', solution: null, savings: null }; result.missingProductIds = missingProductIds;
+          responseText = JSON.stringify(result);
+        }
+        res.writeHead(response.status, { 'Content-Type': 'application/json' }); res.end(responseText); return;
       }
       const file = path.resolve(root, `.${decodeURIComponent(url.pathname)}`);
       if (file !== root && !file.startsWith(root + path.sep)) { res.writeHead(403).end(); return; }
@@ -184,6 +204,30 @@ export async function runPrivateBrowser(api: string) {
     assert.equal(await evaluate(`document.querySelectorAll('[data-testid="basket-availability-notice"]').length`), 1);
     await click('View item breakdown'); await wait(text('Original unit price: USD')); await wait(text('Verified demonstration observation'));
     await click('Edit shopping list'); await wait(text('Saved quantity: 2 complete packages'));
+    await setSplitFixture?.(true);
+    await click('Find Cheapest Basket'); await wait(text('Best Single Store')); await wait(text('Multi-Store Option'));
+    await wait(text('USD 3.90')); await wait(text('Older price')); await wait(text('DEMONSTRATION DATA'));
+    await wait(text('Driving and fuel expenses are excluded')); await wait(text('Master Potato Chips'));
+    if (setSplitFixture) { await wait(text('USD 0.90')); await wait(text('2 branches used')); await wait(text('USD 3.00 (76.92%)')); }
+    await wait(text('Price coverage: 2/2 products'));
+    const optimizationScreenshot = await call('Page.captureScreenshot', { format: 'png' });
+    fs.writeFileSync(path.resolve('dist/t04-optimization.png'), Buffer.from(optimizationScreenshot.data, 'base64'));
+    await click('Up to 3 branches'); await wait(text('Maximum branches: 3')); await wait(text('Best Single Store'));
+    assert.ok(optimizationQueries.includes('?maxStores=3'));
+    await click('One branch'); await wait(text('Maximum branches: 1')); await wait(text('1 branch used'));
+    await wait(text('No merchandise savings'));
+    assert.ok(optimizationQueries.includes('?maxStores=1'));
+    failNextOptimization = true; await click('Refresh optimization'); await wait(text('The backend could not complete'));
+    assert.equal(await evaluate(`!!document.querySelector('[data-testid="optimization-results"]')`), false);
+    await click('Retry'); await wait(text('Best Single Store'));
+    noPriceCoverage = true; await click('Refresh optimization'); await wait(text('No complete solution within 1 branch'));
+    await wait(text('No usable price anywhere for:')); noPriceCoverage = false;
+    await click('Refresh optimization'); await wait(text('Best Single Store'));
+    await click('Edit shopping list'); await wait(text('Saved quantity: 2 complete packages'));
+    await click('Increase Coca-Cola quantity'); await wait(text('Saved quantity: 3 complete packages'));
+    await click('Find Cheapest Basket'); await wait(text('USD 5.50')); await wait(text('Quantity: 3 packages'));
+    await click('Edit shopping list'); await wait(text('Saved quantity: 3 complete packages'));
+    await click('Decrease Coca-Cola quantity'); await wait(text('Saved quantity: 2 complete packages'));
     const readsBeforeRemoval = detailReads, routeBeforeRemoval = await evaluate('location.pathname');
     const writesBeforeRemoval = itemWrites;
     await captureButtons();
@@ -227,6 +271,7 @@ export async function runPrivateBrowser(api: string) {
     await click('Browse products'); await wait(`!!document.querySelector('input[aria-label="Search products"]')`);
     assert.deepEqual(errors, []);
   } finally {
+    await setSplitFixture?.(false);
     if (socket?.readyState === WebSocket.OPEN) { void call('Browser.close').catch(() => {}); socket.close(); } else chrome.kill();
     await closed; await new Promise<void>(resolve => { server.close(() => resolve()); server.closeAllConnections(); });
     assert.ok(path.resolve(profile).startsWith(path.resolve(os.tmpdir()) + path.sep) && /^t03c-browser-/.test(path.basename(profile)));

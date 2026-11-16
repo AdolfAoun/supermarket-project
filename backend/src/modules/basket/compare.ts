@@ -1,5 +1,6 @@
 import { HttpError } from '../../middleware/errors.js';
-import { exchangeRate, monetaryPolicy, toUsdUnits, packageCost, formatUsd } from '../shared/money.js';
+import { exchangeRate, monetaryPolicy, formatUsd } from '../shared/money.js';
+import { costLine } from './pricing.js';
 import type { BasketSnapshot, BasketBranch, BasketPrice } from './repository.js';
 
 export const availabilityNotice = 'Product availability is not verified in real time. Please check with the supermarket before visiting.';
@@ -47,14 +48,9 @@ export function compareBasket(snapshot: BasketSnapshot) {
     let total = 0n;
     const items: CostLine[] = requiredItems.map(item => {
       const price = products!.get(item.productId)!;
-      const unit = toUsdUnits(price.originalPrice, price.originalCurrency);
-      const cost = packageCost(unit, item.quantity);
-      total += cost;
-      return { productId: item.productId, quantity: item.quantity,
-        originalPrice: price.originalPrice, originalCurrency: price.originalCurrency,
-        unitPriceUsd: formatUsd(unit), unitPriceUsdUnits: unit.toString(),
-        lineTotalUsd: formatUsd(cost), lineTotalUsdUnits: cost.toString(),
-        observedAt: price.observedAt, status: 'verified', sourceType: 'seed', demonstrationData: true };
+      const line = costLine(price, item.quantity);
+      total += BigInt(line.lineTotalUsdUnits);
+      return line;
     });
     eligibleBranches.push({ ...branch, rank: 0, totalUsd: formatUsd(total), totalUsdUnits: total.toString(), items });
   }

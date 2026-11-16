@@ -89,6 +89,19 @@ test('T03-C mobile clients → Express → disposable MySQL', { skip: !process.e
       await assert.rejects(createListApi(other.run, client).detail(listId), error => error instanceof ApiError && error.status === 404);
       assert.equal(other.getState().status, 'authenticated'); await other.logout();
     });
+    await t.test('T04 mobile optimizer uses actual API/SQL contract and refreshes after saved quantity changes', async () => {
+      const first = await lists.optimize(listId);
+      assert.equal(first.multiStore.status, 'complete');
+      assert.equal(first.comparison.eligibleBranches[0].totalUsd, '3.90');
+      assert.equal(first.multiStore.solution!.totalUsd, '3.90');
+      assert.equal(first.multiStore.savings!.amountUsd, '0.00');
+      for (const max of [1, 2, 3]) assert.equal((await lists.optimize(listId, max)).maximumStores, max);
+      await lists.setQuantity(listId, itemId, 3);
+      const changed = await lists.optimize(listId);
+      assert.equal(changed.comparison.shoppingList.items.find(i => i.id === itemId)!.quantity, 3);
+      assert.equal(changed.multiStore.solution!.totalUsd, '5.50');
+      await lists.setQuantity(listId, itemId, 2);
+    });
     await t.test('remove/delete/logout clear private access and catalog records remain byte-for-byte unchanged', async () => {
       await lists.removeItem(listId, itemId); assert.equal((await lists.detail(listId)).items.length, 1);
       await lists.remove(listId); await session.logout();
@@ -99,7 +112,11 @@ test('T03-C mobile clients → Express → disposable MySQL', { skip: !process.e
     });
     if (process.env.RUN_T03_BROWSER_TESTS === '1') await t.test('rendered mobile web registration, list editor, basket breakdown and logout with real SQL', async () => {
       const { runPrivateBrowser } = await import('./private-browser');
-      await runPrivateBrowser(baseUrl());
+      await runPrivateBrowser(baseUrl(), async enabled => {
+        if (enabled) await admin.query(`INSERT INTO prices (id,product_id,branch_id,price,currency,observed_at,status,source_type,source_note)
+          VALUES (99001,1,4,0.10,'USD','2026-11-01','verified','seed','DEMONSTRATION DATA T04 disposable browser split fixture')`);
+        else await admin.query('DELETE FROM prices WHERE id = 99001');
+      });
       assert.deepEqual(await snapshot(), before);
     });
   } finally {

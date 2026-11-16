@@ -4,7 +4,7 @@ On 2026-11-07 the owner confirmed successful physical-iPhone testing, including
 the corrected Product Details and Supermarkets headers, and approved the complete
 T02 milestone. See the [acceptance record](t02cde-verification.md#2026-11-07--final-owner-acceptance).
 
-**Status:** T01, T02 and all of T03 (A/B/C) are complete and owner-accepted. T03-C passed final physical-iPhone acceptance on 2026-11-09; see [T03-C verification](t03c-verification.md). T04 two-supermarket optimization, T05 routing/fuel and T06 receipt OCR have not started.
+**Status:** T01–T04 are complete and owner-accepted. The owner confirmed successful T04 physical-iPhone acceptance on 2026-11-17. T04 supersedes the earlier two-stop-only boundary with a configurable maximum of 1–3 branches (default 2). T05 routing/fuel and T06 receipt OCR have not started. See [T04 acceptance and verification](t04-verification.md).
 
 ## Working method
 - Start with a small app shell and API health checks.
@@ -18,7 +18,7 @@ T02 milestone. See the [acceptance record](t02cde-verification.md#2026-11-07--fi
 | T01 | Repo/app/server foundation | Expo Router tabs; Express TS; MySQL config; health/db check; docs; secrets hygiene | Mobile launches, backend responds, DB check succeeds, tests run or blockers documented | Complete; manually verified by owner |
 | T02 | Catalog and price comparison | Core 5 tables, seed data, product search/detail, verified branch prices and timestamps | Search -> product -> branch comparison works end to end; missing/invalid data handled | Complete; owner-approved 2026-11-07 after successful physical-iPhone testing, including corrected headers |
 | T03 | User accounts and lists | Simple email login; list CRUD; basket comparison | User lists persist; totals calculated only for complete eligible baskets | Complete; T03-A/B/C owner-approved, with final physical-iPhone acceptance on 2026-11-09 |
-| T04 | Two-supermarket optimization | One, exactly two, or automatic one/two physical branches; simple preferences; basket split and missing-data treatment | Tested example reproduces lowest eligible basket cost within the approved two-stop limit | Not started |
+| T04 | Shopping basket optimization | Up to 1, 2 (default), or 3 physical branches; complete single-store ranking, split allocations, freshness and missing-data treatment | Exact eligible merchandise optimum within the selected maximum; quantities/savings reconcile; mobile results and refresh work | Complete; owner physical-iPhone acceptance confirmed 2026-11-17; see T04 report |
 | T05 | Routing and fuel | Origin/destination, branch detours, fuel input, additional travel cost | Costs and constraints verifiable; provider cost/billing clarified | Not started |
 | T06 | Receipt OCR and contribution | Free OCR candidate, photo/upload, review/match/catalog picker, duplicate/quality/privacy checks, protected price submission | Known alias matched; unknown product manually chosen; suspect price not auto-verified | Not started |
 | T07 | Supporting functions | Favorites, alerts, history, price reports, savings highlight | Each mapped requirement gets a documented acceptance check | Not started |
