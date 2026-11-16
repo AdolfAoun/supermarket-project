@@ -94,6 +94,17 @@ async function main() {
       }
     };
     const text = value => `document.body.innerText.toLowerCase().includes(${JSON.stringify(value.toLowerCase())})`;
+    const captureDesign = async name => {
+      assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true, `${name}: no horizontal page overflow`);
+      assert.equal(await evaluate(`Array.from(document.querySelectorAll('[role="tab"]')).every(tab => {
+        const title = ['Home','Explore','Shopping List','Receipts','Profile'].find(value => tab.textContent.includes(value));
+        const label = Array.from(tab.querySelectorAll('div,span')).find(node => node.textContent.trim() === title);
+        if (!label) return false;
+        const rect = label.getBoundingClientRect(); return rect.top >= 0 && rect.bottom <= innerHeight;
+      })`), true, `${name}: tab labels remain within the viewport`);
+      const screenshot = await call('Page.captureScreenshot', { format: 'png' });
+      fs.writeFileSync(path.resolve(root, '..', `ui-${name}.png`), Buffer.from(screenshot.data, 'base64'));
+    };
     const navigate = async route => { await call('Page.navigate', { url: origin + route }); };
     const click = async (label, selector = '[role="button"],button,a,[role="tab"]') => {
       const expression = `Array.from(document.querySelectorAll(${JSON.stringify(selector)})).find(e => e.getAttribute('aria-label') === ${JSON.stringify(label)} || e.textContent.trim() === ${JSON.stringify(label)})`;
@@ -107,7 +118,9 @@ async function main() {
         return originalFetch(url.pathname.startsWith('/api/') ? location.origin + url.pathname + url.search : input, options);
       };` });
 
+    await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
     await navigate('/'); await wait(text('Backend and database connected'));
+    await captureDesign('home');
     assert.equal(await evaluate('document.querySelectorAll(\'[role="tab"]\').length'), 5);
     await click('Browse Products'); await wait('!!document.querySelector(\'input[aria-label="Search products"]\')');
     await evaluate(`(() => { const input = document.querySelector('input');
@@ -115,12 +128,15 @@ async function main() {
       input.dispatchEvent(new Event('input', { bubbles: true })); })()`);
     const productSelector = '[role="button"][aria-label*="1.5 L"][aria-label*="Product details"]';
     await wait('document.querySelectorAll(\'[role="button"][aria-label*="Product details"]\').length === 2');
+    await captureDesign('explore');
     assert.ok(apiCalls.some(call => new URL(call, origin).searchParams.get('search') === 'coca'), 'Search must reach the backend');
     assert.equal(apiCalls.some(call => call.split('?')[0].endsWith('/prices')), false, 'Catalog must not prefetch comparison prices');
     await wait(`!!document.querySelector(${JSON.stringify(productSelector)})`);
     await evaluate(`(() => { const row = document.querySelector(${JSON.stringify(productSelector)}); row.click(); row.click(); })()`);
     await wait(text('Pack quantity: 1')); await click('Compare branch prices');
     await wait(text('USD 1.60')); await wait(text('Lowest displayed demo price'));
+    await captureDesign('prices');
+    await click('About demonstration prices'); await wait(text('Invented USD prices'));
     assert.equal(await evaluate('location.pathname'), '/products/1/prices');
     await click('Go back'); await wait(text('Compare branch prices'));
     await click('Go back'); await wait('!!document.querySelector(\'input[aria-label="Search products"]\')');
@@ -176,12 +192,15 @@ async function main() {
         `Content should use existing padding once, not another header-sized gap: ${JSON.stringify(measured)}`);
     };
     mode = 'normal';
+    await navigate('/profile'); await wait(text('Create an account')); await captureDesign('login');
     for (const [width, height] of [[320, 568], [390, 844], [430, 932], [844, 390]]) {
       await call('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: 1, mobile: true });
       await navigate('/products/1'); await wait(text('Compare branch prices'));
       await checkBelowHeader('product-identity', 'Product details');
+      await captureDesign(`product-${width}`);
       await navigate('/supermarkets'); await wait(text('Coordinates unavailable'));
       await checkBelowHeader('supermarket-intro', 'Supermarkets and branches');
+      await captureDesign(`supermarkets-${width}`);
     }
     await call('Emulation.setDeviceMetricsOverride', { width: 320, height: 400, deviceScaleFactor: 1, mobile: true });
     mode = 'long-layout'; await navigate('/products/1'); await wait(text('Long product name for layout verification'));

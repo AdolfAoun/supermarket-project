@@ -5,6 +5,7 @@ import { PageHeader, ProductIdentity, ResourceNotice, ui } from '../../../compon
 import { useRemote } from '../../../hooks/useRemote';
 import { catalogApi, parseProductId } from '../../../services/api';
 import { isLowestDisplayed, observedLabel } from '../../../services/presentation';
+import { Badge, Disclosure, EmptyState } from '../../../components/Design';
 
 function Prices({ id }: { id: number }) {
   const resource = useRemote(`comparison:${id}`, async signal => {
@@ -21,21 +22,19 @@ function Prices({ id }: { id: number }) {
         <ProductIdentity product={resource.data.product} />
         <View style={comparison?.demonstrationData ? ui.warning : ui.notice}>
           <Text style={ui.heading}>{comparison?.demonstrationData ? 'Demonstration prices' : 'Price information'}</Text>
-          <Text style={ui.text}>{comparison?.dataLabel}</Text>
-          <Text style={ui.text}>Freshness has not been evaluated. Verified status does not mean recent.</Text>
-          <Text style={ui.text}>Availability: Check with store.</Text>
+          <Text style={ui.muted}>Freshness has not been evaluated. Verified status does not mean recent.</Text>
+          <Text style={ui.muted}>Availability: Check with store.</Text>
+          <Disclosure title="About demonstration prices"><Text style={ui.muted}>{comparison?.dataLabel}</Text></Disclosure>
         </View>
       </>}
     </>}
-    ListEmptyComponent={resource.status === 'empty' ? <Text style={ui.text}>
-      No eligible price observations are available for this product. Missing prices are not zero.
-    </Text> : undefined}
-    renderItem={({ item }) => <View style={ui.card}>
+    ListEmptyComponent={resource.status === 'empty' ? <EmptyState title="No recorded prices" description="No eligible price observations are available for this product. Missing prices are not zero." /> : undefined}
+    renderItem={({ item }) => <View style={[ui.card, comparison && isLowestDisplayed(comparison, item) && ui.featured]}>
       {comparison && isLowestDisplayed(comparison, item) && <Text style={ui.heading}>
         {item.demonstrationData ? 'Lowest displayed demo price' : 'Lowest displayed price'}
       </Text>}
-      <Text style={ui.heading}>{item.currency} {item.price}</Text>
-      <Text style={ui.text}>{item.supermarket}</Text>
+      <Text style={ui.price}>{item.currency} {item.price}</Text>
+      <Text style={ui.heading}>{item.supermarket}</Text>
       <Text style={ui.text}>Branch: {item.branch}</Text>
       <Text style={ui.muted}>Observed: {observedLabel(item.observedAt)}</Text>
       <Text style={ui.muted}>{item.demonstrationData ? 'Verified (simulated demo status)' : 'Verified'} · Check with store</Text>

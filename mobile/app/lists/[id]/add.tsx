@@ -1,5 +1,6 @@
+import { Button } from '../../../components/Design';
 import { memo, useCallback, useState } from 'react';
-import { Button, FlatList, Text, TextInput, View } from 'react-native';
+import { FlatList, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams } from 'expo-router';
 import { AuthGate, AccountPage, ConfirmationNotice, ErrorText, inputStyle } from '../../../components/AccountUI';
@@ -13,9 +14,10 @@ import { validQuantity } from '../../../services/account-api';
 import { packageLabel } from '../../../services/presentation';
 import { confirmItem } from '../../../services/list-state';
 import type { Product } from '../../../services/contracts';
+import { Badge, EmptyState, SectionHeader } from '../../../components/Design';
 
 const ProductDescription = memo(function ProductDescription({ product }: { product: Product }) {
-  return <><Text style={ui.heading}>{product.name}</Text><Text style={ui.text}>{product.brand} · {product.variant} · {packageLabel(product)}</Text></>;
+  return <><Badge>{product.category}</Badge><Text style={ui.heading}>{product.name}</Text><Text style={ui.muted}>{product.brand} · {product.variant} · {packageLabel(product)}</Text></>;
 });
 const ProductRow = memo(function ProductRow({ product, savedQuantity, pending, error, canAdd, onAdd }: {
   product: Product; savedQuantity?: number; pending: boolean; error: string | null; canAdd: boolean; onAdd: (product: Product) => void;
@@ -24,7 +26,7 @@ const ProductRow = memo(function ProductRow({ product, savedQuantity, pending, e
     <ProductDescription product={product} />
     {savedQuantity !== undefined && <Text style={ui.muted}>Saved in this list: {savedQuantity} packages</Text>}
     <ErrorText message={error} />
-    <Button title={`Add ${product.name}`} accessibilityLabel={`Add ${product.brand} ${product.name}, ${product.variant}, ${packageLabel(product)}`}
+    <Button title={`Add ${product.name}`} variant="primary" accessibilityLabel={`Add ${product.brand} ${product.name}, ${product.variant}, ${packageLabel(product)}`}
       disabled={pending || !canAdd} onPress={() => onAdd(product)} />
   </View>;
 });
@@ -44,15 +46,15 @@ function Picker({ id }: { id: number }) {
   return <SafeAreaView style={ui.page} edges={['left', 'right', 'bottom']}>
     <FlatList keyboardShouldPersistTaps="handled" data={catalog.data ?? []} keyExtractor={p => String(p.id)} contentContainerStyle={ui.content}
       ListHeaderComponent={<>
-        <Text style={ui.title}>Add registered products</Text><ResourceNotice state={detail} retry={detail.retry} />
+        <View style={{ gap: 12, marginBottom: 20 }}><SectionHeader eyebrow="BUILD YOUR BASKET" title="Add registered products" /><ResourceNotice state={detail} retry={detail.retry} />
         <Text style={ui.text}>{detail.data ? `Adding to ${detail.data.name}` : ''}</Text>
         <TextInput accessibilityLabel="Search products to add" placeholder="Name, brand, category or alias" style={inputStyle} value={search} onChangeText={setSearch} maxLength={SEARCH_LIMIT} autoCorrect={false} />
         <Text style={ui.text}>Packages to add (1–999)</Text>
         <TextInput accessibilityLabel="Quantity to add" style={inputStyle} value={value} onChangeText={setValue} maxLength={3} keyboardType="number-pad" />
         <Text style={ui.muted}>Adding an existing product increases its saved quantity. Use the list editor to replace a quantity.</Text>
-        <ResourceNotice state={catalog} retry={catalog.retry} />
+        <ResourceNotice state={catalog} retry={catalog.retry} /></View>
       </>}
-      ListEmptyComponent={catalog.status === 'empty' ? <Text style={ui.text}>No registered products match this search.</Text> : undefined}
+      ListEmptyComponent={catalog.status === 'empty' ? <EmptyState title="No products found" description="No registered products match this search." icon="search-outline" /> : undefined}
       ListFooterComponent={catalog.data?.length === CATALOG_LIMIT ? <Text style={ui.muted}>Showing up to {CATALOG_LIMIT} products. Narrow your search.</Text> : undefined}
       renderItem={({ item }) => <ProductRow product={item}
         savedQuantity={detail.data?.items.find(saved => saved.productId === item.id)?.quantity}

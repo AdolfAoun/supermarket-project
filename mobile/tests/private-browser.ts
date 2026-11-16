@@ -140,6 +140,8 @@ export async function runPrivateBrowser(api: string, setSplitFixture?: (enabled:
     await click('Add products'); await fill('Search products to add', 'Master'); await fill('Quantity to add', '1');
     await click('Add Master Potato Chips, Salted, 90 g'); await wait(text('Saved in this list: 1 packages')); await click('Go back');
     await wait(text('Saved quantity: 1 complete packages'));
+    const listScreenshot = await call('Page.captureScreenshot', { format: 'png' });
+    fs.writeFileSync(path.resolve('dist/ui-shopping-list.png'), Buffer.from(listScreenshot.data, 'base64'));
     const listNode = `Array.from(document.querySelectorAll('[data-testid="shopping-list-scroll"]')).find(e => e.getClientRects().length && !e.closest('[aria-hidden="true"],[inert]'))`;
     await evaluate(`(() => {window.__uxScroll=${listNode}; window.__uxRow=window.__uxScroll.querySelector('[data-testid^="list-item-"]'); window.__uxScroll.scrollTop=100; window.__uxTop=window.__uxScroll.scrollTop;})()`);
     assert.ok(await evaluate('window.__uxTop > 0'));
@@ -212,6 +214,15 @@ export async function runPrivateBrowser(api: string, setSplitFixture?: (enabled:
     await wait(text('Price coverage: 2/2 products'));
     const optimizationScreenshot = await call('Page.captureScreenshot', { format: 'png' });
     fs.writeFileSync(path.resolve('dist/t04-optimization.png'), Buffer.from(optimizationScreenshot.data, 'base64'));
+    // Progressive disclosure must reveal the same server observation fields.
+    await click('Single-store item breakdown'); await wait(text('Older price'));
+    await click('Price observation details'); await wait(text('Verified demonstration observation'));
+    for (const width of [320, 390, 430]) {
+      await call('Emulation.setDeviceMetricsOverride', { width, height: 844, deviceScaleFactor: 1, mobile: true });
+      assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true, 'Optimization must not overflow horizontally');
+      const screenshot = await call('Page.captureScreenshot', { format: 'png' });
+      fs.writeFileSync(path.resolve(`dist/ui-optimization-${width}.png`), Buffer.from(screenshot.data, 'base64'));
+    }
     await click('Up to 3 branches'); await wait(text('Maximum branches: 3')); await wait(text('Best Single Store'));
     assert.ok(optimizationQueries.includes('?maxStores=3'));
     await click('One branch'); await wait(text('Maximum branches: 1')); await wait(text('1 branch used'));

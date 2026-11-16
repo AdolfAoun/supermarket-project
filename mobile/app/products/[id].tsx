@@ -1,4 +1,5 @@
-import { Button, ScrollView, RefreshControl, Text, View } from 'react-native';
+import { Button } from '../../components/Design';
+import { ScrollView, RefreshControl, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router, useLocalSearchParams } from 'expo-router';
 import { PageHeader, ProductIdentity, ResourceNotice, ui } from '../../components/CatalogUI';
@@ -13,7 +14,7 @@ function Details({ id }: { id: number }) {
     <ResourceNotice state={resource} retry={resource.retry} />
     {resource.data && <>
       <ProductIdentity product={resource.data} />
-      <Button title="Compare branch prices" color="#17634c" onPress={() => router.navigate(priceRoute(id))} />
+      <Button title="Compare branch prices" variant="primary" color="#17634c" onPress={() => router.navigate(priceRoute(id))} />
       <Button title="Add to Shopping List" color="#17634c" onPress={() => router.navigate({ pathname: '/products/[id]/add', params: { id: String(id) } })} />
       <Text style={ui.muted}>Compare this exact package. A recorded price does not confirm current stock.</Text>
     </>}

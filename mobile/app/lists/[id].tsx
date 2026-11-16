@@ -1,5 +1,6 @@
+import { Button } from '../../components/Design';
 import { memo, useCallback, useState } from 'react';
-import { Button, Text, TextInput, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { AccountPage, AuthGate, ErrorText, inputStyle, NameForm } from '../../components/AccountUI';
 import { useAuth } from '../../components/AuthProvider';
@@ -12,6 +13,7 @@ import { packageLabel } from '../../services/presentation';
 import type { ListItem } from '../../services/private-contracts';
 import { confirmItem, confirmRemoval, syncQuantityDraft } from '../../services/list-state';
 import { ListActionButton } from '../../components/ListActionButton';
+import { Badge, Disclosure, EmptyState, SectionHeader } from '../../components/Design';
 
 const ItemDescription = memo(function ItemDescription({ name, brand, variant, packageText, isActive }: {
   name: string; brand: string; variant: string; packageText: string; isActive: boolean;
@@ -35,18 +37,18 @@ const QuantityEditor = memo(function QuantityEditor({ item, disabled, error, sav
   return <View testID={`list-item-${item.id}`} style={ui.card}>
     <ItemDescription name={item.product.name} brand={item.product.brand} variant={item.product.variant}
       packageText={packageLabel(item.product)} isActive={item.product.isActive} />
-    <Text style={ui.text}>Saved quantity: {item.quantity} complete packages</Text>
+    <Badge>Saved quantity: {item.quantity} complete packages</Badge>
     <ErrorText message={error} />
     <View style={ui.row}>
       <ListActionButton title="−" accessibilityLabel={`Decrease ${item.product.name} quantity`} busy={disabled} disabled={item.quantity === 1} onPress={() => save(item.id, item.quantity - 1)} />
       <TextInput accessibilityLabel={`Quantity for ${item.product.name}`} value={value}
-        onChangeText={text => setDraft({ confirmed: item.quantity, value: text })} style={[inputStyle, { flex: 1 }]}
+        onChangeText={text => setDraft({ confirmed: item.quantity, value: text })} style={[inputStyle, { flex: 1, minWidth: 0, textAlign: 'center', fontWeight: '600', fontVariant: ['tabular-nums'] }]}
         keyboardType="number-pad" maxLength={3} editable={!disabled} />
       <ListActionButton title="+" accessibilityLabel={`Increase ${item.product.name} quantity`} busy={disabled} disabled={item.quantity === 999} onPress={() => save(item.id, item.quantity + 1)} />
     </View>
     {quantity === null && <Text style={ui.muted}>Enter a whole number from 1 to 999.</Text>}
-    <ListActionButton title="Save quantity" busy={disabled} disabled={quantity === null || quantity === item.quantity} onPress={() => quantity !== null && save(item.id, quantity)} />
-    <ListActionButton title="Remove product" color="#9b332c" busy={disabled} onPress={() => remove(item.id)} />
+    <View style={[ui.row, { flexWrap: 'wrap' }]}><ListActionButton title="Save quantity" busy={disabled} disabled={quantity === null || quantity === item.quantity} onPress={() => quantity !== null && save(item.id, quantity)} />
+    <ListActionButton title="Remove product" color="#9b332c" busy={disabled} onPress={() => remove(item.id)} /></View>
     <Text style={ui.muted}>Whole packages (1–999). Use Remove product to remove an item.</Text>
   </View>;
 });
@@ -73,19 +75,27 @@ function Details({ id }: { id: number }) {
     <ResourceNotice state={resource} retry={resource.retry} /><ErrorText message={action.state.list?.error ?? null} />
     {list && <>
       <Text style={ui.title}>{list.name}</Text>
-      <NameForm key={list.name} label="Rename list" initial={list.name} disabled={!!action.state.list?.pending} submitBusy={action.pending}
-        onSubmit={name => void action.run('list', signal => {
-          resource.update(current => current); return lists.rename(id, name, signal);
-        }, summary => resource.update(current => ({ ...current, ...summary })))} />
+      <Badge>{list.items.length} registered {list.items.length === 1 ? 'product' : 'products'}</Badge>
+
+      <View style={ui.card}>
+      <Text style={ui.label}>PLAN YOUR BASKET</Text>
+      <ListActionButton title="Find Cheapest Basket" variant="primary" busy={action.pending} disabled={!list.items.some(item => item.product.isActive)} onPress={() => router.navigate({ pathname: '/lists/[id]/optimization', params: { id: String(id) } })} />
       <ListActionButton title="Add products" busy={action.pending} onPress={() => router.navigate({ pathname: '/lists/[id]/add', params: { id: String(id) } })} />
       <ListActionButton title="Compare Basket" busy={action.pending} disabled={!list.items.length} onPress={() => router.navigate({ pathname: '/lists/[id]/compare', params: { id: String(id) } })} />
-      <ListActionButton title="Find Cheapest Basket" busy={action.pending} disabled={!list.items.some(item => item.product.isActive)} onPress={() => router.navigate({ pathname: '/lists/[id]/optimization', params: { id: String(id) } })} />
+      </View>
+      <SectionHeader title="In your list" />
       <Text style={ui.muted}>Quantities count complete registered packages. Different sizes remain separate products.</Text>
-      {!list.items.length && <Text style={ui.text}>This shopping list is empty. Add a registered product to compare your basket.</Text>}
+      {!list.items.length && <EmptyState title="No products yet" description="This shopping list is empty. Add a registered product to compare your basket." />}
       {list.items.map(item => <QuantityEditor key={item.id} item={item}
         disabled={!!action.state.list?.pending || !!action.state[String(item.id)]?.pending}
         error={action.state[String(item.id)]?.error ?? null}
         save={save} remove={remove} />)}
+      <Disclosure title="List name & settings" initiallyOpen>
+      <NameForm key={list.name} label="Rename list" initial={list.name} disabled={!!action.state.list?.pending} submitBusy={action.pending}
+        onSubmit={name => void action.run('list', signal => {
+          resource.update(current => current); return lists.rename(id, name, signal);
+        }, summary => resource.update(current => ({ ...current, ...summary })))} />
+      </Disclosure>
       {confirmDelete ? <View style={ui.warning}>
         <Text style={ui.text}>Delete “{list.name}” and all its items? This cannot be undone.</Text>
         <ListActionButton title="Confirm delete list" color="#9b332c" busy={action.pending} onPress={() => void action.run('list', signal => lists.remove(id, signal), () => router.replace('/(tabs)/shopping-list'))} />

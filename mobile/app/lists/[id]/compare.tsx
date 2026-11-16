@@ -1,4 +1,5 @@
-import { Button, Text } from 'react-native';
+import { Button } from '../../../components/Design';
+import { Text } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { AccountPage, AuthGate } from '../../../components/AccountUI';
 import { useAuth } from '../../../components/AuthProvider';

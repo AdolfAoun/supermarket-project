@@ -2,6 +2,18 @@
 
 **Status:** T02–T04 are complete and owner-accepted; successful T04 physical-iPhone acceptance was confirmed 2026-11-17. Other future features in the map remain planning guidance.
 
+## T04-UI cosmetic redesign — awaiting owner acceptance
+
+The mobile presentation now uses shared forest-green/neutral tokens, structured
+cards, native system typography, prominent prices and consistent touch targets.
+All existing screens and five tabs are restyled; APIs, hooks, services, request
+coordination and backend logic are unchanged. Supporting price details use labeled
+disclosures while demo, freshness, stock and fuel caveats remain accessible.
+Opaque headers preserve the accepted safe-area arrangement. Light appearance and
+glass-inspired React Native surfaces add no native dependencies. See the
+[redesign report and iPhone checklist](t04-ui-verification.md). The owner authorized
+saving this redesign to GitHub on 2026-11-17; physical-device acceptance remains pending.
+
 ## Implemented T04 flow
 
 The saved-list editor opens **Find Cheapest Basket**, a root-stack screen using

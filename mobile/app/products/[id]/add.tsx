@@ -1,5 +1,6 @@
+import { Button } from '../../../components/Design';
 import { useState } from 'react';
-import { Button, Text, TextInput, View } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { AccountPage, AuthGate, ErrorText, inputStyle, NameForm } from '../../../components/AccountUI';
 import { useAuth } from '../../../components/AuthProvider';
@@ -9,6 +10,7 @@ import { useProductActions } from '../../../hooks/useProductActions';
 import { useConfirmation } from '../../../hooks/useConfirmation';
 import { catalogApi, parseProductId } from '../../../services/api';
 import { validQuantity } from '../../../services/account-api';
+import { SectionHeader } from '../../../components/Design';
 
 function ChooseList({ id }: { id: number }) {
   const { lists, state } = useAuth(), action = useProductActions(), confirmation = useConfirmation(), [value, setValue] = useState('1');
@@ -18,6 +20,7 @@ function ChooseList({ id }: { id: number }) {
     return { product, shoppingLists };
   }, () => false, 0, { preserveData: true });
   return <AccountPage confirmation={confirmation.message}>
+    <SectionHeader eyebrow="SAVE FOR YOUR NEXT SHOP" title="Choose a shopping list" />
     <ResourceNotice state={resource} retry={resource.retry} /><ErrorText message={action.state.list?.error ?? null} />
     {resource.data && <><ProductIdentity product={resource.data.product} />
       <Text style={ui.text}>Packages to add (1–999)</Text>
@@ -25,7 +28,7 @@ function ChooseList({ id }: { id: number }) {
       {!resource.data.shoppingLists.length && <Text style={ui.text}>You have no shopping lists. Create one below, then select it.</Text>}
       {resource.data.shoppingLists.map(list => <View key={list.id} style={ui.card}><Text style={ui.heading}>{list.name}</Text>
         <ErrorText message={action.state[String(list.id)]?.error ?? null} />
-        <Button title={`Add to ${list.name}`} disabled={!!action.state[String(list.id)]?.pending || !!action.state.list?.pending || quantity === null} onPress={() => {
+        <Button title={`Add to ${list.name}`} variant="primary" disabled={!!action.state[String(list.id)]?.pending || !!action.state.list?.pending || quantity === null} onPress={() => {
           const productName = resource.data!.product.name;
           if (quantity !== null) void action.run(String(list.id), signal => {
             confirmation.clear(); return lists.add(list.id, id, quantity, signal);

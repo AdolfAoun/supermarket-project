@@ -1,19 +1,14 @@
 import type { ReactNode } from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { EmptyState } from './Design';
+import { ui } from './CatalogUI';
 
 export function PlaceholderScreen({ title, description, children }: { title: string; description: string; children?: ReactNode }) {
-  return <SafeAreaView style={styles.page} edges={['left', 'right', 'bottom']}>
-    <ScrollView contentContainerStyle={styles.content}>
-      <Text accessibilityRole="header" style={styles.title}>{title}</Text>
-      <Text style={styles.description}>{description}</Text>
+  return <SafeAreaView style={ui.page} edges={['left', 'right', 'bottom']}>
+    <ScrollView contentContainerStyle={ui.content}>
+      <EmptyState title={title} description={description} icon="receipt-outline" />
       {children}
     </ScrollView>
   </SafeAreaView>;
 }
-const styles = StyleSheet.create({
-  page: { flex: 1, backgroundColor: '#f6f8f7' },
-  content: { flexGrow: 1, justifyContent: 'center', padding: 24, gap: 16 },
-  title: { fontSize: 28, fontWeight: '700', color: '#163e32' },
-  description: { fontSize: 17, lineHeight: 26, color: '#495b54' },
-});

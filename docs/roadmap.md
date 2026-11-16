@@ -7,6 +7,11 @@ T02 milestone. See the [acceptance record](t02cde-verification.md#2026-11-07--fi
 **Status:** T01–T04 are complete and owner-accepted. The owner confirmed successful T04 physical-iPhone acceptance on 2026-11-17. T04 supersedes the earlier two-stop-only boundary with a configurable maximum of 1–3 branches (default 2). T05 routing/fuel and T06 receipt OCR have not started. See [T04 acceptance and verification](t04-verification.md).
 
 ## Working method
+
+T04-UI is a separate cosmetic redesign awaiting owner physical-iPhone acceptance;
+it does not reopen the accepted T04 algorithms or begin T05. See the
+[UI verification and acceptance checklist](t04-ui-verification.md).
+
 - Start with a small app shell and API health checks.
 - Build **vertical slices**: UI -> Express -> MySQL -> tests. Do not design all 28 production screens before one working flow.
 - Use a controlled 30–50 product demonstration catalog and a handful of illustrative branches/prices initially. Label data as demo and never imply it is current real store pricing.
