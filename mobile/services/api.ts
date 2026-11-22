@@ -26,7 +26,7 @@ export interface ClientOptions {
 }
 export interface RequestOptions {
   method?: 'GET' | 'POST' | 'PATCH' | 'DELETE'; body?: object; token?: string;
-  signal?: AbortSignal; errorMessage?: (status: number) => string;
+  signal?: AbortSignal; errorMessage?: (status: number) => string; timeoutMs?: number;
 }
 function httpError(status: number): ApiError {
   const message = status === 404 ? 'This item was not found or is no longer active.'
@@ -54,7 +54,7 @@ export function createApiClient(clientOptions: ClientOptions = {}) {
     const clearDeadline = later(() => {
       rejectAbort(new ApiError('timeout', 'The request timed out. Check your connection and retry.'));
       controller.abort();
-    }, clientOptions.timeoutMs ?? 10_000);
+    }, options.timeoutMs ?? clientOptions.timeoutMs ?? 10_000);
     const work = async () => {
       const response = await transport(`${base}${path}`, { method: options.method ?? 'GET', signal: controller.signal,
         headers: { Accept: 'application/json', ...(options.body ? { 'Content-Type': 'application/json' } : {}),

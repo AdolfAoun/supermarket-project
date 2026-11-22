@@ -1,6 +1,54 @@
 # System architecture
 
-**Status:** T01–T04 are complete and owner-accepted. The owner confirmed successful T04 physical-iPhone acceptance on 2026-11-17. T05 routing/fuel and T06 receipt OCR remain unimplemented.
+## T05-B2 offline OSM import boundary
+
+An operator-only TypeScript CLI fetches bounded Overpass or official HOT/HDX
+OSM extracts, normalizes geometry/names, produces a read-only catalog preview and
+imports only digest-bound approved records. It is not a runtime Overpass dependency
+or public write API. Existing supermarket/branch entities and API contracts remain.
+One optional additive source-ledger migration preserves OSM identity, review
+provenance and fingerprints for safe repeats; it is not applied automatically.
+Catalog inserts and provenance commit atomically; owner records/prices are never
+overwritten. Geographic candidate envelopes precede the unchanged exact corridor
+and provider work limits. See [dataset, approval workflow and evidence](t05b2-data-import.md).
+
+**Status:** T01–T04 are complete and owner-accepted. The owner confirmed successful T04 physical-iPhone acceptance on 2026-11-17. T05-A import/GPS foundations are retained in T05-B discovery, pending owner acceptance. T05-C fuel/basket integration, T05-D final multi-store polish and T06 receipt OCR remain unimplemented.
+
+## T05-B journey discovery boundary
+
+The existing optimizer remains pure and unchanged. Home opens the standalone
+Supermarkets Along My Route screen, without requiring a shopping list. Grocery
+prices remains a separate list screen. Optional saved-list selection loads a
+single-branch T04 comparison only on request, independently of road discovery.
+Valid driving imports start discovery directly;
+there is no confirmation step, confirmation state or requiresConfirmation field.
+The earlier T05-A long JourneySection/Preview UI was removed, not hidden.
+Supported URL formats, secure redirects, coordinate validation and one-shot
+foreground GPS remain. Partial/name-only imports cannot trigger routing.
+
+An authenticated no-store POST under modules/journeys retrieves registered
+branches through the existing catalog repository, then releases SQL resources
+before routing. routing.ts owns the configurable OSRM adapter, transport parsing,
+serial throttling, bounded cache, deadlines and provider attribution. shared/geo.ts
+owns coordinate checks and spherical point-to-polyline distances. discover.ts
+uses full road geometry for a 3 km candidate corridor, then routes complete
+journeys through each candidate, preserving existing stop order and testing each
+insertion position. The response contains raw meters/seconds and explicit exclusions.
+Distinct insertion failures accumulate instead of overwriting one another. After
+a usable baseline, deadline/provider failures retain successful options and mark
+unfinished work incomplete; client disconnects cancel normally. NoRoute/snapping
+remain completed unusable outcomes rather than provider-coverage failures.
+
+Mobile services/discovery.ts validates identity, metric reconciliation and sort
+order, filters the 0?30 minute slider locally, joins existing owned T04 price
+results by full branch identity, and builds supported Google Maps navigation
+URLs preserving destination/stops. No fuel or combined-price ranking is added.
+Source URLs are not persisted. Routing geometry/estimates are cached in bounded
+server memory for five minutes; coordinates are sent to the routing provider.
+The new optional location seed uses existing tables and creates no prices.
+Its temporary routine makes location writes atomic and accepts identical repeats;
+conflicting IDs/names/content roll back the whole import without owner updates.
+See t05b-verification.md and database/sources/README.md for limits and provenance.
 
 ## T04 optimization boundary
 
@@ -133,7 +181,7 @@ Mobile-first Lebanese supermarket price comparison system, supporting branch-spe
 | Mobile | React Native + Expo + TypeScript | Expo Router planned for tab/stack navigation |
 | Server | Node.js + Express + TypeScript | Modular monolith, REST JSON API |
 | Data | MySQL (WAMP locally) | Use `mysql2/promise`, parameterized SQL, migrations |
-| Maps / routes | Google Maps Platform | Intended; assess billing/quota before use |
+| Maps / routes | Google Maps links; OSRM road routing | T05-B import, OSRM road discovery and basic navigation handoff; no Google API billing |
 | Receipt images | Local private server storage initially | Storage abstraction enables later cloud migration |
 | Version control | Git + GitHub | Private repository recommended |
 | Coding | Codex | Claude optional for independent code review |
@@ -142,7 +190,7 @@ Mobile-first Lebanese supermarket price comparison system, supporting branch-spe
 - Mobile authentication/storage: T03-C implements native SecureStore and session-scoped request isolation; the owner verified physical-iPhone persistence after restarting Expo Go. Backend scrypt and opaque sessions are unchanged.
 - OCR: Google ML Kit on-device text recognition is the preferred free candidate; Expo development build/native package compatibility needs verification. If too complex, evaluate free Tesseract in backend. Extraction and product interpretation are separate steps.
 - Assistant: postponed; OpenAI API can incur usage charges. A free/low-cost approach is to be evaluated after core features work.
-- Routing: Google Maps pricing and billing may apply; no assumption of unlimited free use.
+- Routing: T05-B uses OSRM road estimates and Google Maps import/navigation links, without Google API credentials. Fuel and multi-store route optimization remain later work.
 
 ## Logical data flow
 ```text
@@ -160,7 +208,8 @@ Node.js / Express REST API
 
 Future external integration boundaries:
   ML Kit (mobile OCR) -> review -> API receipt submission
-  Google Maps (route distance/detours) -> backend cost evaluation
+  Google Maps links -> app import / basic external navigation (T05-B)
+  OSRM routes/detours -> discovery (T05-B); fuel/basket cost evaluation (T05-C)
   Assistant (natural language) -> controlled backend functions
 ```
 

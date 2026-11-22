@@ -6,14 +6,18 @@ University Computer Science capstone. Mobile-first application to browse registe
 Product Details and Supermarkets headers and approved complete T02 on 2026-11-07.
 See [final owner acceptance](docs/t02cde-verification.md#2026-11-07--final-owner-acceptance).
 
-> **Current state:** T01–T04 are complete and owner-accepted. T04 merchandise optimization supports up to 1–3 branches (default 2) and passed owner acceptance on a physical iPhone, confirmed 2026-11-17. No new database migration or dependency is required. Next: T05 routing/fuel, then T06 receipt OCR; neither has started. See [T04 acceptance and verification](docs/t04-verification.md), [roadmap](docs/roadmap.md), and [database instructions](database/README.md).
+> **Current state:** T01-T04 are owner-accepted. T05-B refines the T05-A import/GPS work into standalone Supermarkets Along My Route discovery, optional saved-list prices, a local detour slider and Google Maps handoff. No list is required for geographical discovery. Owner/iPhone acceptance is pending. Run `npm ci` in mobile; no schema migration is needed for T05-B discovery. The optional T05-B2 provenance migration and all location imports require separate approval. Existing demo branches have no coordinates. See [T05-B delivery and iPhone checklist](docs/t05b-verification.md), [location provenance/import notes](database/sources/README.md) and [roadmap](docs/roadmap.md).
 
-Final T02 cleanup now configures strict SQL mode and UTC on every application
-pool checkout. Current cleanup checks pass: 31 backend tests, 31 mobile tests and
+Historical T02 cleanup configured strict SQL mode and UTC on every application
+pool checkout. Its recorded checks passed: 31 backend tests, 31 mobile tests and
 6 live API checks, plus package typechecks/build and Expo compatibility. See
 [final cleanup](docs/t02-final-cleanup.md) for results, repository preparation and
 confirmed owner/iPhone acceptance. T02-F's historical findings and future proposals
-remain in [the audit](docs/t02f-audit.md). T03-A now extends the backend only.
+remain in [the audit](docs/t02f-audit.md). Current T05-B evidence is linked above.
+
+T05-B2 now prepares an offline OSM supermarket importer and a 521-record Lebanon
+snapshot with a per-record review queue. Application migration/import is pending
+explicit approval. See [data coverage and safe import](docs/t05b2-data-import.md).
 
 ## Documentation
 - [`AGENTS.md`](AGENTS.md): coding-agent rules

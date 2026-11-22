@@ -37,15 +37,15 @@ export function AccountPage({ children, confirmation = null, testID, nativeKeybo
 export function ErrorText({ message }: { message: string | null }) {
   return message ? <View style={{ padding: 14, borderRadius: 12, backgroundColor: colors.errorSoft }}><Text accessibilityRole="alert" style={[ui.text, { color: colors.error }]}>{message}</Text></View> : null;
 }
-export function AuthGate({ children }: { children: ReactNode }) {
+export function AuthGate({ children, title = 'Your private shopping lists', message }: { children: ReactNode; title?: string; message?: string }) {
   const { state, session } = useAuth();
   if (state.status === 'authenticated') return <View key={state.version} style={{ flex: 1 }}>{children}</View>;
   return <AccountPage>
-    <View style={ui.card}><Icon name="lock-closed-outline" size={28} /><Text style={ui.title}>Your private shopping lists</Text>
+    <View style={ui.card}><Icon name="lock-closed-outline" size={28} /><Text style={ui.title}>{title}</Text>
     <Text style={ui.muted}>A little planning. Better grocery choices.</Text></View>
     {state.status === 'guest' && <ErrorText message={state.message} />}
     {state.status === 'restoring' || state.status === 'authenticating' ? <><ActivityIndicator /><Text style={ui.text}>Checking your session…</Text></>
-      : <><Text style={ui.text}>{state.status === 'restore_error' ? state.message : 'Log in or register to save lists and compare baskets. You can keep browsing products as a guest.'}</Text>
+      : <><Text style={ui.text}>{state.status === 'restore_error' ? state.message : message ?? 'Log in or register to save lists and compare baskets. You can keep browsing products as a guest.'}</Text>
         {state.status === 'restore_error' ? <Button title="Retry session" onPress={() => void session.restore()} /> : null}
         <Button title="Log in / Register" variant="primary" onPress={() => router.navigate('/(tabs)/profile')} />
         <Button title="Browse products" onPress={() => router.navigate('/(tabs)/explore')} />

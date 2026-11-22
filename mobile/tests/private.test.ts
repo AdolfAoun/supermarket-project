@@ -117,6 +117,13 @@ test('mutation owner prevents duplicate taps and stale success navigation', asyn
   await mutation.run(operation); assert.equal(calls, 1); mutation.cancel(); response.resolve(1); await first;
   assert.equal(successes, 0); assert.equal(states.length, 1);
 });
+test('read-only import failures do not imply a shopping-list write may have happened', async () => {
+  let message = '';
+  const mutation = createMutation(state => { message = state.error ?? ''; }, true);
+  await mutation.run(async () => { throw new ApiError('timeout', 'Timed out. Try again.'); });
+  assert.equal(message, 'Timed out. Try again.');
+});
+
 test('mutation timeout failures prompt reload and never retry increments automatically', async () => {
   let calls = 0, message = '';
   const mutation = createMutation(state => { message = state.error ?? ''; });

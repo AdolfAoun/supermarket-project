@@ -5,7 +5,7 @@ import { PageHeader, ProductIdentity, ResourceNotice, ui } from '../../../compon
 import { useRemote } from '../../../hooks/useRemote';
 import { catalogApi, parseProductId } from '../../../services/api';
 import { isLowestDisplayed, observedLabel } from '../../../services/presentation';
-import { Badge, Disclosure, EmptyState } from '../../../components/Design';
+import { Disclosure, EmptyState } from '../../../components/Design';
 
 function Prices({ id }: { id: number }) {
   const resource = useRemote(`comparison:${id}`, async signal => {

@@ -18,6 +18,11 @@ export default function Home() {
       </Pressable>
     </View>
     <Text accessibilityRole="header" style={ui.heading}>Make your next shop simpler</Text>
+    <Pressable accessibilityRole="button" accessibilityLabel="Supermarkets Along My Route" onPress={() => router.navigate('/journey')}
+      style={({ pressed }) => [ui.card, ui.row, pressed && { opacity: 0.8 }]}>
+      <View style={styles.tile}><Icon name="navigate-outline" /></View><View style={{ flex: 1, gap: 4 }}>
+        <Text style={ui.heading}>Supermarkets Along My Route</Text><Text style={ui.muted}>Find convenient stops. No shopping list needed.</Text></View><Icon name="chevron-forward-outline" size={18} />
+    </Pressable>
     <Pressable accessibilityRole="button" accessibilityLabel="My shopping lists" onPress={() => router.navigate('/(tabs)/shopping-list')}
       style={({ pressed }) => [ui.card, ui.row, pressed && { opacity: 0.8 }]}>
       <View style={styles.tile}><Icon name="list-outline" /></View><View style={{ flex: 1, gap: 4 }}>
@@ -29,7 +34,7 @@ export default function Home() {
         <Text style={ui.heading}>Browse Supermarkets</Text><Text style={ui.muted}>Explore chains and their physical branches.</Text></View><Icon name="chevron-forward-outline" size={18} />
     </Pressable>
     <ConnectionStatus />
-    <Text style={ui.muted}>Demonstration catalog. Recorded prices may have changed; check stock and shelf prices before visiting.</Text>
+    <Text style={ui.muted}>Product prices use demonstration observations. Location coverage is limited; check store information, stock and shelf prices before visiting.</Text>
   </AccountPage>;
 }
 const styles = StyleSheet.create({

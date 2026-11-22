@@ -2,6 +2,91 @@
 
 **Status:** T02–T04 are complete and owner-accepted; T04 physical-iPhone acceptance was confirmed 2026-11-17. T04 adds the optimization endpoint below. Existing T02/T03 wire contracts are preserved. Cursor/offset pagination remains deferred.
 
+## T05-B route-aware supermarket discovery
+
+T05-B2 preserves this contract. Its approved offline OSM imports appear through
+the same catalog repository; no import HTTP endpoint was added. The conservative
+envelope before exact corridor filtering does not raise routing-request budgets.
+Import approval, provenance and limitations are documented in t05b2-data-import.md.
+
+`POST /api/journeys/supermarkets` requires the existing bearer session and sets
+no-store. Body keys are only `origin`, `destination`, optional ordered `waypoints`
+and optional `maxDetourMinutes` (default 30, whole 0–30). Points have exactly
+numeric latitude/longitude in geographic ranges. No query parameters, user IDs,
+client prices, routing URLs or policy overrides. At most eight original stops;
+the geographic sum of input legs must be at most 500 km for this demonstration.
+
+The client requests all estimates up to 30 minutes once, then filters locally at
+the selected default-eight-minute threshold. Discovery is independent of lists;
+an explicitly selected saved list uses the owned T04 maxStores=1 request for
+optional basket prices. Exploration alone sends neither a list nor a T04 request.
+The discovery endpoint never accepts or ranks client-provided grocery totals.
+
+| Response field | Meaning |
+|---|---|
+| `journey` | Validated request, echoed for client identity checking |
+| `baseline` | `distanceMeters`, `durationSeconds` from OSRM road routing |
+| `options` | Evaluated branches within the requested unrounded detour threshold, ordered by extra time, distance change and branch ID |
+| Option identity | Branch/chain IDs/names, address, numeric latitude/longitude |
+| Option metrics | Complete `journeyDistanceMeters`, `journeyDurationSeconds`, signed `additionalDistanceMeters`, nonnegative `additionalDurationSeconds`, `rawDurationDeltaSeconds`, zero-based `insertionIndex` amongst original stops |
+| `exclusions` | Branch ID and reason: missing/invalid coordinates, outside corridor, duplicate location, evaluation limit, no route, excessive snapping, provider failure, inconsistent route or above threshold. Distinct insertion failures accumulate; a branch may have multiple reasons and may also have a usable option |
+| `evaluationComplete` | False if limits/provider errors/inconsistent estimates prevented full corridor-candidate evaluation; never means national coverage |
+| `evaluatedAt`, `estimated`, `liveTraffic` | UTC timestamp, always true and false respectively |
+| `attribution` | Provider/source label, safe credit URL and OSM correction link |
+
+The internal corridor is 3000 meters from full baseline GeoJSON geometry. All
+original stop insertion positions are evaluated for each selected candidate.
+Work caps are 20 branches and 24 insertion evaluations, with explicit exclusions.
+Missing road routes never become straight-line estimates. Tiny negative time
+deltas down to -1 second become zero with raw delta retained; more-negative time
+is excluded. Negative distance changes can be legitimate faster-route tradeoffs
+and remain signed. Equal endpoints have a zero baseline and full shopping-trip
+driving costs, not independent round-trip sums or a fabricated commute.
+
+400: invalid body/query/coordinates/threshold. 401: invalid session. 422: unusable
+road route/snapping or demo distance limit. 503: baseline provider failure/timeout or busy.
+After a usable baseline exists, candidate failures or the overall deadline return
+HTTP 200 with preserved successful options and incomplete evaluation metadata.
+Unavailable routes/snapping are definitive unusable insertion outcomes; provider
+failures, inconsistent estimates, skipped work and deadlines prevent completeness.
+500 remains sanitized for unexpected SQL/corruption failures. Maximum two active
+discoveries; 60-second total request deadline. Each external call has a seven-
+second deadline, 1 MB response cap and bounded geometry. No database transaction
+is held during routing. Transient shared cache: 128 routes, five minutes, hashed
+keys, no persistent journey storage. See [T05-B report](t05b-verification.md).
+
+## Google Maps import — retained T05-A foundation
+
+`POST /api/locations/import-google-maps` requires an existing bearer session,
+accepts only `{ "url": "https://…" }` and no query parameters, and sets no-store.
+It does not access lists, branches or prices, nor change their ownership checks.
+Input URL length is at most 8192 characters. Invalid input/unsafe host uses 400;
+unsupported formats, unsafe DNS/redirect resolution, service errors, busy or
+timeout outcomes use 422 and the existing `{status:'error',message}` envelope.
+Unexpected failures are sanitized 500; invalid/expired sessions use 401.
+
+Successful response fields:
+
+| Field | Meaning |
+|---|---|
+| `kind` | `journey` or `location` |
+| `status` | `complete` only when both journey endpoints and all supplied stops have usable coordinates; otherwise `partial` |
+| `origin`, `destination` | Nullable imported location; both null for a single-place import |
+| `location` | Single imported place; null for journeys |
+| `waypoints` | Ordered intermediate locations, maximum nine, never silently dropped when unresolved |
+| `travelMode` | `driving`, `walking`, `bicycling`, `transit`, `two-wheeler` or `unknown`; never defaulted to driving |
+
+A location has nullable `name`, `placeId`, `latitude`, `longitude`, and
+`coordinateSource`. Coordinates are both null or finite/in-range. Sources are
+`explicit`, `google_url_data`, `google_geocode` or null. Names/IDs without
+coordinates remain unresolved. Legacy geocode values have six-decimal precision;
+the more precise explicit saddr is preserved when consistent. Unknown tagged
+encodings are not decoded. Viewport @ coordinates never become endpoints.
+
+No distances, prices, routes or persistent IDs are returned. The client holds
+device-origin state locally. T05-B retires the uncommitted requiresConfirmation
+field and separate confirmation workflow. See [format/security details](t05a-verification.md).
+
 ## T04 shopping basket optimization
 
 `GET /api/shopping-lists/:id/optimization?maxStores=2` requires the existing bearer

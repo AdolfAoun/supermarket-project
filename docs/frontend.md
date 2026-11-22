@@ -2,6 +2,42 @@
 
 **Status:** T02–T04 are complete and owner-accepted; successful T04 physical-iPhone acceptance was confirmed 2026-11-17. Other future features in the map remain planning guidance.
 
+## T05-B route discovery ? awaiting owner acceptance
+
+T05-B2 preserves this layout. Route results and supermarket directory add visible
+OSM/ODbL credits with a licence link and an unverified-listing reminder. Before
+optional list selection, route cards explicitly explain that basket prices are
+unavailable until a list is chosen. No new screen or unrelated redesign was added.
+
+Home exposes Supermarkets Along My Route without requiring a shopping list.
+The standalone authenticated screen reuses RouteDiscovery, with optional saved-list
+prices behind an explicit selector. No T04 or list request runs for exploration
+alone. Find Cheapest Basket opens separate Grocery prices, with its existing
+1-3 branch optimizer. A compact import form switches to a From/To summary
+after a complete driving import. Change journey returns to the form and removes
+old route results. Unknown/non-driving modes need an explicit driving choice;
+partial imports keep useful endpoint/place assignment and foreground GPS controls.
+No separate confirmation step or coordinate-entry form remains. At most eight
+original stops can be routed with an additional supermarket; excess stops are
+explained rather than dropped or thrown during render.
+
+The baseline estimated road drive/distance leads into a native Expo Go-compatible
+community slider, default 8 minutes, step 1, range 0?30. Filtering is local using
+unrounded seconds. Stable keyed result cards show extra driving, distance change,
+price status and Navigate with Google Maps. The selected store is inserted without
+replacing the destination. Equal-start/end trips with no original stops are labeled
+return-to-start shopping trips and show full out-and-back drive/distance.
+
+Existing green/neutral components, nontransparent header, keyboard and safe-area
+patterns remain. Error/empty/loading/partial-coverage states are explicit. Road
+credits and Fix the map are visible below results. Grocery prices retains the
+existing T04 controls/results, independent of routing. Screen blur/account
+changes clear local journey data; optional price selection preserves the journey
+and slider. GPS is one foreground
+fix on tap. Coordinates remain server/client memory only, apart from the reviewed
+public real-location fixture; provider logging is outside the app. See the T05-B
+report for real-device checks and unsupported Maps formats.
+
 ## T04-UI cosmetic redesign — awaiting owner acceptance
 
 The mobile presentation now uses shared forest-green/neutral tokens, structured

@@ -1,3 +1,4 @@
+import { executeSqlScript } from '../../backend/tests/fixtures/sql-script';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
@@ -15,6 +16,7 @@ import { createApiClient, createCatalogApi, ApiError } from '../services/api';
 import { createAuthApi, createListApi } from '../services/account-api';
 import { createSession, type TokenStorage } from '../services/session';
 import { basketPresentation } from '../services/basket-presentation';
+import type { RoutingAdapter } from '../../backend/src/modules/journeys/routing';
 
 const backendRequire = createRequire(resolve('../backend/package.json'));
 const mysql = backendRequire('mysql2/promise') as typeof import('../../backend/node_modules/mysql2/promise');
@@ -48,8 +50,16 @@ test('T03-C mobile clients → Express → disposable MySQL', { skip: !process.e
     const before = await snapshot();
     const callbackPool = callbackMysql.createPool({ host: '127.0.0.1', port, user: 'root', password: '', database: schema, timezone: 'Z' });
     configurePoolSessions(callbackPool); pool = callbackPool.promise();
+    // Explicit deterministic routing fixture; live OSRM checks are recorded separately.
+    const routing: RoutingAdapter = { route: async (points, geometry) => geometry
+      ? { distanceMeters: 20000, durationSeconds: 1500, geometry: points.map(p => [p.longitude, p.latitude]) }
+      : { distanceMeters: 22000, durationSeconds: 1500 + (points.some(p => Math.abs(p.latitude - 33.935035) < 0.000001) ? 520 : 240), geometry: null } };
     const application = createApp(async () => { await pool!.query('SELECT 1'); }, [], createCatalogRepository(createSqlReader(pool)),
-      createAuthRepository(pool), createShoppingListRepository(pool), createBasketRepository(pool));
+      createAuthRepository(pool), createShoppingListRepository(pool), createBasketRepository(pool), undefined, routing);
+    const realLocationFixture = async (enabled: boolean) => {
+      if (enabled) await executeSqlScript(sql => admin.query(sql), await readFile(resolve('..', 'database/seeds/002_optional_real_locations.sql'), 'utf8'));
+      else { await admin.query('DELETE FROM branches WHERE supermarket_id = 1001'); await admin.query('DELETE FROM supermarkets WHERE id = 1001'); }
+    };
     server = application.listen(0, '127.0.0.1'); await once(server, 'listening');
     const baseUrl = () => `http://127.0.0.1:${(server!.address() as AddressInfo).port}/api`;
     const client = createApiClient({ baseUrl }), auth = createAuthApi(client), catalog = createCatalogApi(client);
@@ -102,6 +112,29 @@ test('T03-C mobile clients → Express → disposable MySQL', { skip: !process.e
       assert.equal(changed.multiStore.solution!.totalUsd, '5.50');
       await lists.setQuantity(listId, itemId, 2);
     });
+    await t.test('T05-A imports through real session auth without changing catalog/list data or T04 totals', async () => {
+      const beforeList = await lists.detail(listId);
+      const imported = await lists.importGoogleMaps('https://www.google.com/maps/dir/?api=1&origin=34,35&destination=34.1,35.2&travelmode=driving');
+      assert.equal(imported.status, 'complete'); assert.equal('requiresConfirmation' in imported, false);
+      assert.equal(imported.origin!.latitude, 34); assert.equal(imported.destination!.longitude, 35.2);
+      assert.deepEqual(await lists.detail(listId), beforeList);
+      assert.deepEqual(await snapshot(), before);
+      assert.equal((await lists.optimize(listId)).multiStore.solution!.totalUsd, '3.90');
+    });
+    await t.test('T05-B optional real-location seed preserves demo data; real SQL discovery needs no prices and never borrows demo totals', async () => {
+      await realLocationFixture(true);
+      try {
+        const [[count]] = await admin.query<import('../../backend/node_modules/mysql2/promise').RowDataPacket[]>('SELECT COUNT(*) AS count FROM prices WHERE branch_id >= 1000');
+        assert.equal(count.count, 0);
+        const response = await lists.discoverSupermarkets({ origin: { latitude: 33.9808, longitude: 35.6389 },
+          destination: { latitude: 33.8938, longitude: 35.5018 }, waypoints: [], maxDetourMinutes: 30 });
+        assert.ok(response.options.some(o => o.branchId === 1032));
+        const prices = await lists.optimize(listId); assert.equal(prices.multiStore.solution!.totalUsd, '3.90');
+        assert.ok(prices.comparison.incompleteBranches.some(b => b.branchId === 1032));
+        assert.ok(!prices.comparison.eligibleBranches.some(b => b.branchId >= 1000));
+      } finally { await realLocationFixture(false); }
+      assert.deepEqual(await snapshot(), before);
+    });
     await t.test('remove/delete/logout clear private access and catalog records remain byte-for-byte unchanged', async () => {
       await lists.removeItem(listId, itemId); assert.equal((await lists.detail(listId)).items.length, 1);
       await lists.remove(listId); await session.logout();
@@ -112,11 +145,14 @@ test('T03-C mobile clients → Express → disposable MySQL', { skip: !process.e
     });
     if (process.env.RUN_T03_BROWSER_TESTS === '1') await t.test('rendered mobile web registration, list editor, basket breakdown and logout with real SQL', async () => {
       const { runPrivateBrowser } = await import('./private-browser');
-      await runPrivateBrowser(baseUrl(), async enabled => {
-        if (enabled) await admin.query(`INSERT INTO prices (id,product_id,branch_id,price,currency,observed_at,status,source_type,source_note)
-          VALUES (99001,1,4,0.10,'USD','2026-11-01','verified','seed','DEMONSTRATION DATA T04 disposable browser split fixture')`);
-        else await admin.query('DELETE FROM prices WHERE id = 99001');
-      });
+      await realLocationFixture(true);
+      try {
+        await runPrivateBrowser(baseUrl(), async enabled => {
+          if (enabled) await admin.query(`INSERT INTO prices (id,product_id,branch_id,price,currency,observed_at,status,source_type,source_note)
+            VALUES (99001,1,4,0.10,'USD','2026-11-01','verified','seed','DEMONSTRATION DATA T04 disposable browser split fixture')`);
+          else await admin.query('DELETE FROM prices WHERE id = 99001');
+        });
+      } finally { await realLocationFixture(false); }
       assert.deepEqual(await snapshot(), before);
     });
   } finally {

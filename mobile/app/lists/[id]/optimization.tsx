@@ -10,6 +10,7 @@ import { useRemote } from '../../../hooks/useRemote';
 import { parseProductId } from '../../../services/api';
 import { colors } from '../../../components/Design';
 
+
 function Optimize({ id }: { id: number }) {
   const { state, lists } = useAuth();
   const [maximum, setMaximum] = useState(2);
@@ -17,6 +18,7 @@ function Optimize({ id }: { id: number }) {
   // previous result is presented during a new request or after a failure.
   const resource = useRemote(`optimization:${state.version}:${id}:${maximum}`, signal => lists.optimize(id, maximum, signal), () => false);
   return <AccountPage>
+    <Button title="Supermarkets Along My Route" onPress={() => router.navigate('/journey')} />
     <View style={ui.card}>
     <Text style={ui.heading}>Maximum branches: {maximum}</Text>
     <View style={[ui.row, { flexWrap: 'wrap', backgroundColor: colors.secondary, padding: 4, borderRadius: 16, gap: 4 }]}>{[1, 2, 3].map(n => <View key={n} style={{ flex: 1, minWidth: 60 }}><Button title={String(n)} accessibilityLabel={n === 1 ? 'One branch' : `Up to ${n} branches`}
@@ -27,12 +29,13 @@ function Optimize({ id }: { id: number }) {
     <View style={[ui.row, { flexWrap: 'wrap' }]}><Button title="Refresh optimization" onPress={resource.retry} />
     <Button title="Edit shopping list" onPress={() => router.navigate({ pathname: '/lists/[id]', params: { id: String(id) } })} /></View>
     {resource.data && <OptimizationResults result={resource.data} />}
+
   </AccountPage>;
 }
 export default function OptimizationScreen() {
   const { id: raw } = useLocalSearchParams<{ id?: string | string[] }>();
   const id = parseProductId(raw);
-  return <><PageHeader title="Find cheapest basket" fallback="/(tabs)/shopping-list" /><AuthGate>
+  return <><PageHeader title="Grocery prices" fallback="/(tabs)/shopping-list" /><AuthGate>
     {id === null ? <AccountPage><Text style={ui.text}>Invalid shopping-list link.</Text></AccountPage> : <Optimize key={id} id={id} />}
   </AuthGate></>;
 }

@@ -16,6 +16,8 @@ export async function runPrivateBrowser(api: string, setSplitFixture?: (enabled:
   let itemWrites = 0;
   let failNextOptimization = false;
   let noPriceCoverage = false;
+  let discoveryRequests = 0, failNextDiscovery = false;
+  let discoveryCoverage: 'partial' | 'empty' | null = null;
   const optimizationQueries: string[] = [];
   function holdItemRequest() { itemGate = new Promise<void>(resolve => { releaseItem = () => { itemGate = undefined; resolve(); }; }); }
   const server = http.createServer(async (req, res) => {
@@ -24,6 +26,10 @@ export async function runPrivateBrowser(api: string, setSplitFixture?: (enabled:
       if (url.pathname.startsWith('/api/')) {
         const chunks: Buffer[] = []; for await (const chunk of req) chunks.push(Buffer.from(chunk));
         const body = Buffer.concat(chunks);
+        if (req.method === 'POST' && url.pathname === '/api/journeys/supermarkets') {
+          discoveryRequests++;
+          if (failNextDiscovery) { failNextDiscovery = false; res.writeHead(503).end('Controlled routing outage'); return; }
+        }
         if (req.method === 'GET' && url.pathname.endsWith('/optimization')) {
           optimizationQueries.push(url.search);
           if (failNextOptimization) { failNextOptimization = false; res.writeHead(500).end('Controlled T04 failure'); return; }
@@ -39,6 +45,13 @@ export async function runPrivateBrowser(api: string, setSplitFixture?: (enabled:
           headers: { 'Content-Type': 'application/json', ...(req.headers.authorization ? { Authorization: req.headers.authorization } : {}) },
           ...(body.length ? { body } : {}) });
         let responseText = await response.text();
+        if (discoveryCoverage && response.ok && url.pathname === '/api/journeys/supermarkets') {
+          const result = JSON.parse(responseText);
+          result.evaluationComplete = false;
+          result.exclusions.push({ branchId: 1081, reason: 'routing_unavailable' });
+          if (discoveryCoverage === 'empty') result.options = [];
+          responseText = JSON.stringify(result);
+        }
         // Explicit UI-only no-coverage response fixture. Normal/split flows use
         // real SQL; this controlled response verifies the rendered empty state.
         if (noPriceCoverage && response.ok && url.pathname.endsWith('/optimization')) {
@@ -118,7 +131,14 @@ export async function runPrivateBrowser(api: string, setSplitFixture?: (enabled:
     assert.equal(await evaluate(`document.querySelector('input[aria-label="Password"]').type`), 'password');
     await click('Register'); await wait(text('Account created.'));
     await fill('Password', 'password123'); await click('Log in'); await wait(text('My shopping lists'));
-    await click('My shopping lists'); await wait(text('No shopping lists yet.'));
+    // Prove discovery before the account has ever created a shopping list.
+    await evaluate(`Array.from(document.querySelectorAll('[role="tab"]')).find(e=>e.textContent.includes('Home')).click()`); await wait(text('Supermarkets Along My Route'));
+    await click('Supermarkets Along My Route'); await wait(text('Find Supermarkets Along Your Route'));
+    await fill('Paste Journey Link', 'https://www.google.com/maps/dir/?api=1&origin=33.9808,35.6389&destination=33.8938,35.5018&travelmode=driving');
+    await click('Import Route'); await wait(text('Supermarkets Along Your Route')); await wait(text('choose a list for basket comparison'));
+    assert.equal(optimizationQueries.length, 0, 'Account without lists can discover without T04');
+    await click('Optional saved-list prices'); await click('Choose a saved list'); await wait(text('You have no saved lists'));
+    await click('Go back'); await evaluate(`Array.from(document.querySelectorAll('[role="tab"]')).find(e=>e.textContent.includes('Shopping List')).click()`); await wait(text('No shopping lists yet.'));
     await fill('Create list', 'Browser basket'); await click('Create list'); await wait(text('This shopping list is empty.'));
     await fill('Rename list', 'Browser acceptance'); await click('Rename list'); await wait(text('Browser acceptance'));
     await click('Add products'); await fill('Search products to add', 'Coke 1.5L'); await fill('Quantity to add', '2');
@@ -214,6 +234,67 @@ export async function runPrivateBrowser(api: string, setSplitFixture?: (enabled:
     await wait(text('Price coverage: 2/2 products'));
     const optimizationScreenshot = await call('Page.captureScreenshot', { format: 'png' });
     fs.writeFileSync(path.resolve('dist/t04-optimization.png'), Buffer.from(optimizationScreenshot.data, 'base64'));
+    // Browser/SQL/import/API are real. Routing is a deterministic injected fixture;
+    // live Lebanese road evidence is recorded separately in t05b-live-routing.json.
+    const optimizationBeforeExploring = optimizationQueries.length;
+    await click('Supermarkets Along My Route'); await wait(text('Find Supermarkets Along Your Route'));
+    const journeyLink = 'https://www.google.com/maps/dir/?api=1&origin=33.9808,35.6389&destination=33.8938,35.5018&travelmode=driving';
+    await fill('Paste Journey Link', journeyLink); await click('Import Route');
+    await wait(text('Supermarkets Along Your Route')); await wait(text('choose a list for basket comparison'));
+    assert.equal(optimizationQueries.length, optimizationBeforeExploring, 'Exploration must not run T04');
+    const searchesBeforePrices = discoveryRequests;
+    await click('Optional saved-list prices'); await click('Choose a saved list'); await click('Compare Browser acceptance');
+    await wait(text('Comparing saved list: Browser acceptance')); await wait(text('Prices unavailable'));
+    assert.equal(discoveryRequests, searchesBeforePrices, 'Optional pricing must not recalculate routes');
+    assert.equal(await evaluate(`!!document.querySelector('[data-testid="route-branch-1032"]')`), false, '8 min 40 sec exceeds the default 8-minute threshold');
+    const slider = 'document.querySelector(\'[aria-label="Maximum additional driving time"]\')';
+    await evaluate(`void (window.__detourSlider = ${slider})`);
+    const requestsBeforeSlider = discoveryRequests;
+    const setSlider = async (value: number) => {
+      const bounds = await evaluate(`(() => {const e=${slider}; e.scrollIntoView({block:'center'}); const r=e.getBoundingClientRect(); return {x:r.x+10+(r.width-20)*${value}/30,y:r.y+r.height/2};})()`);
+      await call('Input.dispatchMouseEvent', { type: 'mousePressed', x: bounds.x, y: bounds.y, button: 'left', clickCount: 1 });
+      await call('Input.dispatchMouseEvent', { type: 'mouseReleased', x: bounds.x, y: bounds.y, button: 'left', clickCount: 1 });
+      await wait(`${slider}.getAttribute('aria-valuenow') === '${value}'`);
+    };
+    await setSlider(9); await wait(`!!document.querySelector('[data-testid="route-branch-1032"]')`);
+    await setSlider(0); await wait(text('No stops within 0 minutes'));
+    await setSlider(30); await wait(`!!document.querySelector('[data-testid="route-branch-1032"]')`);
+    await setSlider(8);
+    assert.equal(discoveryRequests, requestsBeforeSlider, 'Slider must only filter locally');
+    assert.equal(await evaluate(`window.__detourSlider === ${slider}`), true, 'Slider must retain DOM identity');
+    await evaluate('window.__navigationUrls=[];window.open=url=>{window.__navigationUrls.push(String(url));return null;}');
+    await click('Navigate via Zouk');
+    const navigation = new URL(await evaluate('window.__navigationUrls.at(-1)'));
+    assert.equal(navigation.searchParams.get('origin'), '33.9808,35.6389');
+    assert.equal(navigation.searchParams.get('destination'), '33.8938,35.5018');
+    assert.equal(navigation.searchParams.get('waypoints'), '33.977974,35.617567');
+    for (const width of [320, 390, 430]) {
+      await call('Emulation.setDeviceMetricsOverride', { width, height: 844, deviceScaleFactor: 1, mobile: true });
+      assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true, 'Journey screen must not overflow');
+      await evaluate(`document.querySelector('[data-testid="route-discovery"]').scrollIntoView({block:'start'})`);
+      const screenshot = await call('Page.captureScreenshot', { format: 'png' });
+      fs.writeFileSync(path.resolve(`dist/t05b-route-${width}.png`), Buffer.from(screenshot.data, 'base64'));
+    }
+    await click('Change journey'); await fill('Paste Journey Link', 'https://example.com/maps');
+    await click('Import Route'); await wait(text('Enter a supported HTTPS Google Maps link'));
+    assert.equal(await evaluate(`!!document.querySelector('[data-testid="route-branch-1078"]')`), false);
+    await fill('Paste Journey Link', 'https://www.google.com/maps/dir/?api=1&destination=33.8938,35.5018&travelmode=driving');
+    await click('Import Route'); await wait(text('This journey is incomplete'));
+    await call('Browser.grantPermissions', { origin, permissions: ['geolocation'] });
+    await call('Emulation.setGeolocationOverride', { latitude: 33.9808, longitude: 35.6389, accuracy: 5 });
+    await click('Use my current location as start'); await wait(text('My current location')); await wait(text('Supermarkets Along Your Route'));
+    await click('Change journey'); failNextDiscovery = true;
+    await fill('Paste Journey Link', journeyLink); await click('Import Route'); await wait(text('Road estimates are temporarily unavailable'));
+    assert.equal(await evaluate(`!!document.querySelector('[data-testid="route-branch-1078"]')`), false);
+    discoveryCoverage = 'partial';
+    await click('Retry road estimates'); await wait(`!!document.querySelector('[data-testid="route-branch-1078"]')`);
+    await wait(text('Some stops could not be checked'));
+    discoveryCoverage = 'empty';
+    await click('About these road estimates'); await click('Refresh road estimates');
+    await wait(text('Search coverage is incomplete'));
+    assert.equal(await evaluate(`!!document.querySelector('[data-testid="route-branch-1078"]')`), false);
+    discoveryCoverage = null;
+    await click('Go back'); await wait(text('Best Single Store'));
     // Progressive disclosure must reveal the same server observation fields.
     await click('Single-store item breakdown'); await wait(text('Older price'));
     await click('Price observation details'); await wait(text('Verified demonstration observation'));

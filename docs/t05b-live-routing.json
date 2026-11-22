@@ -1,0 +1,584 @@
+[
+  {
+    "label": "Jounieh area to Jbeil",
+    "source": "Live FOSSGIS OSRM requests; retailer-listed fixture in memory, not owner database",
+    "journey": {
+      "origin": {
+        "latitude": 33.9808,
+        "longitude": 35.6389
+      },
+      "destination": {
+        "latitude": 34.1191,
+        "longitude": 35.6473
+      },
+      "waypoints": [],
+      "maxDetourMinutes": 30
+    },
+    "baseline": {
+      "distanceMeters": 17965.5,
+      "durationSeconds": 1010.8
+    },
+    "options": [
+      {
+        "branchId": 1053,
+        "branch": "Jbeil",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Jbeil Main Highway, Blat Exit",
+        "latitude": 34.109895,
+        "longitude": 35.654787,
+        "additionalDistanceMeters": 190.59999999999854,
+        "additionalDurationSeconds": 23.600000000000136,
+        "rawDurationDeltaSeconds": 23.600000000000136,
+        "journeyDistanceMeters": 18156.1,
+        "journeyDurationSeconds": 1034.4,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1023,
+        "branch": "Sahel Alma",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Spinneys Sahel Alma",
+        "latitude": 34.000842,
+        "longitude": 35.647694,
+        "additionalDistanceMeters": 175.79999999999927,
+        "additionalDurationSeconds": 49.100000000000136,
+        "rawDurationDeltaSeconds": 49.100000000000136,
+        "journeyDistanceMeters": 18141.3,
+        "journeyDurationSeconds": 1059.9,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1078,
+        "branch": "Zouk",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "XJH8+4V5, Beirut, Lebanon",
+        "latitude": 33.977974,
+        "longitude": 35.617567,
+        "additionalDistanceMeters": 5733.299999999999,
+        "additionalDurationSeconds": 306.79999999999995,
+        "rawDurationDeltaSeconds": 306.79999999999995,
+        "journeyDistanceMeters": 23698.8,
+        "journeyDurationSeconds": 1317.6,
+        "insertionIndex": 0
+      }
+    ],
+    "exclusions": [
+      {
+        "branchId": 1005,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1008,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1014,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1032,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1038,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1044,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1056,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1065,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1081,
+        "reason": "outside_corridor"
+      }
+    ],
+    "evaluationComplete": true,
+    "evaluatedAt": "2026-11-21T16:20:35.014Z",
+    "estimated": true,
+    "liveTraffic": false,
+    "attribution": {
+      "label": "Routing: OSRM / FOSSGIS · Map data © OpenStreetMap contributors",
+      "url": "https://routing.openstreetmap.de/about.html",
+      "fixMapUrl": "https://www.openstreetmap.org/fixthemap"
+    }
+  },
+  {
+    "label": "Jounieh area to Beirut",
+    "source": "Live FOSSGIS OSRM requests; retailer-listed fixture in memory, not owner database",
+    "journey": {
+      "origin": {
+        "latitude": 33.9808,
+        "longitude": 35.6389
+      },
+      "destination": {
+        "latitude": 33.8938,
+        "longitude": 35.5018
+      },
+      "waypoints": [],
+      "maxDetourMinutes": 30
+    },
+    "baseline": {
+      "distanceMeters": 19969.4,
+      "durationSeconds": 1039.6
+    },
+    "options": [
+      {
+        "branchId": 1078,
+        "branch": "Zouk",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "XJH8+4V5, Beirut, Lebanon",
+        "latitude": 33.977974,
+        "longitude": 35.617567,
+        "additionalDistanceMeters": 73.09999999999854,
+        "additionalDurationSeconds": 15.100000000000136,
+        "rawDurationDeltaSeconds": 15.100000000000136,
+        "journeyDistanceMeters": 20042.5,
+        "journeyDurationSeconds": 1054.7,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1008,
+        "branch": "Ashrafieh - Mar Mitr",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "La Sagesse School",
+        "latitude": 33.891427,
+        "longitude": 35.520902,
+        "additionalDistanceMeters": 543.5999999999985,
+        "additionalDurationSeconds": 140.80000000000018,
+        "rawDurationDeltaSeconds": 140.80000000000018,
+        "journeyDistanceMeters": 20513,
+        "journeyDurationSeconds": 1180.4,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1065,
+        "branch": "Signature by Spinneys",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Beirut Souks",
+        "latitude": 33.899155,
+        "longitude": 35.503365,
+        "additionalDistanceMeters": 2016.5,
+        "additionalDurationSeconds": 164.20000000000005,
+        "rawDurationDeltaSeconds": 164.20000000000005,
+        "journeyDistanceMeters": 21985.9,
+        "journeyDurationSeconds": 1203.8,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1032,
+        "branch": "Dbayeh 24/7",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Dbayeh Highway, Jdeidet El Metn",
+        "latitude": 33.935035,
+        "longitude": 35.589932,
+        "additionalDistanceMeters": 2163.5,
+        "additionalDurationSeconds": 225.5,
+        "rawDurationDeltaSeconds": 225.5,
+        "journeyDistanceMeters": 22132.9,
+        "journeyDurationSeconds": 1265.1,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1005,
+        "branch": "Ashrafieh - Alexandre",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Ashrafieh facing Mar Youhana (Hotel Alexandre). Alexandre district, Adib Eshaq street",
+        "latitude": 33.884739,
+        "longitude": 35.518509,
+        "additionalDistanceMeters": 1500.199999999997,
+        "additionalDurationSeconds": 259.9000000000001,
+        "rawDurationDeltaSeconds": 259.9000000000001,
+        "journeyDistanceMeters": 21469.6,
+        "journeyDurationSeconds": 1299.5,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1023,
+        "branch": "Sahel Alma",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Spinneys Sahel Alma",
+        "latitude": 34.000842,
+        "longitude": 35.647694,
+        "additionalDistanceMeters": 4538.0999999999985,
+        "additionalDurationSeconds": 303.8000000000002,
+        "rawDurationDeltaSeconds": 303.8000000000002,
+        "journeyDistanceMeters": 24507.5,
+        "journeyDurationSeconds": 1343.4,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1044,
+        "branch": "Hamra",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Sourati Road, Idriss building",
+        "latitude": 33.896895,
+        "longitude": 35.484799,
+        "additionalDistanceMeters": 4281.5999999999985,
+        "additionalDurationSeconds": 343.10000000000014,
+        "rawDurationDeltaSeconds": 343.10000000000014,
+        "journeyDistanceMeters": 24251,
+        "journeyDurationSeconds": 1382.7,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1056,
+        "branch": "Jnah",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Wata El Msaytbeh",
+        "latitude": 33.873805,
+        "longitude": 35.490518,
+        "additionalDistanceMeters": 5539,
+        "additionalDurationSeconds": 419.8000000000002,
+        "rawDurationDeltaSeconds": 419.8000000000002,
+        "journeyDistanceMeters": 25508.4,
+        "journeyDurationSeconds": 1459.4,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1014,
+        "branch": "Ain El Tineh",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Sakiet El Janzeer",
+        "latitude": 33.886449,
+        "longitude": 35.479156,
+        "additionalDistanceMeters": 6835.699999999997,
+        "additionalDurationSeconds": 551.3000000000002,
+        "rawDurationDeltaSeconds": 551.3000000000002,
+        "journeyDistanceMeters": 26805.1,
+        "journeyDurationSeconds": 1590.9,
+        "insertionIndex": 0
+      }
+    ],
+    "exclusions": [
+      {
+        "branchId": 1038,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1053,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1081,
+        "reason": "outside_corridor"
+      }
+    ],
+    "evaluationComplete": true,
+    "evaluatedAt": "2026-11-21T16:20:38.419Z",
+    "estimated": true,
+    "liveTraffic": false,
+    "attribution": {
+      "label": "Routing: OSRM / FOSSGIS · Map data © OpenStreetMap contributors",
+      "url": "https://routing.openstreetmap.de/about.html",
+      "fixMapUrl": "https://www.openstreetmap.org/fixthemap"
+    }
+  },
+  {
+    "label": "Jounieh area through Dbayeh to Beirut",
+    "source": "Live FOSSGIS OSRM requests; retailer-listed fixture in memory, not owner database",
+    "journey": {
+      "origin": {
+        "latitude": 33.9808,
+        "longitude": 35.6389
+      },
+      "destination": {
+        "latitude": 33.8938,
+        "longitude": 35.5018
+      },
+      "waypoints": [
+        {
+          "latitude": 33.9327,
+          "longitude": 35.5878
+        }
+      ],
+      "maxDetourMinutes": 30
+    },
+    "baseline": {
+      "distanceMeters": 20866.6,
+      "durationSeconds": 1086.4
+    },
+    "options": [
+      {
+        "branchId": 1078,
+        "branch": "Zouk",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "XJH8+4V5, Beirut, Lebanon",
+        "latitude": 33.977974,
+        "longitude": 35.617567,
+        "additionalDistanceMeters": 73,
+        "additionalDurationSeconds": 15.099999999999909,
+        "rawDurationDeltaSeconds": 15.099999999999909,
+        "journeyDistanceMeters": 20939.6,
+        "journeyDurationSeconds": 1101.5,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1008,
+        "branch": "Ashrafieh - Mar Mitr",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "La Sagesse School",
+        "latitude": 33.891427,
+        "longitude": 35.520902,
+        "additionalDistanceMeters": 488.90000000000146,
+        "additionalDurationSeconds": 123,
+        "rawDurationDeltaSeconds": 123,
+        "journeyDistanceMeters": 21355.5,
+        "journeyDurationSeconds": 1209.4,
+        "insertionIndex": 1
+      },
+      {
+        "branchId": 1065,
+        "branch": "Signature by Spinneys",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Beirut Souks",
+        "latitude": 33.899155,
+        "longitude": 35.503365,
+        "additionalDistanceMeters": 2016.5,
+        "additionalDurationSeconds": 164.19999999999982,
+        "rawDurationDeltaSeconds": 164.19999999999982,
+        "journeyDistanceMeters": 22883.1,
+        "journeyDurationSeconds": 1250.6,
+        "insertionIndex": 1
+      },
+      {
+        "branchId": 1032,
+        "branch": "Dbayeh 24/7",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Dbayeh Highway, Jdeidet El Metn",
+        "latitude": 33.935035,
+        "longitude": 35.589932,
+        "additionalDistanceMeters": 1954.5,
+        "additionalDurationSeconds": 198.5,
+        "rawDurationDeltaSeconds": 198.5,
+        "journeyDistanceMeters": 22821.1,
+        "journeyDurationSeconds": 1284.9,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1005,
+        "branch": "Ashrafieh - Alexandre",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Ashrafieh facing Mar Youhana (Hotel Alexandre). Alexandre district, Adib Eshaq street",
+        "latitude": 33.884739,
+        "longitude": 35.518509,
+        "additionalDistanceMeters": 1445.4000000000015,
+        "additionalDurationSeconds": 242.0999999999999,
+        "rawDurationDeltaSeconds": 242.0999999999999,
+        "journeyDistanceMeters": 22312,
+        "journeyDurationSeconds": 1328.5,
+        "insertionIndex": 1
+      },
+      {
+        "branchId": 1023,
+        "branch": "Sahel Alma",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Spinneys Sahel Alma",
+        "latitude": 34.000842,
+        "longitude": 35.647694,
+        "additionalDistanceMeters": 4538,
+        "additionalDurationSeconds": 303.79999999999995,
+        "rawDurationDeltaSeconds": 303.79999999999995,
+        "journeyDistanceMeters": 25404.6,
+        "journeyDurationSeconds": 1390.2,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1044,
+        "branch": "Hamra",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Sourati Road, Idriss building",
+        "latitude": 33.896895,
+        "longitude": 35.484799,
+        "additionalDistanceMeters": 4281.600000000002,
+        "additionalDurationSeconds": 343.0999999999999,
+        "rawDurationDeltaSeconds": 343.0999999999999,
+        "journeyDistanceMeters": 25148.2,
+        "journeyDurationSeconds": 1429.5,
+        "insertionIndex": 1
+      },
+      {
+        "branchId": 1056,
+        "branch": "Jnah",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Wata El Msaytbeh",
+        "latitude": 33.873805,
+        "longitude": 35.490518,
+        "additionalDistanceMeters": 5484.300000000003,
+        "additionalDurationSeconds": 402,
+        "rawDurationDeltaSeconds": 402,
+        "journeyDistanceMeters": 26350.9,
+        "journeyDurationSeconds": 1488.4,
+        "insertionIndex": 1
+      },
+      {
+        "branchId": 1014,
+        "branch": "Ain El Tineh",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Sakiet El Janzeer",
+        "latitude": 33.886449,
+        "longitude": 35.479156,
+        "additionalDistanceMeters": 6835.700000000001,
+        "additionalDurationSeconds": 551.3,
+        "rawDurationDeltaSeconds": 551.3,
+        "journeyDistanceMeters": 27702.3,
+        "journeyDurationSeconds": 1637.7,
+        "insertionIndex": 1
+      }
+    ],
+    "exclusions": [
+      {
+        "branchId": 1038,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1053,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1081,
+        "reason": "outside_corridor"
+      }
+    ],
+    "evaluationComplete": true,
+    "evaluatedAt": "2026-11-21T16:20:49.512Z",
+    "estimated": true,
+    "liveTraffic": false,
+    "attribution": {
+      "label": "Routing: OSRM / FOSSGIS · Map data © OpenStreetMap contributors",
+      "url": "https://routing.openstreetmap.de/about.html",
+      "fixMapUrl": "https://www.openstreetmap.org/fixthemap"
+    }
+  },
+  {
+    "label": "Jounieh area return-to-start shopping trip",
+    "source": "Live FOSSGIS OSRM requests; retailer-listed fixture in memory, not owner database",
+    "journey": {
+      "origin": {
+        "latitude": 33.9808,
+        "longitude": 35.6389
+      },
+      "destination": {
+        "latitude": 33.9808,
+        "longitude": 35.6389
+      },
+      "waypoints": [],
+      "maxDetourMinutes": 30
+    },
+    "baseline": {
+      "distanceMeters": 0,
+      "durationSeconds": 0
+    },
+    "options": [
+      {
+        "branchId": 1078,
+        "branch": "Zouk",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "XJH8+4V5, Beirut, Lebanon",
+        "latitude": 33.977974,
+        "longitude": 35.617567,
+        "additionalDistanceMeters": 6403.4,
+        "additionalDurationSeconds": 527.5,
+        "rawDurationDeltaSeconds": 527.5,
+        "journeyDistanceMeters": 6403.4,
+        "journeyDurationSeconds": 527.5,
+        "insertionIndex": 0
+      },
+      {
+        "branchId": 1023,
+        "branch": "Sahel Alma",
+        "supermarketId": 1001,
+        "supermarket": "Spinneys",
+        "address": "Spinneys Sahel Alma",
+        "latitude": 34.000842,
+        "longitude": 35.647694,
+        "additionalDistanceMeters": 6650.8,
+        "additionalDurationSeconds": 563.3,
+        "rawDurationDeltaSeconds": 563.3,
+        "journeyDistanceMeters": 6650.8,
+        "journeyDurationSeconds": 563.3,
+        "insertionIndex": 0
+      }
+    ],
+    "exclusions": [
+      {
+        "branchId": 1005,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1008,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1014,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1032,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1038,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1044,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1053,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1056,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1065,
+        "reason": "outside_corridor"
+      },
+      {
+        "branchId": 1081,
+        "reason": "outside_corridor"
+      }
+    ],
+    "evaluationComplete": true,
+    "evaluatedAt": "2026-11-21T16:43:50.884Z",
+    "estimated": true,
+    "liveTraffic": false,
+    "attribution": {
+      "label": "Routing: OSRM / FOSSGIS · Map data © OpenStreetMap contributors",
+      "url": "https://routing.openstreetmap.de/about.html",
+      "fixMapUrl": "https://www.openstreetmap.org/fixthemap"
+    }
+  }
+]

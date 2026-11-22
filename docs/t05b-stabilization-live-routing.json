@@ -1,0 +1,113 @@
+{
+  "purpose": "Stabilization live OSRM smoke check; public illustrative journey, retailer fixture in memory; no application DB",
+  "journey": {
+    "origin": {
+      "latitude": 33.9808,
+      "longitude": 35.6389
+    },
+    "destination": {
+      "latitude": 34.1191,
+      "longitude": 35.6473
+    },
+    "waypoints": [],
+    "maxDetourMinutes": 30
+  },
+  "baseline": {
+    "distanceMeters": 17965.5,
+    "durationSeconds": 1010.8
+  },
+  "options": [
+    {
+      "branchId": 1053,
+      "branch": "Jbeil",
+      "supermarketId": 1001,
+      "supermarket": "Spinneys",
+      "address": "Jbeil Main Highway, Blat Exit",
+      "latitude": 34.109895,
+      "longitude": 35.654787,
+      "additionalDistanceMeters": 190.59999999999854,
+      "additionalDurationSeconds": 23.600000000000136,
+      "rawDurationDeltaSeconds": 23.600000000000136,
+      "journeyDistanceMeters": 18156.1,
+      "journeyDurationSeconds": 1034.4,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 1023,
+      "branch": "Sahel Alma",
+      "supermarketId": 1001,
+      "supermarket": "Spinneys",
+      "address": "Spinneys Sahel Alma",
+      "latitude": 34.000842,
+      "longitude": 35.647694,
+      "additionalDistanceMeters": 175.79999999999927,
+      "additionalDurationSeconds": 49.100000000000136,
+      "rawDurationDeltaSeconds": 49.100000000000136,
+      "journeyDistanceMeters": 18141.3,
+      "journeyDurationSeconds": 1059.9,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 1078,
+      "branch": "Zouk",
+      "supermarketId": 1001,
+      "supermarket": "Spinneys",
+      "address": "XJH8+4V5, Beirut, Lebanon",
+      "latitude": 33.977974,
+      "longitude": 35.617567,
+      "additionalDistanceMeters": 5733.299999999999,
+      "additionalDurationSeconds": 306.79999999999995,
+      "rawDurationDeltaSeconds": 306.79999999999995,
+      "journeyDistanceMeters": 23698.8,
+      "journeyDurationSeconds": 1317.6,
+      "insertionIndex": 0
+    }
+  ],
+  "exclusions": [
+    {
+      "branchId": 1005,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 1008,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 1014,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 1032,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 1038,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 1044,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 1056,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 1065,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 1081,
+      "reason": "outside_corridor"
+    }
+  ],
+  "evaluationComplete": true,
+  "evaluatedAt": "2026-11-21T21:37:05.228Z",
+  "estimated": true,
+  "liveTraffic": false,
+  "attribution": {
+    "label": "Routing: OSRM / FOSSGIS · Map data © OpenStreetMap contributors",
+    "url": "https://routing.openstreetmap.de/about.html",
+    "fixMapUrl": "https://www.openstreetmap.org/fixthemap"
+  }
+}

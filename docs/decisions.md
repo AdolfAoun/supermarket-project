@@ -7,7 +7,7 @@
 | D01 | CONFIRMED | Build a mobile app with React Native + Expo + TypeScript | Cross-platform; prior React Native familiarity |
 | D02 | CONFIRMED | Backend in Node.js + Express + TypeScript | Matches experience; clean business-logic boundary |
 | D03 | CONFIRMED | MySQL via WAMP locally | Familiar SQL workflow; WAMP is development environment, not production hosting |
-| D04 | CONFIRMED | Google Maps intended for routing | Billing/quotas must be checked before integration |
+| D04 | CONFIRMED; refined by T05-B task | Google Maps links for import/basic navigation; OSRM road-route discovery in T05-B | No Google billing/credentials; fuel/basket integration remains T05-C |
 | D05 | CONFIRMED | Store receipt images locally first, migrate to cloud if needed | Keep storage swappable and private |
 | D06 | CONFIRMED | ChatGPT handles planning, Codex implementation, Claude optional independent review | Shared docs and review checkpoints |
 | D07 | CONFIRMED | Prefer achievable, minimal solutions; flag hard requirements and propose scope alternatives | Do not silently change formal URs |
@@ -25,7 +25,115 @@
 | D19 | OPEN | Receipt storage retention/privacy/redaction, image quality/duplicate handling | Needed for receipts to meet UR-08 |
 | D20 | OPEN | Advisor-approved scope simplifications and current spec wording | Formal URs remain authoritative until amended |
 
+### 2026-11-21 ? Owner-requested T05-B stabilization
+
+The owner explicitly authorizes independent journey discovery without shopping
+lists. Home opens a standalone authenticated journey screen reusing RouteDiscovery;
+grocery optimization remains separate. Saved-list selection explicitly requests
+T04 maxStores=1 for optional branch pricing, avoiding default T04 work or another
+pricing endpoint. Optional pricing changes do not restart routing.
+
+Accumulate distinct insertion failures. Completed NoRoute/snapping outcomes differ
+from unavailable/inconsistent/skipped work. After a usable baseline, the server
+routing deadline preserves options and marks unfinished coverage incomplete;
+client disconnects still cancel. Preserve existing request budgets and throttling.
+
+The optional fixture uses an import-only routine with transactional rollback and
+resignal, exact record checks, insert-only writes and safe identical repeats.
+Routine privileges and manual cleanup after an import client stops on failure are
+accepted implementation tradeoffs for atomicity; no migration framework or owner
+record updates are introduced. Only verified disposable schemas were written.
+No fuel optimizer, application fixture import, commit or push is authorized here.
+Acceptance remains pending physical-iPhone testing. These changes support the
+existing journey/price requirements without changing formal requirement scope.
+See [stabilization and verification](t05b-verification.md).
+
+### 2026-11-22 - T05-B2 controlled OSM data expansion
+
+The owner authorizes an offline fetch/normalize/validate/preview/import workflow,
+not application database writes. Use bounded Overpass requests and the official
+HOT/HDX OSM GeoJSON extract fallback; retain ODbL/source notices. Actual small GET
+and POST failures are recorded without claiming a proven overload cause.
+
+Use conservative review signals for names, proximity, polygon entrances, source
+identity and the prepared retailer fixture; never auto-merge uncertain stores.
+One optional additive OSM source ledger is justified by durable identity and safe
+repeat/change detection. Existing supermarket/branch entities and APIs are reused.
+A serializable insert-only transaction applies only explicit digest-bound approved
+records or source links, preserving demo records and all prices. No migration or
+import has been applied to the application DB; both need owner approval.
+A conservative geographic envelope reduces exact corridor work without raising
+OSRM budgets. UI changes are limited to missing-price wording and OSM credits.
+No new dependency, paid API, fuel optimizer or unrelated redesign. Owner/device
+acceptance and application import remain pending. See t05b2-data-import.md.
+
 ## New decisions protocol
+
+### 2026-11-21 — Approved T05-B refinement
+
+The owner explicitly authorizes refactoring uncommitted T05-A, removes mandatory
+confirmation from the journey workflow, and moves basic Google Maps handoff into
+T05-B. Preserve secure imports, all supported URL formats, foreground GPS,
+authentication, owned snapshots and exact T04 grocery calculations. The older
+T05-A workflow entry below is historical, superseded by this approved direction.
+
+Use the public FOSSGIS OSRM car endpoint for a low-volume capstone demo, configured
+by OSRM_BASE_URL. Verify live Lebanese route/geometry responses and table support
+first. Implement only complete route requests here; a matrix abstraction is not
+needed. Serial calls at least one second apart, bounded cache/queue, deadlines,
+no automatic retry and visible attribution respect the provider policy. There is
+no traffic claim, Google route reproduction claim or paid API dependency.
+
+Prefilter branches against the entire OSRM polyline with a 3 km spherical corridor,
+then test complete driving journeys through each supermarket. Preserve original
+stop order and test each insertion. Maximum 24 insertion evaluations/20 branches
+protects the public service; explicitly disclose skipped branches rather than
+claim exhaustive discovery. Threshold comparisons use unrounded seconds. Time
+deltas below -1 second are inconsistent/excluded; smaller negatives round to zero
+with raw evidence retained. A shorter/slower road alternative may have a negative
+distance change, shown honestly rather than inventing extra distance.
+
+Overpass investigation encountered availability failures. A reviewed 12-branch
+fixture uses actual points from the retailer's public branch finder instead,
+with source IDs/date, uncertainty and null OSM IDs. This uses existing tables in
+an optional manual seed, with no prices or automatic application writes. Future
+data/price ingestion remains separate. Retire the confirmation flag/reducer/UI
+and their behavior-only tests; retain parser, resolver and GPS/security regressions.
+Slider 5.2.1 is included in Expo Go SDK 58; no new backend dependency/framework.
+
+This implements portions of UR-19/20/22/26/28 and navigation, without claiming
+fuel, combined overall-cost ranking, complete live inventory or natural-language
+journeys. Equal endpoint shopping journeys are labeled full return trips. T05-C
+owns fuel/basket integration; T05-D owns final multi-store evaluation/polish.
+Owner/device acceptance remains pending. No commit/push is authorized here.
+
+### 2026-11-21 — T05-A owner-assigned journey import and location selection
+
+Historical: its confirmation-oriented workflow and phase sequencing are superseded
+by the approved T05-B entry above. Import/GPS technical foundations remain in use.
+
+The owner explicitly narrows T05-A to Google Maps URL import, foreground device
+location and user confirmation. The selected pipeline is Google Maps → app →
+OSRM → optimizer → Google Maps navigation. Only the first import/location boundary
+is implemented here. The earlier manual-coordinate/round-trip T05 proposal is
+superseded; no manual coordinate input is required and no routing/fuel code is added.
+
+Use URL-contained data and normal permitted redirects only. Support documented
+coordinate query forms, explicit coordinate directions paths, the supplied exact
+expanded data layout, bounded place-pin formats and the observed legacy tagged
+geocode encoding. Unknown names/place IDs do not imply coordinates. Internal URL
+encodings are provisional, can change and must fail partial/unsupported rather
+than scrape Google pages or call undocumented APIs. The supplied short link was
+resolved live on 2026-11-21; this is evidence for that link, not universal support.
+
+Use the SDK 58 Expo Location package for one foreground fix on explicit user tap.
+No background permission/tracking, persisted precise locations, native share
+extension, new schema or catalog data changes. Confirm complete driving journeys
+locally and invalidate confirmation on changes. Auth/session and T04 arithmetic
+remain untouched. This supports portions of UR-20/21/28 without claiming full
+route or vehicle requirements. Manual prices/fuel, detours, OSRM, combined costs
+and navigation remain T05-B/C/D. Owner/device acceptance is pending; no task is
+marked complete or committed/pushed by this implementation.
 
 ### 2026-11-15 — T04 merchandise optimization
 

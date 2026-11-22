@@ -1,0 +1,51 @@
+{
+  "supermarkets": [
+    {
+      "id": 1,
+      "name": "Spinneys - DEMONSTRATION DATA"
+    },
+    {
+      "id": 2,
+      "name": "Carrefour - DEMONSTRATION DATA"
+    },
+    {
+      "id": 3,
+      "name": "Le Charcutier - DEMONSTRATION DATA"
+    }
+  ],
+  "branches": [
+    {
+      "id": 1,
+      "supermarketId": 1,
+      "name": "Beirut - DEMO",
+      "address": "DEMONSTRATION DATA: fictional Beirut branch, Lebanon",
+      "latitude": null,
+      "longitude": null
+    },
+    {
+      "id": 2,
+      "supermarketId": 1,
+      "name": "Metn - DEMO",
+      "address": "DEMONSTRATION DATA: fictional Metn branch, Lebanon",
+      "latitude": null,
+      "longitude": null
+    },
+    {
+      "id": 3,
+      "supermarketId": 2,
+      "name": "Baabda - DEMO",
+      "address": "DEMONSTRATION DATA: fictional Baabda branch, Lebanon",
+      "latitude": null,
+      "longitude": null
+    },
+    {
+      "id": 4,
+      "supermarketId": 3,
+      "name": "Jounieh - DEMO",
+      "address": "DEMONSTRATION DATA: fictional Jounieh branch, Lebanon",
+      "latitude": null,
+      "longitude": null
+    }
+  ],
+  "sources": []
+}

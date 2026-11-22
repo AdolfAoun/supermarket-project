@@ -1,0 +1,6270 @@
+{
+  "format": 1,
+  "datasetHash": "763b4821e558e1e3bc3e171103ce978750c3879e17d0741326f758a1fcf0b329",
+  "snapshotHash": "e464be6c3861a737064014709ac4cb59e49e5ad525733e0b4ff967b15c6cf7c6",
+  "rows": [
+    {
+      "key": "node/10107972082",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/10253774763",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/10253774768",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/10253774769",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/10915540243",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/11056661688",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "near_coarse_extract_boundary"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/11080262257",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/11153633706",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/1117586285",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/11241260137",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/4938255492",
+        "nearby_osm:node/9946806717"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/11313529351",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/11390585940",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/11485635612",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/11505339848",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/11637593769",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12151725801",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "nearby_osm:node/3336158191"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12170423501",
+      "status": "manual_review",
+      "reasons": [
+        "nearby_osm:node/9946858117"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12534051887",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12722991004",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/4340981003"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12723269746",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12759644610",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12798633935",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12826002001",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12882637995",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12928075003",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12928075101",
+      "status": "manual_review",
+      "reasons": [
+        "nearby_osm:node/12928075201"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12928075103",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12928075201",
+      "status": "manual_review",
+      "reasons": [
+        "nearby_osm:node/12928075101"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12928076803",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12965809701",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/12991687501",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13060710697",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13084792980",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13085011584",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13123754601",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13146726303",
+      "status": "manual_review",
+      "reasons": [
+        "nearby_osm:node/13146731102"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13146731102",
+      "status": "manual_review",
+      "reasons": [
+        "nearby_osm:node/13146726303"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13289196201",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13326191202",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13326192202",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13326192501",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13387256102",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13479428301",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13594286376",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13598093259",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/1359825365",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13620129501",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/655382108"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13652714235",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13667930602",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13668528601",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13685654901",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13686451002",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13732374045",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13885861001",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13887897208",
+      "status": "manual_review",
+      "reasons": [
+        "nearby_osm:node/5265333685"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/13902517101",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/14068969934",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/14132196233",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/14214361301",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/14378718487",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/1722740913",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/1857603220",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/1857643213",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8158767293",
+        "nearby_osm:node/8572196018"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/1886685478",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/1889908392",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2166787580",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/5246560423"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2179625487",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2180101452",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2214946024",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9200157198"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2221788556",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2222243296",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/5621922847"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2234982584",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2408909201",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2440599713",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2440957950",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2455108641",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8245874679"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/260285680",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2675178364",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/268094402",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2707153729",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2801168109",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/282761227",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "possible_retailer_fixture_branch"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": [
+        1023
+      ]
+    },
+    {
+      "key": "node/282763141",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2877888381",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2910621522",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/2910690787",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "nearby_osm:node/9127847711"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/294482507",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3009945071",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3045379820",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3052287867",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3061112420",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3081293720",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3105325143",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3117022000",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3130631470",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3132457124",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3250727824",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3255912064",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3336158191",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/12151725801"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3419859625",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3448689676",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/348963675",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "nearby_osm:way/533227646"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3499252850",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3511526048",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3513850567",
+      "status": "manual_review",
+      "reasons": [
+        "nearby_osm:node/3513850569",
+        "nearby_osm:node/9946782717"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3513850569",
+      "status": "manual_review",
+      "reasons": [
+        "nearby_osm:node/3513850567"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3563833414",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3563903293",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:way/795769741"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3565927438",
+      "status": "manual_review",
+      "reasons": [
+        "nearby_osm:node/6229097285"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3565998213",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3566017378",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3566020452",
+      "status": "manual_review",
+      "reasons": [
+        "nearby_osm:node/6654783670",
+        "nearby_osm:way/541496699"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3660353707",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "nearby_osm:node/3660353708"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3660353708",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "nearby_osm:node/3660353707"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3660354216",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3700902471",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3728735850",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3751533793",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3756926290",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/3910356007",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4031390161",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4104558511",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4185822306",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4233646089",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4252440021",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4279861633",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "possible_retailer_fixture_branch"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": [
+        1053
+      ]
+    },
+    {
+      "key": "node/4288651495",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4340981003",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/12722991004"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4361688499",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4422872394",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/4422877996",
+        "nearby_osm:node/4422891093"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4422877996",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/4422872394",
+        "nearby_osm:node/4422891093"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4422891093",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/4422872394",
+        "nearby_osm:node/4422877996"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4422891096",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name",
+        "near_coarse_extract_boundary"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4422891190",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4426684092",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "near_coarse_extract_boundary"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4427254497",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4428802306",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4431738692",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4502777574",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4611761289",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4613670689",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4616642290",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4620717991",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4625474091",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4661434108",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4672428189",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4695678068",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4708816589",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4713389827",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4735897542",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4742687539",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/9946755117",
+        "possible_retailer_fixture_branch"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": [
+        1005
+      ]
+    },
+    {
+      "key": "node/4747882924",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4818582923",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4938255492",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/11241260137",
+        "nearby_osm:node/9946806717"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4985643483",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4985648714",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/4986254037",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5009777623",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5028425175",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5028481744",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9135247288",
+        "nearby_osm:node/9135247297",
+        "nearby_osm:node/9135247303"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5030744722",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5042853593",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5059447163",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5091798534",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5149654625",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5195632621",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5205933980",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5234603027",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5235392121",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5246560423",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/2166787580"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5265333685",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/13887897208"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5295860451",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5299207098",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5321733221",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5398078843",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5398087323",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5437991474",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5462772787",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5464011823",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5464011824",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:way/1444795788"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5464018521",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5485615961",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5485635094",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5485641635",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5490677223",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5536670103",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8872427144",
+        "nearby_osm:node/8872427148",
+        "nearby_osm:node/8872427149"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5587672415",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "possible_retailer_fixture_branch"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": [
+        1038
+      ]
+    },
+    {
+      "key": "node/559971044",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/559979548",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/559984687",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/559985116",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5621922847",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "nearby_osm:node/2222243296"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5679937768",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5838807481",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5886023604",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5922739833",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5933778358",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/5938494705",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6022635186",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6139026595",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6139054612",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6139061891",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6141309128",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6153678085",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6164088085",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/6177094187"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6177094187",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/6164088085"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6229097285",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/3565927438",
+        "possible_retailer_fixture_branch"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": [
+        1044
+      ]
+    },
+    {
+      "key": "node/6299527425",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6308702402",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6418924456",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6449228085",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6551723185",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/655382108",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/13620129501"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6557231100",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6654783670",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/3566020452",
+        "nearby_osm:node/9213700296",
+        "nearby_osm:way/541496699"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6709033285",
+      "status": "manual_review",
+      "reasons": [
+        "nearby_osm:way/586010629",
+        "nearby_osm:way/706309329"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6715992085",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6831105185",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/683470130",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6851497886",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6967841174",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:way/740444119"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/6967868518",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7190443085",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7279277887",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7279277889"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7279277889",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7279277887"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7315644109",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7316653586",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7443103263",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7443103265",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7443124303",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/8358370849"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7443124308",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7443124309"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7443124309",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7443124308"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7443124445",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7452616676",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7467969480",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7469501753",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7477059982",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7477418589",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7570141759",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7638524828",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7654252085",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7680882177",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7725589697"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7725586327",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7725586338",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7725586351",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/7725589732"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7725586369",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7725589697",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7680882177"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7725589706",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7725589711",
+        "nearby_osm:node/9082357972"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7725589711",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7725589706",
+        "nearby_osm:node/9082357972"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7725589713",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7725589719"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7725589719",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7725589713"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7725589723",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7725589732",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7725586351"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7725589746",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7743675346",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7847828185",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7928561762",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930328855",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930328858",
+        "nearby_osm:node/8678599613"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930328858",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930328855",
+        "nearby_osm:node/8678599613"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930789031",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930789049",
+        "nearby_osm:node/8149611955",
+        "nearby_osm:node/8244775068",
+        "nearby_osm:node/8244775076"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930789049",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930789031",
+        "nearby_osm:node/8244775068",
+        "nearby_osm:node/8244775076"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930911820",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930911839",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930911842",
+        "nearby_osm:node/7930911845",
+        "nearby_osm:node/7930911847",
+        "nearby_osm:node/7930911848",
+        "nearby_osm:node/7930911851"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930911840",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930911842",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930911839",
+        "nearby_osm:node/7930911845",
+        "nearby_osm:node/7930911847",
+        "nearby_osm:node/7930911848",
+        "nearby_osm:node/7930911851"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930911845",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930911839",
+        "nearby_osm:node/7930911842",
+        "nearby_osm:node/7930911847",
+        "nearby_osm:node/7930911848",
+        "nearby_osm:node/7930911851"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930911847",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930911839",
+        "nearby_osm:node/7930911842",
+        "nearby_osm:node/7930911845",
+        "nearby_osm:node/7930911848",
+        "nearby_osm:node/7930911851"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930911848",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930911839",
+        "nearby_osm:node/7930911842",
+        "nearby_osm:node/7930911845",
+        "nearby_osm:node/7930911847",
+        "nearby_osm:node/7930911851"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930911851",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930911839",
+        "nearby_osm:node/7930911842",
+        "nearby_osm:node/7930911845",
+        "nearby_osm:node/7930911847",
+        "nearby_osm:node/7930911848"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930918946",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7930918978",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7931624007",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7931624018",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8245874674",
+        "nearby_osm:node/8245874675"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7934573789",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7934573797",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7934845599",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7934845605",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8119016144"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7935267120",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7935267152",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7935267165",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7954650518",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/7954650532",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8009089203",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8045136310",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:way/863622531"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8046915318",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8049636927",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8064764995",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8064765006",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:way/291844762"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8064765020",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8064765021",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8064765026",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8084739196",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8119016132",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8119016144",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7934845605"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8119016151",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8127283908",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8149611955",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930789031",
+        "nearby_osm:node/8244775068"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8149611967",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8149611969",
+        "nearby_osm:node/8244775061",
+        "nearby_osm:node/8244775062",
+        "nearby_osm:node/8244775084"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8149611969",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/8149611967",
+        "nearby_osm:node/8244775061",
+        "nearby_osm:node/8244775062",
+        "nearby_osm:node/8244775084"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8158641944",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8158767293",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/1857643213",
+        "nearby_osm:node/8572196018"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8180646617",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8200135117",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8207742381",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8207742388",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8207742396",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8207742401",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8207742407",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8207742410",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8207742415",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8207751722",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8207751723",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8222988818",
+      "status": "rejected",
+      "reasons": [
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8240253966",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8240253981",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8240253997",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8240254006",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8240286921",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8240286925",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8244775061",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8149611967",
+        "nearby_osm:node/8149611969",
+        "nearby_osm:node/8244775062",
+        "nearby_osm:node/8244775084"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8244775062",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/8149611967",
+        "nearby_osm:node/8149611969",
+        "nearby_osm:node/8244775061",
+        "nearby_osm:node/8244775084"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8244775068",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930789031",
+        "nearby_osm:node/7930789049",
+        "nearby_osm:node/8149611955",
+        "nearby_osm:node/8244775076"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8244775076",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930789031",
+        "nearby_osm:node/7930789049",
+        "nearby_osm:node/8244775068"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8244775084",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8149611967",
+        "nearby_osm:node/8149611969",
+        "nearby_osm:node/8244775061",
+        "nearby_osm:node/8244775062"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8245874674",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7931624018",
+        "nearby_osm:node/8245874675"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8245874675",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7931624018",
+        "nearby_osm:node/8245874674"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8245874679",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/2455108641"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8260376215",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8262672005",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8262672006"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8262672006",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8262672005"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8308882952",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8317853053",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8331932780",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8346440956",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8358370849",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/7443124303"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8406200818",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8455778335",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8458547548",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8458547563",
+        "nearby_osm:node/8458547564"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8458547563",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8458547548",
+        "nearby_osm:node/8458547564"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8458547564",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8458547548",
+        "nearby_osm:node/8458547563"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8462141418",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:way/911345096"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8462141465",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:way/911345105"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8464506056",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8464626285",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8464626286",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8464657117",
+        "nearby_osm:node/8464657119"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8464657117",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8464626286",
+        "nearby_osm:node/8464657119"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8464657119",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8464626286",
+        "nearby_osm:node/8464657117"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8464657124",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8482943135",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8571776137",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8572196018",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/1857643213",
+        "nearby_osm:node/8158767293"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8572210195",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8572210205",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/8572210206"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8572210206",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/8572210205"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8675495519",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8678599613",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7930328855",
+        "nearby_osm:node/7930328858"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8678616019",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8678616024",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8678616025",
+        "nearby_osm:node/8678616026"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8678616025",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8678616024",
+        "nearby_osm:node/8678616026"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8678616026",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8678616024",
+        "nearby_osm:node/8678616025"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8680630711",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8714443875",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name",
+        "near_coarse_extract_boundary"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8753555777",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8754627815",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8754628617",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8754628620",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8754628623",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8754628625",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8754628627",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8754628632",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8754628638",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8754628639",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8754628643",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8754628648",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8812172027",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8812276637",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8815450035",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8872427144",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/5536670103",
+        "nearby_osm:node/8872427148",
+        "nearby_osm:node/8872427149"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8872427148",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/5536670103",
+        "nearby_osm:node/8872427144",
+        "nearby_osm:node/8872427149"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8872427149",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/5536670103",
+        "nearby_osm:node/8872427144",
+        "nearby_osm:node/8872427148"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8887176447",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "possible_retailer_fixture_branch"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": [
+        1065
+      ]
+    },
+    {
+      "key": "node/8956904280",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/8956906419",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9010156417",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9047334702",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9082357972",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/7725589706",
+        "nearby_osm:node/7725589711"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9088641285",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9088666132",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9088666137",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9088666170",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9088666173",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9111824553",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9111884658",
+        "nearby_osm:way/798512797"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9111884658",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9111824553",
+        "nearby_osm:way/798512797"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9127847690",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9127847711",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/2910690787"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9134960728",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:way/798537060"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9135247265",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9135247288",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/5028481744",
+        "nearby_osm:node/9135247297",
+        "nearby_osm:node/9135247303"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9135247297",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/5028481744",
+        "nearby_osm:node/9135247288"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9135247303",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/5028481744",
+        "nearby_osm:node/9135247288"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9135969559",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9135987326",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9200157198",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/2214946024"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9207215558",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9381360495"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9213700296",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/6654783670"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9293080710",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9381360476",
+        "nearby_osm:node/9381360477",
+        "nearby_osm:node/9381360478"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9294339798",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9294339807",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9294339808",
+        "nearby_osm:node/9294339809",
+        "nearby_osm:way/997991280",
+        "nearby_osm:way/997991283",
+        "nearby_osm:way/997991284",
+        "nearby_osm:way/997991285"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9294339808",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9294339807",
+        "nearby_osm:node/9294339809",
+        "nearby_osm:way/997991280",
+        "nearby_osm:way/997991283",
+        "nearby_osm:way/997991284",
+        "nearby_osm:way/997991285"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9294339809",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9294339807",
+        "nearby_osm:node/9294339808",
+        "nearby_osm:way/997991280",
+        "nearby_osm:way/997991283",
+        "nearby_osm:way/997991284",
+        "nearby_osm:way/997991285"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9294354422",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:way/997991284",
+        "nearby_osm:way/997991285"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9294354430",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9381360476",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9293080710",
+        "nearby_osm:node/9381360477",
+        "nearby_osm:node/9381360478"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9381360477",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9293080710",
+        "nearby_osm:node/9381360476",
+        "nearby_osm:node/9381360478"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9381360478",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9293080710",
+        "nearby_osm:node/9381360476",
+        "nearby_osm:node/9381360477"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9381360479",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9381360481",
+        "nearby_osm:node/9381391723"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9381360481",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9381360479",
+        "nearby_osm:node/9381391723"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9381360495",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9207215558"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9381391723",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9381360479",
+        "nearby_osm:node/9381360481"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9813727907",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9819026193",
+      "status": "auto_validated",
+      "reasons": [],
+      "action": "insert",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9946681117",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9946707217",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9946745817",
+        "nearby_osm:node/9946778917"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9946745817",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9946707217"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9946755117",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/4742687539"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9946778917",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9946707217"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9946782717",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/3513850567"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9946806717",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/11241260137",
+        "nearby_osm:node/4938255492"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9946858117",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/12170423501"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "node/9947329517",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1011505218",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1049113059",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1077504063",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1173240584",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1178549593",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1281945103",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1304601164",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1304618002",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1304642827",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1304654869",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:way/1304654870",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1304654870",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:way/1304654869",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1304798388",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1336794550",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1356913270",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1360669354",
+      "status": "manual_review",
+      "reasons": [
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1420402289",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1444795788",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/5464011824",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1444795812",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1444805636",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/1577309180",
+      "status": "manual_review",
+      "reasons": [
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/194543616",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance",
+        "possible_retailer_fixture_branch"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": [
+        1056
+      ]
+    },
+    {
+      "key": "way/261130671",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/261180811",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/261331656",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/261333679",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "polygon_not_verified_entrance",
+        "possible_retailer_fixture_branch"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": [
+        1008
+      ]
+    },
+    {
+      "key": "way/261903784",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/262405764",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/262830577",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/287211569",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/291844762",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8064765006",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/296053208",
+      "status": "manual_review",
+      "reasons": [
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/302595348",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/302887432",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/313927891",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/317216291",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/366109731",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/410181496",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/417151625",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/449226053",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/449228130",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/459091080",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/471511283",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/482594452",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "polygon_not_verified_entrance",
+        "possible_retailer_fixture_branch"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": [
+        1014
+      ]
+    },
+    {
+      "key": "way/518709336",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/529244245",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance",
+        "possible_retailer_fixture_branch"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": [
+        1032
+      ]
+    },
+    {
+      "key": "way/533227646",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "duplicate_branch_or_independent_name",
+        "nearby_osm:node/348963675",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/534465612",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/541496699",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/3566020452",
+        "nearby_osm:node/6654783670",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/547932139",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:way/586010688",
+        "nearby_osm:way/795349281",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/548676978",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/578872785",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/580925941",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/586010629",
+      "status": "manual_review",
+      "reasons": [
+        "nearby_osm:node/6709033285",
+        "nearby_osm:way/706309329",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/586010688",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:way/547932139",
+        "nearby_osm:way/750129197",
+        "nearby_osm:way/795349281",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/633868697",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/704273183",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/704273185",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/706309329",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/6709033285",
+        "nearby_osm:way/586010629",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/732270899",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/740444119",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/6967841174",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/745181685",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/745462761",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/750129197",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:way/586010688",
+        "nearby_osm:way/795349281",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/762359183",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/762359192",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/765228470",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/795349281",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:way/547932139",
+        "nearby_osm:way/586010688",
+        "nearby_osm:way/750129197",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/795769741",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/3563903293",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/798512797",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/9111824553",
+        "nearby_osm:node/9111884658",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/798537026",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/798537039",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/798537048",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/798537060",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9134960728",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/809260293",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/849822292",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/853017167",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/863622531",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/8045136310",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/867315458",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/892592056",
+      "status": "rejected",
+      "reasons": [
+        "incomplete_address",
+        "missing_name",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "reject",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/897494383",
+      "status": "manual_review",
+      "reasons": [
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/911345096",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/8462141418",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/911345105",
+      "status": "manual_review",
+      "reasons": [
+        "duplicate_branch_or_independent_name",
+        "incomplete_address",
+        "nearby_osm:node/8462141465",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/935782985",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/94759765",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/95252277",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/961044518",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/988393543",
+      "status": "manual_review",
+      "reasons": [
+        "chain_identity_from_name_only",
+        "incomplete_address",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/997991280",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9294339807",
+        "nearby_osm:node/9294339808",
+        "nearby_osm:node/9294339809",
+        "nearby_osm:way/997991283",
+        "nearby_osm:way/997991284",
+        "nearby_osm:way/997991285",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/997991283",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9294339807",
+        "nearby_osm:node/9294339808",
+        "nearby_osm:node/9294339809",
+        "nearby_osm:way/997991280",
+        "nearby_osm:way/997991284",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/997991284",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9294339807",
+        "nearby_osm:node/9294339808",
+        "nearby_osm:node/9294339809",
+        "nearby_osm:node/9294354422",
+        "nearby_osm:way/997991280",
+        "nearby_osm:way/997991283",
+        "nearby_osm:way/997991285",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    },
+    {
+      "key": "way/997991285",
+      "status": "manual_review",
+      "reasons": [
+        "incomplete_address",
+        "nearby_osm:node/9294339807",
+        "nearby_osm:node/9294339808",
+        "nearby_osm:node/9294339809",
+        "nearby_osm:node/9294354422",
+        "nearby_osm:way/997991280",
+        "nearby_osm:way/997991284",
+        "polygon_not_verified_entrance"
+      ],
+      "action": "review",
+      "existingBranchIds": [],
+      "candidateHashes": {},
+      "fixtureBranchIds": []
+    }
+  ],
+  "summary": {
+    "retrieved": 521,
+    "valid": 462,
+    "autoValidated": 30,
+    "rejected": 59,
+    "requiringReview": 432,
+    "suspectedDuplicates": 186,
+    "duplicateOsmIdentifiers": 0,
+    "majorChainBranches": 40,
+    "otherNamedBusinesses": 422,
+    "chainCounts": {
+      "Spinneys": 17,
+      "Fahed Supermarket": 4,
+      "Carrefour": 4,
+      "Le Charcutier Aoun": 14,
+      "Metro Superstore": 1
+    },
+    "regions": {
+      "Mount Lebanon": 174,
+      "Baalbek-El Hermel": 14,
+      "Beirut": 72,
+      "Akkar": 8,
+      "North": 39,
+      "South": 56,
+      "Bekaa": 65,
+      "El Nabatieh": 34
+    },
+    "missingExpectedChains": [],
+    "corridorRecords": 179
+  }
+}

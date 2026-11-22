@@ -1,5 +1,41 @@
 # MySQL data model
 
+## T05-B2 optional OSM provenance
+
+Prepared migration 003 adds branch_location_sources only: composite OSM type/ID
+primary key, branch FK, source/catalog hashes, review status, provenance JSON and
+timestamp. It has not been applied to the application database. This durable
+mapping prevents repeat imports from relying only on mutable names/coordinates.
+Existing tables/records and price histories are preserved. The CLI imports approved
+new locations or source links in one transaction and never performs DDL, updates,
+deletes or price creation. Source changes and uncertain matches require review.
+See [safe import instructions](t05b2-data-import.md); do not run migrations/seeds
+automatically on the current installation.
+
+## T05-B real locations
+
+No schema migration or existing application record change. The optional
+002_optional_real_locations.sql inserts one real chain and 12 retailer-listed
+branches using existing address/coordinate columns; no prices are copied or
+created. It has only been executed in disposable integration schemas. The owner
+must review and manually import it for real app discovery coverage. Identical
+repeat imports are safe. A temporary import procedure wraps writes in a transaction
+with rollback-and-resignal on any SQL error; ID/name/content conflicts abort the
+whole import. No existing records are updated. Run in a dedicated session without
+an open transaction; routine privileges are required. See database/sources/README.md.
+Original demonstration branches and their fictional prices retain their IDs.
+The source JSON records original retailer IDs, coordinates, addresses, source URL,
+review date and uncertainty; unavailable OSM IDs stay null. See sources/README.md
+under database for Overpass failures, source review and collision-safe import steps.
+
+The discovery API performs catalog SELECTs before external routing and opens no
+long transaction. Private list-price snapshots remain owned, consistent and
+unchanged; mobile joins already validated T04 prices by full branch identity.
+Real branches without observations show Prices unavailable and cannot acquire
+complete basket status through geography. No user journey, precise GPS fix or
+routing estimate is persisted in MySQL. A five-minute bounded memory cache is
+owned by the OSRM adapter, separate from observation history.
+
 ## T04 read-only optimization
 
 No migration, index, seed or observation-history change is required. Optimization

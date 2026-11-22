@@ -1,0 +1,59 @@
+{
+  "provider": "Humanitarian OpenStreetMap Team / Humanitarian Data Exchange",
+  "package": "https://data.humdata.org/dataset/hotosm_lbn_points_of_interest",
+  "metadataUrl": "https://data.humdata.org/api/3/action/package_show?id=hotosm_lbn_points_of_interest",
+  "resourceUrl": "https://production-raw-data-api.s3.amazonaws.com/ISO3/LBN/points_of_interest/hotosm_lbn_points_of_interest_osm_geojson.zip",
+  "license": "hdx-odc-odbl",
+  "sourceDataDate": "[2026-11-15T00:00:00 TO 2026-11-15T23:59:59]",
+  "metadataModified": "2026-11-19T10:21:34.299003",
+  "rawSha256": "9581fdeff3495c59154759aff41e63cc7431aa780ee95b38b2b90a611617fdb4",
+  "rawBytes": 1706940,
+  "selectedFeatures": 521,
+  "boundaryUrl": "https://download.geofabrik.de/asia/lebanon.geojson",
+  "boundaryPurpose": "Coarse extract-extent validation, not a surveyed national border",
+  "investigation": [
+    {
+      "provider": "overpass-api.de",
+      "method": "GET",
+      "bbox": [
+        33.88,
+        35.48,
+        33.92,
+        35.55
+      ],
+      "timeoutMs": 20000,
+      "result": "timeout"
+    },
+    {
+      "provider": "overpass.private.coffee",
+      "method": "GET",
+      "bbox": [
+        33.88,
+        35.48,
+        33.92,
+        35.55
+      ],
+      "timeoutMs": 20000,
+      "result": "timeout"
+    },
+    {
+      "provider": "overpass-api.de/api/status",
+      "method": "GET",
+      "result": "HTTP 406"
+    },
+    {
+      "provider": "overpass-api.de",
+      "method": "POST",
+      "bbox": [
+        33.89,
+        35.5,
+        33.895,
+        35.505
+      ],
+      "timeoutMs": 12000,
+      "result": "timeout"
+    }
+  ],
+  "boundarySha256": "bdbefeca99d310e856ca59753d923c75046a353c4cef7b414f8ab28c07719153",
+  "getAndPostDiagnosis": "Small GETs on two providers and a tiny POST timed out; status returned HTTP 406. Geofabrik and HOT worked. Evidence does not isolate provider load, regional connectivity or request filtering; query size alone is insufficient."
+}

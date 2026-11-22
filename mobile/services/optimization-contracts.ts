@@ -9,7 +9,9 @@ export interface Solution {
   allocations: (BasketBranch & { items: OptimizationLine[]; subtotalUsd: string; subtotalUsdUnits: string })[];
 }
 export interface Optimization {
-  comparison: BasketComparison & { eligibleBranches: (BasketComparison['eligibleBranches'][number] & { items: OptimizationLine[] })[] };
+  comparison: Omit<BasketComparison, 'eligibleBranches'> & {
+    eligibleBranches: (Omit<BasketComparison['eligibleBranches'][number], 'items'> & { items: OptimizationLine[] })[];
+  };
   excludedItems: ListItem[]; evaluatedAt: string; maximumStores: number; freshnessDays: number;
   fuelCostsIncluded: false; availabilityGuaranteed: false; missingProductIds: number[];
   multiStore: { status: 'complete' | 'no_solution'; solution: Solution | null;

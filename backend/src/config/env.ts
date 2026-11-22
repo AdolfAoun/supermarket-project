@@ -1,4 +1,5 @@
 import 'dotenv/config';
+import { DEFAULT_OSRM_BASE_URL, routingUrl } from '../modules/journeys/routing.js';
 
 function port(name: string, fallback: number): number {
   const value = Number(process.env[name] ?? fallback);
@@ -9,6 +10,7 @@ function port(name: string, fallback: number): number {
 }
 
 export const env = {
+  osrmBaseUrl: routingUrl(process.env.OSRM_BASE_URL ?? DEFAULT_OSRM_BASE_URL),
   priceFreshnessDays: port('PRICE_FRESHNESS_DAYS', 30),
   host: process.env.HOST ?? '127.0.0.1',
   port: port('PORT', 3000),

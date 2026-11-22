@@ -1,5 +1,30 @@
 # T02-A catalog SQL
 
+## T05-B2 optional OSM import
+
+Review [the source snapshot/queue](sources/osm/README.md) and
+[approval instructions](../docs/t05b2-data-import.md). Migration 003 is one optional
+additive provenance table, manually applied only after approval. The CLI then
+applies a reviewed batch transactionally without modifying existing records/prices.
+No application migration or import has been performed. Do not rerun earlier
+migrations/seeds as part of this workflow.
+
+## T05-B optional real locations
+
+There is no schema migration for T05-B. Review the [source/review notes](sources/README.md)
+and [optional location-only seed](seeds/002_optional_real_locations.sql), then
+manually import that seed if you want live route discovery to include the
+12 retailer-listed real branches. It has not been applied to the owner database.
+Do not reload seed 001 or any existing migration. New real branches receive no
+fictional prices; existing demo observations and records remain unchanged.
+Identical repeats are safe; any conflicting ID, name or content rolls back all
+fixture writes. Use a dedicated session with no open transaction and routine
+privileges. If the SQL client stops after an error, follow the routine-cleanup
+instructions in sources/README.md before retrying. No application import is automatic.
+
+The older T02/T03 setup instructions below are retained for their stated historical
+and fresh-install contexts, not as prerequisites to rerun for T05-B.
+
 The owner successfully imported migration 002 and confirmed all four new tables
 on 2026-11-09, then approved T03-A after manual API checks. Do not rerun it on the
 current installation. The instructions below are retained for fresh installations.

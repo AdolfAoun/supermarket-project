@@ -1,0 +1,239 @@
+{
+  "description": "Published retailer location facts; no retail prices. Optional fixture, not automatically imported.",
+  "sourceUrl": "https://www.spinneyslebanon.com/branch-finder/",
+  "retrievedOn": "2026-11-21",
+  "supermarket": {
+    "id": 1001,
+    "name": "Spinneys"
+  },
+  "branches": [
+    {
+      "branchId": 1005,
+      "supermarketId": 1001,
+      "name": "Ashrafieh - Alexandre",
+      "address": "Ashrafieh facing Mar Youhana (Hotel Alexandre). Alexandre district, Adib Eshaq street",
+      "latitude": 33.884739,
+      "longitude": 35.518509,
+      "source": {
+        "url": "https://www.spinneyslebanon.com/branch-finder/",
+        "retailerLocationId": "5",
+        "name": "Spinneys Ashrafieh - Alexandre",
+        "latitude": "33.88473866",
+        "longitude": "35.51850915",
+        "osmId": null
+      },
+      "review": "retailer_listed_not_field_verified",
+      "reviewedOn": "2026-11-21",
+      "prices": "unavailable"
+    },
+    {
+      "branchId": 1008,
+      "supermarketId": 1001,
+      "name": "Ashrafieh - Mar Mitr",
+      "address": "La Sagesse School",
+      "latitude": 33.891427,
+      "longitude": 35.520902,
+      "source": {
+        "url": "https://www.spinneyslebanon.com/branch-finder/",
+        "retailerLocationId": "8",
+        "name": "Spinneys Ashrafieh - Mar Mitr",
+        "latitude": "33.89142730",
+        "longitude": "35.52090168",
+        "osmId": null
+      },
+      "review": "retailer_listed_not_field_verified",
+      "reviewedOn": "2026-11-21",
+      "prices": "unavailable"
+    },
+    {
+      "branchId": 1014,
+      "supermarketId": 1001,
+      "name": "Ain El Tineh",
+      "address": "Sakiet El Janzeer",
+      "latitude": 33.886449,
+      "longitude": 35.479156,
+      "source": {
+        "url": "https://www.spinneyslebanon.com/branch-finder/",
+        "retailerLocationId": "14",
+        "name": "Spinneys Ain El Tineh",
+        "latitude": "33.88644872",
+        "longitude": "35.47915578",
+        "osmId": null
+      },
+      "review": "retailer_listed_not_field_verified",
+      "reviewedOn": "2026-11-21",
+      "prices": "unavailable"
+    },
+    {
+      "branchId": 1023,
+      "supermarketId": 1001,
+      "name": "Sahel Alma",
+      "address": "Spinneys Sahel Alma",
+      "latitude": 34.000842,
+      "longitude": 35.647694,
+      "source": {
+        "url": "https://www.spinneyslebanon.com/branch-finder/",
+        "retailerLocationId": "23",
+        "name": "Spinneys Sahel Alma",
+        "latitude": "34.00084233",
+        "longitude": "35.64769397",
+        "osmId": null
+      },
+      "review": "retailer_listed_not_field_verified",
+      "reviewedOn": "2026-11-21",
+      "prices": "unavailable"
+    },
+    {
+      "branchId": 1032,
+      "supermarketId": 1001,
+      "name": "Dbayeh 24/7",
+      "address": "Dbayeh Highway, Jdeidet El Metn",
+      "latitude": 33.935035,
+      "longitude": 35.589932,
+      "source": {
+        "url": "https://www.spinneyslebanon.com/branch-finder/",
+        "retailerLocationId": "32",
+        "name": "Spinneys Dbayeh 24/7",
+        "latitude": "33.93503465",
+        "longitude": "35.58993207",
+        "osmId": null
+      },
+      "review": "retailer_listed_not_field_verified",
+      "reviewedOn": "2026-11-21",
+      "prices": "unavailable"
+    },
+    {
+      "branchId": 1038,
+      "supermarketId": 1001,
+      "name": "Elissar",
+      "address": "Antelias, Bikfaya Highway",
+      "latitude": 33.924426,
+      "longitude": 35.624532,
+      "source": {
+        "url": "https://www.spinneyslebanon.com/branch-finder/",
+        "retailerLocationId": "38",
+        "name": "Spinneys Elissar",
+        "latitude": "33.92442640",
+        "longitude": "35.62453151",
+        "osmId": null
+      },
+      "review": "retailer_listed_not_field_verified",
+      "reviewedOn": "2026-11-21",
+      "prices": "unavailable"
+    },
+    {
+      "branchId": 1044,
+      "supermarketId": 1001,
+      "name": "Hamra",
+      "address": "Sourati Road, Idriss building",
+      "latitude": 33.896895,
+      "longitude": 35.484799,
+      "source": {
+        "url": "https://www.spinneyslebanon.com/branch-finder/",
+        "retailerLocationId": "44",
+        "name": "Spinneys Hamra",
+        "latitude": "33.89689538",
+        "longitude": "35.48479915",
+        "osmId": null
+      },
+      "review": "retailer_listed_not_field_verified",
+      "reviewedOn": "2026-11-21",
+      "prices": "unavailable"
+    },
+    {
+      "branchId": 1053,
+      "supermarketId": 1001,
+      "name": "Jbeil",
+      "address": "Jbeil Main Highway, Blat Exit",
+      "latitude": 34.109895,
+      "longitude": 35.654787,
+      "source": {
+        "url": "https://www.spinneyslebanon.com/branch-finder/",
+        "retailerLocationId": "53",
+        "name": "Spinneys Jbeil",
+        "latitude": "34.10989471",
+        "longitude": "35.65478683",
+        "osmId": null
+      },
+      "review": "retailer_listed_not_field_verified",
+      "reviewedOn": "2026-11-21",
+      "prices": "unavailable"
+    },
+    {
+      "branchId": 1056,
+      "supermarketId": 1001,
+      "name": "Jnah",
+      "address": "Wata El Msaytbeh",
+      "latitude": 33.873805,
+      "longitude": 35.490518,
+      "source": {
+        "url": "https://www.spinneyslebanon.com/branch-finder/",
+        "retailerLocationId": "56",
+        "name": "Spinneys Jnah",
+        "latitude": "33.87380504",
+        "longitude": "35.49051762",
+        "osmId": null
+      },
+      "review": "retailer_listed_not_field_verified",
+      "reviewedOn": "2026-11-21",
+      "prices": "unavailable"
+    },
+    {
+      "branchId": 1065,
+      "supermarketId": 1001,
+      "name": "Signature by Spinneys",
+      "address": "Beirut Souks",
+      "latitude": 33.899155,
+      "longitude": 35.503365,
+      "source": {
+        "url": "https://www.spinneyslebanon.com/branch-finder/",
+        "retailerLocationId": "65",
+        "name": "Signature by Spinneys",
+        "latitude": "33.89915510",
+        "longitude": "35.50336540",
+        "osmId": null
+      },
+      "review": "retailer_listed_not_field_verified",
+      "reviewedOn": "2026-11-21",
+      "prices": "unavailable"
+    },
+    {
+      "branchId": 1078,
+      "supermarketId": 1001,
+      "name": "Zouk",
+      "address": "XJH8+4V5, Beirut, Lebanon",
+      "latitude": 33.977974,
+      "longitude": 35.617567,
+      "source": {
+        "url": "https://www.spinneyslebanon.com/branch-finder/",
+        "retailerLocationId": "78",
+        "name": "Spinneys Zouk",
+        "latitude": "33.97797376",
+        "longitude": "35.61756715",
+        "osmId": null
+      },
+      "review": "retailer_listed_not_field_verified",
+      "reviewedOn": "2026-11-21",
+      "prices": "unavailable"
+    },
+    {
+      "branchId": 1081,
+      "supermarketId": 1001,
+      "name": "Ajaltoun",
+      "address": "Ajaltoun main road, Keserwan",
+      "latitude": 33.970582,
+      "longitude": 35.688593,
+      "source": {
+        "url": "https://www.spinneyslebanon.com/branch-finder/",
+        "retailerLocationId": "81",
+        "name": "Spinneys Ajaltoun",
+        "latitude": "33.97058233",
+        "longitude": "35.68859339",
+        "osmId": null
+      },
+      "review": "retailer_listed_not_field_verified",
+      "reviewedOn": "2026-11-21",
+      "prices": "unavailable"
+    }
+  ]
+}

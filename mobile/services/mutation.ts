@@ -1,6 +1,6 @@
 import { ApiError } from './api';
 
-export function createMutation(publish: (state: { pending: boolean; error: string | null }) => void) {
+export function createMutation(publish: (state: { pending: boolean; error: string | null }) => void, readOnly = false) {
   let controller: AbortController | null = null, generation = 0;
   function cancel() { generation++; controller?.abort(); controller = null; }
   async function run<T>(operation: (signal: AbortSignal) => Promise<T>, success?: (value: T) => void) {
@@ -14,7 +14,7 @@ export function createMutation(publish: (state: { pending: boolean; error: strin
     } catch (error) {
       if (generation === own && !request.signal.aborted) {
         message = error instanceof ApiError && error.kind !== 'cancelled' ? error.message
-          + (error.kind === 'timeout' || error.kind === 'network' ? ' Reload before repeating a change; it may have reached the server.' : '')
+          + (!readOnly && (error.kind === 'timeout' || error.kind === 'network') ? ' Reload before repeating a change; it may have reached the server.' : '')
           : error instanceof ApiError ? null : 'Unable to complete this action. Please retry.';
       }
     } finally {

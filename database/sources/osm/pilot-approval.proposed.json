@@ -1,0 +1,127 @@
+{
+  "datasetHash": "763b4821e558e1e3bc3e171103ce978750c3879e17d0741326f758a1fcf0b329",
+  "previewHash": "e7ad816524d63b996bda059bbaeab1c8d9400a177bc65ef5836e87a33982f10b",
+  "database": "supermarket_comparison",
+  "decisions": [
+    {
+      "key": "node/12759644610",
+      "action": "insert"
+    },
+    {
+      "key": "node/12798633935",
+      "action": "insert"
+    },
+    {
+      "key": "node/12928075003",
+      "action": "insert"
+    },
+    {
+      "key": "node/12928075103",
+      "action": "insert"
+    },
+    {
+      "key": "node/12928076803",
+      "action": "insert"
+    },
+    {
+      "key": "node/12965809701",
+      "action": "insert"
+    },
+    {
+      "key": "node/13387256102",
+      "action": "insert"
+    },
+    {
+      "key": "node/1359825365",
+      "action": "insert"
+    },
+    {
+      "key": "node/13686451002",
+      "action": "insert"
+    },
+    {
+      "key": "node/13885861001",
+      "action": "insert"
+    },
+    {
+      "key": "node/14068969934",
+      "action": "insert"
+    },
+    {
+      "key": "node/2801168109",
+      "action": "insert"
+    },
+    {
+      "key": "node/3511526048",
+      "action": "insert"
+    },
+    {
+      "key": "node/3563833414",
+      "action": "insert"
+    },
+    {
+      "key": "node/3565998213",
+      "action": "insert"
+    },
+    {
+      "key": "node/3566017378",
+      "action": "insert"
+    },
+    {
+      "key": "node/4031390161",
+      "action": "insert"
+    },
+    {
+      "key": "node/4233646089",
+      "action": "insert"
+    },
+    {
+      "key": "node/4611761289",
+      "action": "insert"
+    },
+    {
+      "key": "node/4613670689",
+      "action": "insert"
+    },
+    {
+      "key": "node/5299207098",
+      "action": "insert"
+    },
+    {
+      "key": "node/5321733221",
+      "action": "insert"
+    },
+    {
+      "key": "node/6022635186",
+      "action": "insert"
+    },
+    {
+      "key": "node/7477059982",
+      "action": "insert"
+    },
+    {
+      "key": "node/7847828185",
+      "action": "insert"
+    },
+    {
+      "key": "node/8180646617",
+      "action": "insert"
+    },
+    {
+      "key": "node/8200135117",
+      "action": "insert"
+    },
+    {
+      "key": "node/8812276637",
+      "action": "insert"
+    },
+    {
+      "key": "node/9813727907",
+      "action": "insert"
+    },
+    {
+      "key": "node/9819026193",
+      "action": "insert"
+    }
+  ]
+}

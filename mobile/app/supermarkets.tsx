@@ -4,6 +4,7 @@ import { PageHeader, ResourceNotice, ui } from '../components/CatalogUI';
 import { useRemote } from '../hooks/useRemote';
 import { catalogApi } from '../services/api';
 import { Badge, Icon, SectionHeader } from '../components/Design';
+import { LocationDataCredits } from '../components/LocationDataCredits';
 
 export default function Supermarkets() {
   const resource = useRemote('supermarkets', signal => catalogApi.supermarkets(signal), rows => rows.length === 0);
@@ -14,7 +15,8 @@ export default function Supermarkets() {
       contentContainerStyle={ui.content} refreshing={resource.status === 'refreshing'} onRefresh={resource.refresh}
       ListHeaderComponent={<>
         <View testID="supermarket-intro" style={{ gap: 10 }}><SectionHeader eyebrow="THE STORE DIRECTORY" title="Know your supermarkets" />
-        <Text style={ui.muted}>Branches belong to their named chain. Store information does not confirm stock availability.</Text></View>
+        <Text style={ui.muted}>Branches belong to their named chain. Store information does not confirm stock availability.</Text>
+        <LocationDataCredits /></View>
         <ResourceNotice state={resource} retry={resource.retry} />
       </>}
       ListEmptyComponent={resource.status === 'empty' ? <Text style={ui.text}>No supermarkets are registered.</Text> : undefined}

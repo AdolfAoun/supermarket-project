@@ -10,6 +10,11 @@ import { createShoppingListRepository, type ShoppingListRepository } from './mod
 import { shoppingListRoutes } from './modules/shopping-lists/routes.js';
 import { createBasketRepository, type BasketRepository } from './modules/basket/repository.js';
 import { basketRoutes } from './modules/basket/routes.js';
+import { locationRoutes, type GoogleMapsImporter } from './modules/locations/routes.js';
+import { createGoogleMapsImporter } from './modules/locations/resolver.js';
+import { journeyRoutes } from './modules/journeys/routes.js';
+import { createOsrmAdapter, type RoutingAdapter } from './modules/journeys/routing.js';
+import { env } from './config/env.js';
 
 export function createApp(
   checkDatabase: () => Promise<void>,
@@ -18,6 +23,8 @@ export function createApp(
   auth: AuthRepository = createAuthRepository(),
   shoppingLists: ShoppingListRepository = createShoppingListRepository(),
   basket: BasketRepository = createBasketRepository(),
+  importGoogleMaps: GoogleMapsImporter = createGoogleMapsImporter(),
+  routing: RoutingAdapter = createOsrmAdapter({ baseUrl: env.osrmBaseUrl }),
 ) {
   const app = express();
   app.disable('x-powered-by');
@@ -30,6 +37,8 @@ export function createApp(
   app.use('/api/auth', authRoutes(auth));
   app.use('/api/shopping-lists', basketRoutes(basket, auth));
   app.use('/api/shopping-lists', shoppingListRoutes(shoppingLists, auth));
+  app.use('/api/locations', locationRoutes(auth, importGoogleMaps));
+  app.use('/api/journeys', journeyRoutes(auth, catalog, routing));
   app.use(notFound);
   app.use(errorHandler);
   return app;

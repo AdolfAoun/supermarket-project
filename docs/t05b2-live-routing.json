@@ -1,0 +1,2102 @@
+{
+  "purpose": "Public OSM snapshot in memory ONLY; includes review-pending locations; not imported or physically verified",
+  "inputRecords": 462,
+  "routingCalls": 21,
+  "journey": {
+    "origin": {
+      "latitude": 33.9808,
+      "longitude": 35.6389
+    },
+    "destination": {
+      "latitude": 34.1191,
+      "longitude": 35.6473
+    },
+    "waypoints": [],
+    "maxDetourMinutes": 30
+  },
+  "baseline": {
+    "distanceMeters": 17965.5,
+    "durationSeconds": 1010.8
+  },
+  "options": [
+    {
+      "branchId": 200134,
+      "branch": "Atouprix/Value Rite - Sahel Aalma",
+      "supermarketId": 200134,
+      "supermarket": "Atouprix/Value Rite",
+      "address": "Sahel Aalma",
+      "latitude": 33.994614,
+      "longitude": 35.646784,
+      "additionalDistanceMeters": 175.40000000000146,
+      "additionalDurationSeconds": 13.600000000000136,
+      "rawDurationDeltaSeconds": 13.600000000000136,
+      "journeyDistanceMeters": 18140.9,
+      "journeyDurationSeconds": 1024.4,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200062,
+      "branch": "Hage Superstore - Blat Jbeil",
+      "supermarketId": 200062,
+      "supermarket": "Hage Superstore",
+      "address": "Blat Jbeil",
+      "latitude": 34.12058,
+      "longitude": 35.650915,
+      "additionalDistanceMeters": 442.2000000000007,
+      "additionalDurationSeconds": 17.600000000000136,
+      "rawDurationDeltaSeconds": 17.600000000000136,
+      "journeyDistanceMeters": 18407.7,
+      "journeyDurationSeconds": 1028.4,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200007,
+      "branch": "Hage - Blat Jbeil",
+      "supermarketId": 200007,
+      "supermarket": "Hage",
+      "address": "Blat Jbeil",
+      "latitude": 34.120425,
+      "longitude": 35.649047,
+      "additionalDistanceMeters": 529.5999999999985,
+      "additionalDurationSeconds": 25.5,
+      "rawDurationDeltaSeconds": 25.5,
+      "journeyDistanceMeters": 18495.1,
+      "journeyDurationSeconds": 1036.3,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200145,
+      "branch": "Trim - Sahel Aalma",
+      "supermarketId": 200145,
+      "supermarket": "Trim",
+      "address": "Sahel Aalma",
+      "latitude": 33.996839,
+      "longitude": 35.645984,
+      "additionalDistanceMeters": 392.2000000000007,
+      "additionalDurationSeconds": 29.5,
+      "rawDurationDeltaSeconds": 29.5,
+      "journeyDistanceMeters": 18357.7,
+      "journeyDurationSeconds": 1040.3,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200354,
+      "branch": "bee mart - Blat Jbeil",
+      "supermarketId": 200354,
+      "supermarket": "bee mart",
+      "address": "Blat Jbeil",
+      "latitude": 34.12114,
+      "longitude": 35.652151,
+      "additionalDistanceMeters": 783.7999999999993,
+      "additionalDurationSeconds": 33.600000000000136,
+      "rawDurationDeltaSeconds": 33.600000000000136,
+      "journeyDistanceMeters": 18749.3,
+      "journeyDurationSeconds": 1044.4,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200410,
+      "branch": "Charcutier aoun - Halate",
+      "supermarketId": 200410,
+      "supermarket": "Le Charcutier Aoun",
+      "address": "Halate",
+      "latitude": 34.104075,
+      "longitude": 35.654433,
+      "additionalDistanceMeters": 7.299999999999272,
+      "additionalDurationSeconds": 36.799999999999955,
+      "rawDurationDeltaSeconds": 36.799999999999955,
+      "journeyDistanceMeters": 17972.8,
+      "journeyDurationSeconds": 1047.6,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200159,
+      "branch": "Le Marché - Kfar Yassine",
+      "supermarketId": 200159,
+      "supermarket": "Le Marché",
+      "address": "Kfar Yassine",
+      "latitude": 34.012498,
+      "longitude": 35.650901,
+      "additionalDistanceMeters": 402.40000000000146,
+      "additionalDurationSeconds": 37.200000000000045,
+      "rawDurationDeltaSeconds": 37.200000000000045,
+      "journeyDistanceMeters": 18367.9,
+      "journeyDurationSeconds": 1048,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200204,
+      "branch": "Mabouf Market - الفيدار",
+      "supermarketId": 200204,
+      "supermarket": "Mabouf Market",
+      "address": "الفيدار",
+      "latitude": 34.098591,
+      "longitude": 35.651458,
+      "additionalDistanceMeters": 77,
+      "additionalDurationSeconds": 39.5,
+      "rawDurationDeltaSeconds": 39.5,
+      "journeyDistanceMeters": 18042.5,
+      "journeyDurationSeconds": 1050.3,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200073,
+      "branch": "Spinneys - Sahel Aalma",
+      "supermarketId": 200073,
+      "supermarket": "Spinneys",
+      "address": "Sahel Aalma",
+      "latitude": 34.000911,
+      "longitude": 35.648013,
+      "additionalDistanceMeters": 144.20000000000073,
+      "additionalDurationSeconds": 41.5,
+      "rawDurationDeltaSeconds": 41.5,
+      "journeyDistanceMeters": 18109.7,
+      "journeyDurationSeconds": 1052.3,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200011,
+      "branch": "Tawfeer - Kfar Yassine",
+      "supermarketId": 200011,
+      "supermarket": "Tawfeer",
+      "address": "Kfar Yassine",
+      "latitude": 34.02395,
+      "longitude": 35.631813,
+      "additionalDistanceMeters": 199,
+      "additionalDurationSeconds": 52.90000000000009,
+      "rawDurationDeltaSeconds": 52.90000000000009,
+      "journeyDistanceMeters": 18164.5,
+      "journeyDurationSeconds": 1063.7,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200129,
+      "branch": "سوبر ماركت كميلوت مانويلا - Sahel Aalma",
+      "supermarketId": 200129,
+      "supermarket": "سوبر ماركت كميلوت مانويلا",
+      "address": "Sahel Aalma",
+      "latitude": 34.005626,
+      "longitude": 35.645054,
+      "additionalDistanceMeters": 542.7000000000007,
+      "additionalDurationSeconds": 56.5,
+      "rawDurationDeltaSeconds": 56.5,
+      "journeyDistanceMeters": 18508.2,
+      "journeyDurationSeconds": 1067.3,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200114,
+      "branch": "Spinneys - مستيتا",
+      "supermarketId": 200114,
+      "supermarket": "Spinneys",
+      "address": "مستيتا",
+      "latitude": 34.109751,
+      "longitude": 35.654947,
+      "additionalDistanceMeters": 218.40000000000146,
+      "additionalDurationSeconds": 59.299999999999955,
+      "rawDurationDeltaSeconds": 59.299999999999955,
+      "journeyDistanceMeters": 18183.9,
+      "journeyDurationSeconds": 1070.1,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200336,
+      "branch": "يوق جبيل - Blat Jbeil",
+      "supermarketId": 200336,
+      "supermarket": "يوق جبيل",
+      "address": "Blat Jbeil",
+      "latitude": 34.120694,
+      "longitude": 35.647263,
+      "additionalDistanceMeters": 809,
+      "additionalDurationSeconds": 65.5,
+      "rawDurationDeltaSeconds": 65.5,
+      "journeyDistanceMeters": 18774.5,
+      "journeyDurationSeconds": 1076.3,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200421,
+      "branch": "Golden Star - Sahel Aalma",
+      "supermarketId": 200421,
+      "supermarket": "Golden Star",
+      "address": "Sahel Aalma",
+      "latitude": 33.988296,
+      "longitude": 35.638851,
+      "additionalDistanceMeters": 1489.9000000000015,
+      "additionalDurationSeconds": 77.90000000000009,
+      "rawDurationDeltaSeconds": 77.90000000000009,
+      "journeyDistanceMeters": 19455.4,
+      "journeyDurationSeconds": 1088.7,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200106,
+      "branch": "Metro - Sahel Aalma",
+      "supermarketId": 200106,
+      "supermarket": "Metro Superstore",
+      "address": "Sahel Aalma",
+      "latitude": 34.00689,
+      "longitude": 35.648835,
+      "additionalDistanceMeters": 1127.7000000000007,
+      "additionalDurationSeconds": 101.5,
+      "rawDurationDeltaSeconds": 101.5,
+      "journeyDistanceMeters": 19093.2,
+      "journeyDurationSeconds": 1112.3,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200093,
+      "branch": "supermarket jbeil - Blat Jbeil",
+      "supermarketId": 200093,
+      "supermarket": "supermarket jbeil",
+      "address": "Blat Jbeil",
+      "latitude": 34.12888,
+      "longitude": 35.648718,
+      "additionalDistanceMeters": 2572.7000000000007,
+      "additionalDurationSeconds": 113.40000000000009,
+      "rawDurationDeltaSeconds": 113.40000000000009,
+      "journeyDistanceMeters": 20538.2,
+      "journeyDurationSeconds": 1124.2,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200074,
+      "branch": "Fahed - Jounie Ghadir",
+      "supermarketId": 200074,
+      "supermarket": "Fahed Supermarket",
+      "address": "Jounie Ghadir",
+      "latitude": 33.984987,
+      "longitude": 35.634793,
+      "additionalDistanceMeters": 2546.7999999999993,
+      "additionalDurationSeconds": 160.20000000000005,
+      "rawDurationDeltaSeconds": 160.20000000000005,
+      "journeyDistanceMeters": 20512.3,
+      "journeyDurationSeconds": 1171,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200294,
+      "branch": "Carrefour Market - أدما و الدفنه",
+      "supermarketId": 200294,
+      "supermarket": "Carrefour",
+      "address": "Adma - Fatqa, أدما و الدفنه",
+      "latitude": 34.022277,
+      "longitude": 35.647188,
+      "additionalDistanceMeters": 2078.2999999999993,
+      "additionalDurationSeconds": 215.60000000000014,
+      "rawDurationDeltaSeconds": 215.60000000000014,
+      "journeyDistanceMeters": 20043.8,
+      "journeyDurationSeconds": 1226.4,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200010,
+      "branch": "Faddoul Supermarket - Jounie Ghadir",
+      "supermarketId": 200010,
+      "supermarket": "Faddoul Supermarket",
+      "address": "Jounie Ghadir",
+      "latitude": 33.978218,
+      "longitude": 35.625339,
+      "additionalDistanceMeters": 3605.4000000000015,
+      "additionalDurationSeconds": 230.4000000000001,
+      "rawDurationDeltaSeconds": 230.4000000000001,
+      "journeyDistanceMeters": 21570.9,
+      "journeyDurationSeconds": 1241.2,
+      "insertionIndex": 0
+    },
+    {
+      "branchId": 200214,
+      "branch": "Jabroun Roastery - مستيتا",
+      "supermarketId": 200214,
+      "supermarket": "Jabroun Roastery",
+      "address": "طريق عام مستيتا, مستيتا",
+      "latitude": 34.105933,
+      "longitude": 35.663666,
+      "additionalDistanceMeters": 3139.9000000000015,
+      "additionalDurationSeconds": 306.9000000000001,
+      "rawDurationDeltaSeconds": 306.9000000000001,
+      "journeyDistanceMeters": 21105.4,
+      "journeyDurationSeconds": 1317.7,
+      "insertionIndex": 0
+    }
+  ],
+  "exclusions": [
+    {
+      "branchId": 200000,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200001,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200002,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200003,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200004,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200005,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200006,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200008,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200009,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200012,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200013,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200014,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200015,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200016,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200017,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200018,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200019,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200020,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200021,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200022,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200023,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200024,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200025,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200026,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200027,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200028,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200029,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200030,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200031,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200032,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200033,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200034,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200035,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200036,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200037,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200038,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200039,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200040,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200041,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200042,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200043,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200044,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200045,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200046,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200047,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200048,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200049,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200050,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200051,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200052,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200053,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200054,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200055,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200056,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200057,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200058,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200059,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200060,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200061,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200063,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200064,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200065,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200066,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200067,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200068,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200069,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200070,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200071,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200072,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200075,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200076,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200077,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200078,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200079,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200080,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200081,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200082,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200083,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200084,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200085,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200086,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200087,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200088,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200089,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200090,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200091,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200092,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200094,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200095,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200096,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200097,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200098,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200099,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200100,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200101,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200102,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200103,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200104,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200105,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200107,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200108,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200109,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200110,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200111,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200112,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200113,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200115,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200116,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200117,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200118,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200119,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200120,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200121,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200122,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200123,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200124,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200125,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200126,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200127,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200128,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200130,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200131,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200133,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200135,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200136,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200137,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200138,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200139,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200140,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200141,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200142,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200143,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200144,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200146,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200147,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200148,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200149,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200150,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200151,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200152,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200153,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200154,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200155,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200156,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200157,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200158,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200160,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200161,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200162,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200163,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200164,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200165,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200166,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200167,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200168,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200169,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200170,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200171,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200172,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200173,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200174,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200175,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200176,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200177,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200178,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200179,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200180,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200181,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200183,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200184,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200185,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200186,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200187,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200188,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200189,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200190,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200191,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200192,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200193,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200194,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200195,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200196,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200197,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200198,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200199,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200200,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200202,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200203,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200205,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200206,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200207,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200208,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200209,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200210,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200211,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200212,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200213,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200215,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200216,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200217,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200218,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200219,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200220,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200221,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200222,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200223,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200224,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200225,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200226,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200227,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200228,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200229,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200230,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200231,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200232,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200233,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200234,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200235,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200236,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200237,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200238,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200239,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200240,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200241,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200242,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200243,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200244,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200245,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200246,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200247,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200248,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200249,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200250,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200251,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200252,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200253,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200254,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200255,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200256,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200257,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200258,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200259,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200260,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200261,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200262,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200263,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200264,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200265,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200266,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200267,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200268,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200269,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200270,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200271,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200272,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200273,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200274,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200275,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200276,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200277,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200278,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200279,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200280,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200281,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200282,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200283,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200284,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200285,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200286,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200287,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200288,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200289,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200290,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200291,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200292,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200293,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200295,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200296,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200297,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200298,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200299,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200300,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200301,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200302,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200303,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200304,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200305,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200306,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200307,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200308,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200309,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200310,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200311,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200312,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200313,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200314,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200315,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200316,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200317,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200318,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200319,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200320,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200321,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200322,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200323,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200324,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200325,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200326,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200327,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200328,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200329,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200330,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200331,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200332,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200333,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200334,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200335,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200337,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200338,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200339,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200340,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200341,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200342,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200343,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200344,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200345,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200346,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200347,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200348,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200349,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200350,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200351,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200352,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200353,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200355,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200356,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200357,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200358,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200359,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200360,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200361,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200362,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200363,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200364,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200365,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200366,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200367,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200368,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200369,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200370,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200371,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200372,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200373,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200374,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200375,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200376,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200377,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200378,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200379,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200380,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200381,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200382,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200383,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200384,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200385,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200386,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200387,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200388,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200389,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200390,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200391,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200392,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200393,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200394,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200395,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200396,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200397,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200398,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200399,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200400,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200401,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200402,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200403,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200404,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200405,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200406,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200407,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200408,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200409,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200411,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200412,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200413,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200414,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200415,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200416,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200417,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200418,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200419,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200420,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200422,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200423,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200425,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200426,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200427,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200428,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200429,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200430,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200431,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200432,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200433,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200434,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200435,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200436,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200437,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200438,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200439,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200440,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200441,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200442,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200443,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200444,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200445,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200446,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200447,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200448,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200449,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200450,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200451,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200452,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200453,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200454,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200455,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200456,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200457,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200458,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200459,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200460,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200461,
+      "reason": "outside_corridor"
+    },
+    {
+      "branchId": 200132,
+      "reason": "evaluation_limit"
+    },
+    {
+      "branchId": 200424,
+      "reason": "evaluation_limit"
+    },
+    {
+      "branchId": 200201,
+      "reason": "evaluation_limit"
+    },
+    {
+      "branchId": 200182,
+      "reason": "evaluation_limit"
+    }
+  ],
+  "evaluationComplete": false,
+  "evaluatedAt": "2026-11-22T00:42:51.952Z",
+  "estimated": true,
+  "liveTraffic": false,
+  "attribution": {
+    "label": "Routing: OSRM / FOSSGIS · Map data © OpenStreetMap contributors",
+    "url": "https://routing.openstreetmap.de/about.html",
+    "fixMapUrl": "https://www.openstreetmap.org/fixthemap"
+  }
+}

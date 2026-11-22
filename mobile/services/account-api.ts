@@ -2,6 +2,8 @@ import { ApiError, createApiClient, parseProductId, type RequestOptions } from '
 import { readBasket, readItem, readList, readLists, readListSummary, readLogin, readUser } from './private-contracts';
 import { InvalidPayload } from './contracts';
 import { readOptimization } from './optimization-contracts';
+import { readJourneyImport } from './journey';
+import { readDiscovery, type DiscoveryRequest } from './discovery';
 
 export function validQuantity(value: string): number | null {
   return /^[1-9]\d{0,2}$/.test(value) && Number(value) <= 999 ? Number(value) : null;
@@ -40,6 +42,17 @@ export function createListApi(run: PrivateRequest, client = createApiClient()) {
   };
   return {
     lists: (signal?: AbortSignal) => request('/shopping-lists', readLists, { signal }),
+    discoverSupermarkets: (journey: DiscoveryRequest, signal?: AbortSignal) => request('/journeys/supermarkets', v => readDiscovery(v, journey), {
+      method: 'POST', body: journey, signal, timeoutMs: 70000,
+      errorMessage: status => status === 503 ? 'Road estimates are temporarily unavailable. Retry shortly, or use Grocery prices.'
+        : status === 422 ? 'No usable driving route was found, or the journey exceeds the demonstration limit. Check your journey in Google Maps.'
+          : status === 400 ? 'Import a complete driving journey with valid locations and at most eight existing stops.' : errorMessage(status),
+    }),
+    importGoogleMaps: (url: string, signal?: AbortSignal) => request('/locations/import-google-maps', readJourneyImport, {
+      method: 'POST', body: { url: url.trim() }, signal,
+      errorMessage: status => status === 400 ? 'Enter a supported HTTPS Google Maps link.'
+        : status === 422 ? 'This link could not be imported. Try an expanded Google Maps directions or place link containing endpoint coordinates.' : errorMessage(status),
+    }),
     optimize: (id: number, maximumStores = 2, signal?: AbortSignal) => {
       if (![1, 2, 3].includes(maximumStores)) throw new ApiError('http', 'Choose one, two or three branches.', 400);
       return request(`${listPath(id)}/optimization?maxStores=${maximumStores}`, v => readOptimization(v, id, maximumStores), { signal,

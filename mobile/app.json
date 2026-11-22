@@ -10,7 +10,13 @@
       "expo-router",
       "expo-status-bar",
       "expo-font",
-      "expo-secure-store"
+      "expo-secure-store",
+      ["expo-location", {
+        "locationWhenInUsePermission": "Use your location as your shopping journey starting point when you request it.",
+        "isIosBackgroundLocationEnabled": false,
+        "isAndroidBackgroundLocationEnabled": false,
+        "isAndroidForegroundServiceEnabled": false
+      }]
     ],
     "web": {
       "output": "single"
