@@ -20,6 +20,7 @@ snapshot with a per-record review queue. Application migration/import is pending
 explicit approval. See [data coverage and safe import](docs/t05b2-data-import.md).
 
 ## Documentation
+- [`docs/engineering-audit-and-explanations.md`](docs/engineering-audit-and-explanations.md): 2026-11-22 audit, verification results, remaining concerns and academic explanations
 - [`AGENTS.md`](AGENTS.md): coding-agent rules
 - [`docs/requirements.md`](docs/requirements.md): exact 28 submitted requirements and rationales
 - [`docs/architecture.md`](docs/architecture.md): technical architecture
@@ -112,7 +113,7 @@ WAMP MySQL uses port **3306**, confirmed by the owner. The backend default, envi
 - **Address already in use:** stop the previous process with Ctrl+C or select another backend `PORT` and update the mobile URL.
 
 ## Implementation boundaries
-`mobile/app/` contains the five tabs plus catalog, list/editor/picker and basket screens. Profile handles authentication; native sessions use Expo SecureStore. `mobile/services/` holds the shared HTTP client, contract readers and session/request controllers; `mobile/hooks/` owns focused loads and mutations. Backend health/catalog/auth/shopping-list/basket modules remain unchanged in T03-C. No new migration is required. Multi-store optimization and OCR remain deferred. Run mobile tests after installing both packages: `npm test` and `npm run typecheck:tests` in `mobile/`. Device acceptance is in [T03-C verification](docs/t03c-verification.md).
+`mobile/app/` contains the five tabs plus catalog, list/editor/picker, basket, optimization and journey screens. Profile handles authentication; native sessions use Expo SecureStore. `mobile/services/` holds the shared HTTP client, contract readers and session/request controllers; `mobile/hooks/` owns focused loads and mutations. Merchandise optimization supports up to three branches; journey discovery supplies road estimates separately. Fuel integration and OCR remain deferred. The engineering audit requires no migration or real import; optional T05-B2 migration/import still requires separate approval. Run `npm test` and `npm run typecheck:tests` in `mobile/`. Current verification and remaining device actions are in the [engineering audit](docs/engineering-audit-and-explanations.md).
 
 ## Security
 Do not commit credentials, `.env`, unredacted personal receipts or database dumps containing user data.

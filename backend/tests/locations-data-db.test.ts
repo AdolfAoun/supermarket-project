@@ -99,6 +99,20 @@ test('OSM approved imports on verified disposable MySQL', { skip: !process.env.T
       await db.query("INSERT INTO branches(supermarket_id,name,address,latitude,longitude) VALUES (LAST_INSERT_ID(),'Neighbor','Test',34.1601,35.65)");
       const before = await snapshot(); await assert.rejects(importApproved(db, newStore, stale.plan, stale.approval, fixture, boundary), /Catalog changed/); assert.deepEqual(await snapshot(), before);
     });
+    await t.test('insertion approval becomes stale when a previously reviewed duplicate candidate changes', async () => {
+      const source = make(90000010, 'Reviewed neighbor fixture', 34.1602);
+      const ready = await approve(source);
+      assert.ok(ready.plan.rows[0].existingBranchIds.length);
+      ready.approval.decisions[0].distinctFromBranchIds = ready.plan.rows[0].existingBranchIds;
+      const candidateId = ready.plan.rows[0].existingBranchIds[0];
+      await db.execute('UPDATE branches SET latitude=?,longitude=? WHERE id=?', [source.records[0].latitude, source.records[0].longitude, candidateId]);
+      const before = await snapshot();
+      await assert.rejects(importApproved(db, source, ready.plan, ready.approval, fixture, boundary), /Catalog changed/);
+      assert.deepEqual(await snapshot(), before, 'Stale approval must not insert a branch or source ledger');
+      const fresh = await approve(source);
+      fresh.approval.decisions[0].distinctFromBranchIds = fresh.plan.rows[0].existingBranchIds;
+      assert.equal((await importApproved(db, source, fresh.plan, fresh.approval, fixture, boundary)).insertedBranches, 1);
+    });
     await t.test('real HOT snapshot approved technical-quality subset imports and repeats without affecting any prices', async () => {
       const real = JSON.parse(await readFile('../database/sources/osm/2026-11-22-supermarkets.normalized.json', 'utf8'));
       const plan = preview(real, await readSnapshot(db), fixture);

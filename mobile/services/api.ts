@@ -62,9 +62,8 @@ export function createApiClient(clientOptions: ClientOptions = {}) {
         ...(options.body ? { body: JSON.stringify(options.body) } : {}) });
       if (!response.ok) throw options.errorMessage
         ? new ApiError('http', options.errorMessage(response.status), response.status) : httpError(response.status);
-      if (response.status === 204) return read(undefined);
       let value: unknown;
-      try { value = await response.json(); }
+      try { value = response.status === 204 ? undefined : await response.json(); }
       catch { throw new ApiError('invalid_response', 'The server returned invalid data. Please retry.'); }
       try { return read(value); }
       catch { throw new ApiError('invalid_response', 'The server returned invalid data. Please retry.'); }

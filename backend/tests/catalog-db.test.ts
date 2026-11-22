@@ -94,7 +94,14 @@ test('read-only MySQL catalog integration', { skip: process.env.RUN_CATALOG_DB_T
     await t.test('normalized name/alias/category searches deduplicate active products', async () => {
       assert.deepEqual((await repository.listProducts('COCA - COLA', 50)).map(p => p.id), [1, 2]);
       assert.deepEqual((await repository.listProducts('COKE 1.5-L', 50)).map(p => p.id), [1]);
+      assert.deepEqual((await repository.listProducts(' \tCOKE\n1.5\u00a0L ', 50)).map(p => p.id), [1]);
+      assert.equal((await repository.listProducts('\t\n\u00a0', 50)).length, 3);
       assert.deepEqual((await repository.listProducts('coke', 50)).map(p => p.id), [1, 2]);
+      // LOCATE keeps accents literal even though catalog identity comparisons
+      // use an accent-insensitive collation. Do not promise fuzzy equivalence.
+      assert.deepEqual(await repository.listProducts('cóca', 50), []);
+      assert.deepEqual((await repository.listProducts('330', 50)).map(p => p.id), [2]);
+      for (const unmatched of ['牛奶', '\u200b', '🥛', 'Coke!']) assert.deepEqual(await repository.listProducts(unmatched, 50), []);
       assert.deepEqual((await repository.listProducts('beverages', 50)).map(p => p.id), [1, 2]);
       assert.deepEqual(await repository.listProducts('hidden', 50), []);
       assert.deepEqual(await repository.listProducts('not found', 50), []);

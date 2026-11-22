@@ -40,6 +40,15 @@ test('invalid list queries fail before database access', async () => {
   }
 });
 
+test('repository normalizes pasted whitespace before binding search without changing punctuation or sizes', async () => {
+  for (const [input, expected] of [['\t\n\u00a0', ''], [' \tCOKE\n 1.5\u00a0L ', 'COKE 1.5 L'], ["%_\\';--330", "%_\\';--330"]]) {
+    const repository = createCatalogRepository(async (_sql, values) => {
+      assert.deepEqual(values, [expected, expected, expected, expected, 50]); return [];
+    });
+    await repository.listProducts(input, 50);
+  }
+});
+
 test('product details return the canonical record', async () => {
   const response = await request(app()).get('/api/products/1').expect(200);
   assert.deepEqual(response.body, { product });

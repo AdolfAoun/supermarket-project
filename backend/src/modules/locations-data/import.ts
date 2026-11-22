@@ -44,6 +44,9 @@ export async function importApproved(connection: Connection, dataset: LocationDa
       if (row.action === 'existing') { result.alreadyPresent++; continue; }
       if (row.reasons.includes('mapped_record_changed')) throw new Error('OSM or catalog record changed; review update separately');
       if (row.existingBranchIds.some(id => !prior.existingBranchIds.includes(id))) throw new Error('Catalog changed since preview; regenerate approval');
+      // An acknowledgement that two stores are distinct applies to the reviewed
+      // candidate's contents, not just its ID. Owner edits require a fresh review.
+      if (row.existingBranchIds.some(id => row.candidateHashes[id] !== prior.candidateHashes[id])) throw new Error('Catalog changed since preview; regenerate approval');
       if ((row.status === 'manual_review' || decision.action === 'link' || decision.branchName || decision.supermarketId) && (!decision.note || decision.note.trim().length < 12)) throw new Error('Manual decisions need an explicit review note');
       let branch: ExistingBranch;
       if (decision.action === 'link') {

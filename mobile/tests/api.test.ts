@@ -54,6 +54,14 @@ test('malformed JSON and missing required payload fields become safe invalid-res
     await assert.rejects(client.get('/health/db', readHealth), error => error instanceof ApiError && error.kind === 'invalid_response');
   }
 });
+
+test('unexpected empty success is invalid response data, while an expected 204 remains valid', async () => {
+  const client = createApiClient({ baseUrl, fetch: async () => new Response(null, { status: 204 }) });
+  await assert.rejects(client.get('/health/db', readHealth), error => error instanceof ApiError && error.kind === 'invalid_response');
+  assert.equal(await client.request('/auth/logout', value => {
+    assert.equal(value, undefined); return 'signed out';
+  }, { method: 'POST' }), 'signed out');
+});
 test('timeout aborts even when the transport never resolves', async () => {
   const clock = manualClock();
   let signal: AbortSignal | null | undefined;

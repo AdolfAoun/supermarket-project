@@ -1,6 +1,13 @@
 # T05-B2 — OSM supermarket import and review
 
 Prepared 2026-11-22. **No application migration or import has been applied.**
+
+The subsequent [engineering audit](engineering-audit-and-explanations.md) adds
+candidate-hash checks for insertion decisions: edits to previously reviewed
+duplicate candidates now invalidate the old approval, requiring a fresh preview.
+Isolated repeat/rollback and stale-approval regressions passed. This is technical
+readiness for owner review, not approval of any real record or import.
+
 Owner/device acceptance and application migration/import approval remain pending.
 The owner authorized committing and pushing the T05 source checkpoint after review;
 that authorization does not approve any database operation or the proposed pilot.

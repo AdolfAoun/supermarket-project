@@ -123,6 +123,12 @@ The fixture returns USD 1.70 despite newer pending/flagged/rejected observations
 Seed data must remain visibly demonstrative. Real comparisons also need approved
 source/freshness rules and must separate currencies until conversion is defined.
 
+Search input now collapses pasted whitespace before SQL normalization; this does
+not change stored aliases or their generated uniqueness key. Current LOCATE
+substring searches keep accent differences literal despite the identity collation.
+See the [engineering audit](engineering-audit-and-explanations.md). No schema or
+index changes were needed for that audit.
+
 ## Foundational entities
 | Table | Key fields | Relationships / notes |
 |---|---|---|

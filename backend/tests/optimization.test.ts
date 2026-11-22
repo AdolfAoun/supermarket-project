@@ -162,6 +162,36 @@ test('deterministic generated cases reconcile, preserve quantities, obey limits 
     }
   }
 });
+test('mixed USD/LBP sub-cent baskets at quantity 999 match an independent assignment oracle', () => {
+  const quantities = [1, 2, 999];
+  for (let seed = 1; seed <= 12; seed++) {
+    const data = fixture(Array.from({ length: 4 }, () => [null, null, null]), quantities);
+    const units: (bigint | null)[][] = Array.from({ length: 4 }, () => [null, null, null]);
+    for (let b = 0; b < 4; b++) for (let p = 0; p < 3; p++) {
+      if ((seed + b + p) % 5 === 0) continue;
+      const hundredths = 1 + (seed * 7 + b * 13 + p * 3) % 100;
+      const currency = (b + p) % 2 ? 'LBP' : 'USD';
+      data.prices.push({ branchId: b + 1, productId: p + 1, originalCurrency: currency, observedAt,
+        originalPrice: `${Math.floor(hundredths / 100)}.${String(hundredths % 100).padStart(2, '0')}` });
+      // Reference values come directly from integer fixture hundredths, without
+      // calling production conversion, formatting or candidate generation.
+      units[b][p] = BigInt(hundredths) * (currency === 'USD' ? 90000n : 1n) * BigInt(quantities[p]);
+    }
+    for (const maximum of [1, 2, 3]) {
+      let minimum: bigint | null = null;
+      for (let a = 0; a < 4; a++) for (let b = 0; b < 4; b++) for (let c = 0; c < 4; c++) {
+        if (new Set([a, b, c]).size > maximum) continue;
+        const lines = [units[a][0], units[b][1], units[c][2]];
+        if (lines.some(line => line === null)) continue;
+        const total = lines.reduce<bigint>((sum, line) => sum + line!, 0n);
+        if (minimum === null || total < minimum) minimum = total;
+      }
+      assert.equal(optimize(data, maximum).multiStore.solution?.totalUsdUnits ?? null, minimum?.toString() ?? null,
+        `seed=${seed}, maximum=${maximum}`);
+    }
+  }
+});
+
 test('bounded synthetic workloads: 10/5, 30/10, 50/20 and 100/50 at two and three stores', t => {
   for (const [products, branches] of [[10, 5], [30, 10], [50, 20], [100, 50]]) {
     const data = fixture(Array.from({ length: branches }, (_, b) => Array.from({ length: products }, (_, p) => `${1 + (b + p) % 9}.00`)), Array(products).fill(2));

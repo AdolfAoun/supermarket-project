@@ -73,6 +73,9 @@ export function createSqlReader(database: Pick<Pool, 'execute'> = pool): ReadRow
 export function createCatalogRepository(read: ReadRows = createSqlReader()): CatalogRepository {
   return {
     async listProducts(search, limit) {
+      // Pasted tabs/newlines/nonbreaking spaces should behave like typed spaces.
+      // Keep punctuation and package-size text for the existing SQL/alias policy.
+      search = search.replace(/\s+/gu, ' ').trim();
       const rows = await read(`
         SELECT ${productColumns} FROM products p
         WHERE p.is_active = 1 AND (
