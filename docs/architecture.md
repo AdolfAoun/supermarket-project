@@ -1,5 +1,26 @@
 # System architecture
 
+## T05-C fuel-aware comparison boundary
+
+An additive authenticated POST reads the owned basket plus branch coordinates in
+one consistent snapshot, releases SQL, then evaluates complete route-qualified
+allocations. Shared T04 preparation/candidate generation remains pure; the existing
+grocery-only endpoints and wire shapes are unchanged. New basket/fuel.ts uses
+BigInt fractions for incremental fuel and combined costs, preserving the fixed
+90,000 rate and rounding only display values. basket/trip.ts reuses OSRM for full
+ordered journeys: different endpoints charge max(0, shopping minus baseline
+distance); matching endpoints charge the full route. Original stops/endpoints are
+preserved without assuming home. Three corridor candidates and 24 shopping route
+evaluations bound work; output explicitly means best among evaluated plans.
+
+The existing optimization screen adds an optional fuel mode and reuses journey
+import/GPS through RouteDiscovery's optional renderer. Native fuel settings use
+existing SecureStore, web settings use memory; journeys are not persisted. Runtime
+readers reconcile coverage, exact totals, request identity and route metrics;
+focus-owned keyed resources invalidate stale results. No migration, dependency,
+provider, price/location import or account-preference table. See
+[T05-C decisions, limitations and checks](t05c-verification.md).
+
 ## T05-B2 offline OSM import boundary
 
 An operator-only TypeScript CLI fetches bounded Overpass or official HOT/HDX
@@ -12,7 +33,7 @@ Catalog inserts and provenance commit atomically; owner records/prices are never
 overwritten. Geographic candidate envelopes precede the unchanged exact corridor
 and provider work limits. See [dataset, approval workflow and evidence](t05b2-data-import.md).
 
-**Status:** T01–T04 are complete and owner-accepted. The owner confirmed successful T04 physical-iPhone acceptance on 2026-11-17. T05-A import/GPS foundations are retained in T05-B discovery, pending owner acceptance. T05-C fuel/basket integration, T05-D final multi-store polish and T06 receipt OCR remain unimplemented.
+**Status:** T01–T04 are complete and owner-accepted. T05-B discovery and T05-C fuel-aware comparison are implemented, pending owner/device acceptance. T05-D final polish and T06 receipt OCR remain unimplemented. Location imports remain separately approval-gated.
 
 ## T05-B journey discovery boundary
 
@@ -190,7 +211,7 @@ Mobile-first Lebanese supermarket price comparison system, supporting branch-spe
 - Mobile authentication/storage: T03-C implements native SecureStore and session-scoped request isolation; the owner verified physical-iPhone persistence after restarting Expo Go. Backend scrypt and opaque sessions are unchanged.
 - OCR: Google ML Kit on-device text recognition is the preferred free candidate; Expo development build/native package compatibility needs verification. If too complex, evaluate free Tesseract in backend. Extraction and product interpretation are separate steps.
 - Assistant: postponed; OpenAI API can incur usage charges. A free/low-cost approach is to be evaluated after core features work.
-- Routing: T05-B uses OSRM road estimates and Google Maps import/navigation links, without Google API credentials. Fuel and multi-store route optimization remain later work.
+- Routing: T05-B/C use OSRM road estimates and Google Maps import/navigation links, without Google API credentials. T05-C adds bounded multi-store fuel evaluation; final T05-D polish remains later work.
 
 ## Logical data flow
 ```text

@@ -69,6 +69,31 @@ acceptance and application import remain pending. See t05b2-data-import.md.
 
 ## New decisions protocol
 
+### 2026-11-22 — Owner-confirmed T05-C incremental fuel model
+
+Preserve the approved planned origin → ordered existing stops → destination model.
+For different endpoints, fuel uses max(0, shopping route distance minus original
+baseline route distance). Identical endpoints use full shopping route distance,
+without assuming home or adding a separate round-trip mode. The owner explicitly
+authorizes bounded multi-store fuel evaluation in this T05-C assignment; T05-D
+remains final polish. Grocery-only calculations remain independently available.
+
+Use manually entered decimal-string L/100 km and USD/LBP per-liter price, fixed
+90,000 conversion, exact BigInt fractions and display-only rounding. Consumption
+is above 0 through 100; nonnegative price allows an explicit free-fuel assumption.
+No live price API or claimed current fuel price. Reuse existing native SecureStore
+for device preferences and web memory, rather than adding tables/dependencies.
+
+Reuse T04 allocations and OSRM, with up to three nearest price-bearing 3 km corridor
+candidates and 24 shopping-route evaluations. Enumerate visit permutations and
+insertions preserving original stop order. This bounded strategy protects existing
+provider budgets and is labeled best among evaluated plans; omitted/failing work
+is disclosed, never called a global optimum. Exact total ties retain fewer visits
+then lower branch IDs. The alternative of exhaustive national routing would exceed
+the existing public-service budget. No real DB changes/imports or Git writes are
+authorized by this task. Scope supports portions of UR-18/19/22/24/25/28 without
+waiving remaining source, coverage or acceptance requirements. See t05c-verification.md.
+
 ### 2026-11-21 — Approved T05-B refinement
 
 The owner explicitly authorizes refactoring uncommitted T05-A, removes mandatory

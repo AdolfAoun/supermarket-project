@@ -7,7 +7,10 @@ export interface BasketBranch { branchId: number; branch: string; supermarketId:
 export interface BasketPrice {
   productId: number; branchId: number; originalPrice: string; originalCurrency: string; observedAt: string;
 }
-export interface BasketSnapshot { shoppingList: ListDetails; branches: BasketBranch[]; prices: BasketPrice[] }
+export interface BasketSnapshot {
+  shoppingList: ListDetails; branches: BasketBranch[]; prices: BasketPrice[];
+  locations?: { branchId: number; latitude: number | null; longitude: number | null }[];
+}
 export interface BasketRepository { snapshot(userId: number, listId: number): Promise<BasketSnapshot> }
 
 export function createBasketRepository(database: Pool = pool): BasketRepository {
@@ -28,7 +31,7 @@ export function createBasketRepository(database: Pool = pool): BasketRepository 
         const items = await readListItems(connection, listId);
         if (!items.length) throw new HttpError(400, 'Shopping list is empty');
         const shoppingList: ListDetails = { id: row.id, name: row.name, createdAt: row.created, updatedAt: row.updated, items };
-        const [branches] = await connection.execute<RowDataPacket[]>(`SELECT b.id AS branch_id, b.name AS branch,
+        const [branches] = await connection.execute<RowDataPacket[]>(`SELECT b.id AS branch_id, b.name AS branch, b.latitude, b.longitude,
           s.id AS supermarket_id, s.name AS supermarket FROM branches b
           JOIN supermarkets s ON s.id = b.supermarket_id ORDER BY b.id`);
         // Same verified/seed policy as T02; T03-B supports both approved currencies.
@@ -45,6 +48,8 @@ export function createBasketRepository(database: Pool = pool): BasketRepository 
           ) ranked WHERE position = 1 ORDER BY branch_id, product_id`, [listId]);
         const result: BasketSnapshot = {
           shoppingList,
+          locations: branches.map(row => ({ branchId: row.branch_id,
+            latitude: row.latitude === null ? null : Number(row.latitude), longitude: row.longitude === null ? null : Number(row.longitude) })),
           branches: branches.map(row => ({ branchId: row.branch_id, branch: row.branch, supermarketId: row.supermarket_id, supermarket: row.supermarket })),
           prices: prices.map(row => ({ productId: row.product_id, branchId: row.branch_id,
             originalPrice: row.price, originalCurrency: row.currency, observedAt: row.observed })),

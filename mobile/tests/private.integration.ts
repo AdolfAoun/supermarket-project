@@ -60,6 +60,12 @@ test('T03-C mobile clients → Express → disposable MySQL', { skip: !process.e
       if (enabled) await executeSqlScript(sql => admin.query(sql), await readFile(resolve('..', 'database/seeds/002_optional_real_locations.sql'), 'utf8'));
       else { await admin.query('DELETE FROM branches WHERE supermarket_id = 1001'); await admin.query('DELETE FROM supermarkets WHERE id = 1001'); }
     };
+    // Coordinates exist ONLY in this datadir-verified disposable schema. Restore
+    // the original NULLs after each fuel test; never attach demo prices to imports.
+    const fuelFixture = async (enabled: boolean) => {
+      if (enabled) await admin.query('UPDATE branches SET latitude=34.002 + id * 0.002,longitude=35.6 WHERE id IN (1,2,3,4)');
+      else await admin.query('UPDATE branches SET latitude=NULL,longitude=NULL WHERE id IN (1,2,3,4)');
+    };
     server = application.listen(0, '127.0.0.1'); await once(server, 'listening');
     const baseUrl = () => `http://127.0.0.1:${(server!.address() as AddressInfo).port}/api`;
     const client = createApiClient({ baseUrl }), auth = createAuthApi(client), catalog = createCatalogApi(client);
@@ -97,6 +103,8 @@ test('T03-C mobile clients → Express → disposable MySQL', { skip: !process.e
       const other = createSession({ get: async () => null, set: async () => {}, remove: async () => {} }, auth);
       await other.restore(); await other.login({ email: 'other@example.com', password: 'password123' });
       await assert.rejects(createListApi(other.run, client).detail(listId), error => error instanceof ApiError && error.status === 404);
+      const { tripInput } = await import('../../backend/tests/fixtures/fuel');
+      await assert.rejects(createListApi(other.run, client).optimizeFuel(listId, tripInput()), error => error instanceof ApiError && error.status === 404);
       assert.equal(other.getState().status, 'authenticated'); await other.logout();
     });
     await t.test('T04 mobile optimizer uses actual API/SQL contract and refreshes after saved quantity changes', async () => {
@@ -135,6 +143,26 @@ test('T03-C mobile clients → Express → disposable MySQL', { skip: !process.e
       } finally { await realLocationFixture(false); }
       assert.deepEqual(await snapshot(), before);
     });
+    await t.test('T05-C actual SQL snapshot and mobile POST reconcile groceries, incremental fuel, ownership and changed quantities', async () => {
+      const { tripInput } = await import('../../backend/tests/fixtures/fuel');
+      const input = tripInput(); input.maxStores = 2;
+      const missing = await lists.optimizeFuel(listId, input); assert.equal(missing.plans.length, 0);
+      await fuelFixture(true);
+      try {
+        const result = await lists.optimizeFuel(listId, input);
+        assert.equal(result.plans[0].grocery.totalUsd, '3.90');
+        // Injected route is 22 km vs 20 km baseline: 2 km × 10/100 × $1 = $.20.
+        assert.equal(result.plans[0].fuelUsd, '0.20'); assert.equal(result.plans[0].totalUsd, '4.10');
+        await lists.setQuantity(listId, itemId, 3);
+        assert.equal((await lists.optimizeFuel(listId, input)).plans[0].totalUsd, '5.70');
+        await lists.setQuantity(listId, itemId, 2);
+        const dedicated = structuredClone(input); dedicated.journey.destination = dedicated.journey.origin;
+        dedicated.journey.maxDetourMinutes = 30;
+        // This routing fixture's 29-minute full trip remains under the allowance.
+        assert.equal((await lists.optimizeFuel(listId, dedicated)).plans[0].fuelUsd, '2.20');
+      } finally { await fuelFixture(false); }
+      assert.deepEqual(await snapshot(), before);
+    });
     await t.test('remove/delete/logout clear private access and catalog records remain byte-for-byte unchanged', async () => {
       await lists.removeItem(listId, itemId); assert.equal((await lists.detail(listId)).items.length, 1);
       await lists.remove(listId); await session.logout();
@@ -151,7 +179,7 @@ test('T03-C mobile clients → Express → disposable MySQL', { skip: !process.e
           if (enabled) await admin.query(`INSERT INTO prices (id,product_id,branch_id,price,currency,observed_at,status,source_type,source_note)
             VALUES (99001,1,4,0.10,'USD','2026-11-01','verified','seed','DEMONSTRATION DATA T04 disposable browser split fixture')`);
           else await admin.query('DELETE FROM prices WHERE id = 99001');
-        });
+        }, fuelFixture);
       } finally { await realLocationFixture(false); }
       assert.deepEqual(await snapshot(), before);
     });

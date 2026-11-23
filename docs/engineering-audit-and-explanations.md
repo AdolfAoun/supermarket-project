@@ -3,6 +3,10 @@
 Audit date: 2026-11-22. This is evidence from this audit, separate from historical
 milestone acceptance. No milestone is newly marked owner-accepted.
 
+Sections A–K preserve the completed audit's historical state/results. The later
+owner-confirmed T05-C implementation is recorded in [T05-C verification](t05c-verification.md);
+the fuel explanation below now describes that current implementation.
+
 ## A. Initial project state
 
 Branch `main`; `git status --short` was empty before work. No pre-existing
@@ -324,10 +328,19 @@ without replacing it with an opaque optimization library.
 
 ### 7. Fuel costs and route estimates
 
-**Current implementation:** there are no vehicle/fuel inputs or fuel-cost
-calculations. Optimizer responses say fuelCostsIncluded=false. No claim about
-fuel precision, zero fuel price or travel-adjusted savings can be tested yet.
-T05-C remains future work.
+**Current T05-C implementation:** the optional fuel mode accepts consumption in
+L/100 km and a manually supplied USD/LBP price per liter. Different endpoints charge
+max(0, shopping route meters minus original baseline meters); identical endpoints
+charge full shopping route meters. Liters = charged meters / 1000 × consumption / 100;
+fuel cost = liters × per-liter price. Add that to exact groceries once. BigInt
+fractions preserve precision and the fixed 90,000 exchange rate; round only display.
+For 20 km charged distance, 10 L/100 km and USD 1/L, fuel is 2 L / USD 2.
+The existing grocery-only endpoint still returns fuelCostsIncluded=false; the new
+POST ranks complete evaluated route plans by groceries plus fuel. Three corridor
+candidates and 24 shopping-route checks bound work, with explicit limitations and
+no global-optimum claim. Zero price is an explicit assumption; missing distances
+never mean free fuel. Native fuel preferences use existing SecureStore, web uses
+memory; journeys are not saved. See the linked T05-C report for tests and examples.
 
 The implemented location system takes journey coordinates/stops and a detour
 limit, retrieves an OSRM driving baseline, filters catalog locations using the

@@ -1,5 +1,14 @@
 # MySQL data model
 
+## T05-C read-only location snapshot
+
+No migration or stored data change. The existing branch SELECT in the owned
+basket snapshot additionally reads latitude/longitude into an internal location
+sidecar for fuel routing. All four SELECTs use the existing consistent snapshot;
+no transaction is held during OSRM requests. Existing API branch DTOs remain
+unchanged. Fuel preferences are device-local, not new MySQL tables. See
+[T05-C verification](t05c-verification.md).
+
 ## T05-B2 optional OSM provenance
 
 Prepared migration 003 adds branch_location_sources only: composite OSM type/ID

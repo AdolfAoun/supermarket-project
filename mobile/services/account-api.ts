@@ -4,6 +4,7 @@ import { InvalidPayload } from './contracts';
 import { readOptimization } from './optimization-contracts';
 import { readJourneyImport } from './journey';
 import { readDiscovery, type DiscoveryRequest } from './discovery';
+import { readFuelResult, validFuel, type FuelRequest } from './fuel';
 
 export function validQuantity(value: string): number | null {
   return /^[1-9]\d{0,2}$/.test(value) && Number(value) <= 999 ? Number(value) : null;
@@ -42,6 +43,12 @@ export function createListApi(run: PrivateRequest, client = createApiClient()) {
   };
   return {
     lists: (signal?: AbortSignal) => request('/shopping-lists', readLists, { signal }),
+    optimizeFuel: (id: number, input: FuelRequest, signal?: AbortSignal) => {
+      if (!validFuel(input.fuel) || ![1, 2, 3].includes(input.maxStores)) throw new ApiError('http', 'Check fuel settings and maximum branches.', 400);
+      return request(`${listPath(id)}/fuel-optimization`, v => readFuelResult(v, id, input), { method: 'POST', body: input, signal, timeoutMs: 70000,
+        errorMessage: status => status === 503 || status === 422 ? 'Fuel comparison needs usable road estimates. Retry, or switch to Grocery only.'
+          : status === 400 ? 'Check your journey, fuel consumption and price per liter. Add active list products before comparing.' : errorMessage(status) });
+    },
     discoverSupermarkets: (journey: DiscoveryRequest, signal?: AbortSignal) => request('/journeys/supermarkets', v => readDiscovery(v, journey), {
       method: 'POST', body: journey, signal, timeoutMs: 70000,
       errorMessage: status => status === 503 ? 'Road estimates are temporarily unavailable. Retry shortly, or use Grocery prices.'

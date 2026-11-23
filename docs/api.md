@@ -1,5 +1,32 @@
 # REST API contracts
 
+## T05-C fuel-aware comparison
+
+`POST /api/shopping-lists/:id/fuel-optimization` is authenticated, owned, no-store
+and read-only. Body contains only `journey` (existing numeric endpoints, ordered
+waypoints and 0–30 minute allowance), `fuel` (`consumption` decimal string in
+L/100 km >0 through 100; `price` decimal string per liter >=0; `currency` USD/LBP),
+and optional numeric `maxStores` 1/2/3 (default 2). Both fuel decimals allow at most
+two fractional digits; price supports the existing DECIMAL(12,2) range. No query
+parameters, client grocery prices/totals or distance-policy overrides.
+
+Different endpoints charge max(0, full shopping meters minus the original baseline
+meters); identical endpoints charge full shopping meters. Existing stops keep
+their order. Response plans contain complete T04 grocery allocations, fuel and
+combined display amounts, exact USD numerator/denominator pairs, full/charged
+distance, liters, ordered branch IDs and complete navigation points. It includes
+baseline/request identity, active list/inactive exclusions, location/route exclusion
+diagnostics, evaluation counts/completeness and `scope:"best_evaluated_plans"`.
+Only three nearest price-bearing corridor branches and at most 24 shopping routes
+are evaluated; this is not a global optimum. Missing routes/prices are not zero.
+`status:"unavailable"` with empty plans is a valid HTTP 200 outcome.
+
+400 invalid/empty/all-inactive; 401 auth; 404 missing/foreign list; 422 unusable
+baseline route; 503 busy/provider baseline failure; sanitized 500 unexpected error.
+After a usable baseline, preserved partial work uses HTTP 200 and incomplete
+metadata. Grocery-only GET endpoints retain their existing contracts. Detailed
+response fields, formula and example are in [T05-C verification](t05c-verification.md).
+
 **Status:** T02–T04 are complete and owner-accepted; T04 physical-iPhone acceptance was confirmed 2026-11-17. T04 adds the optimization endpoint below. Existing T02/T03 wire contracts are preserved. Cursor/offset pagination remains deferred.
 
 ## T05-B route-aware supermarket discovery

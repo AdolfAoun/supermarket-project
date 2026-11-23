@@ -2,6 +2,20 @@
 
 **Status:** T02–T04 are complete and owner-accepted; successful T04 physical-iPhone acceptance was confirmed 2026-11-17. Other future features in the map remain planning guidance.
 
+## T05-C optional fuel comparison — pending owner acceptance
+
+Grocery prices now offers Grocery only / Groceries + fuel. Grocery-only mode keeps
+the existing exact optimizer and does not require routing or fuel settings. Fuel
+mode reuses the approved journey import/GPS controls, then accepts L/100 km,
+USD/LBP per-liter price and a 0–30 minute driving allowance. Explicit submission
+shows complete evaluated plans with grocery/fuel/total breakdown, charged and full
+route distance, visit order, quantities, freshness and navigation. Missing coverage
+or routing never becomes zero fuel. Changes hide prior results; keyed requests
+cancel on mode/navigation/account changes. Fuel preferences use SecureStore on
+native devices and memory on web; precise journeys are not persisted. Original
+stops/endpoints are retained, with full fuel charged when endpoints match. See
+[behavior, candidate limits and iPhone checklist](t05c-verification.md).
+
 ## T05-B route discovery ? awaiting owner acceptance
 
 T05-B2 preserves this layout. Route results and supermarket directory add visible

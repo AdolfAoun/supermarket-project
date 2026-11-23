@@ -8,7 +8,7 @@ import { once } from 'node:events';
 
 // Called only by the verified disposable-MySQL integration fixture. This proxy
 // may forward writes, so it explicitly refuses the owner's ordinary API port.
-export async function runPrivateBrowser(api: string, setSplitFixture?: (enabled: boolean) => Promise<void>) {
+export async function runPrivateBrowser(api: string, setSplitFixture?: (enabled: boolean) => Promise<void>, setFuelFixture?: (enabled: boolean) => Promise<void>) {
   const target = new URL(api);
   assert.equal(target.hostname, '127.0.0.1'); assert.notEqual(target.port, '3000'); assert.ok(target.port);
   const root = path.resolve('dist/web'); assert.ok(fs.existsSync(path.join(root, 'index.html')));
@@ -315,6 +315,30 @@ export async function runPrivateBrowser(api: string, setSplitFixture?: (enabled:
     noPriceCoverage = true; await click('Refresh optimization'); await wait(text('No complete solution within 1 branch'));
     await wait(text('No usable price anywhere for:')); noPriceCoverage = false;
     await click('Refresh optimization'); await wait(text('Best Single Store'));
+    if (setFuelFixture) {
+      await setFuelFixture(true);
+      try {
+        await click('Groceries + fuel'); await wait(text('Find Supermarkets Along Your Route'));
+        await fill('Paste Journey Link', 'https://www.google.com/maps/dir/?api=1&origin=34,35.6&destination=34.02,35.6&travelmode=driving');
+        await click('Import Route'); await wait(text('Fuel settings'));
+        await fill('Fuel consumption in L per 100 km', '10'); await fill('Fuel price per liter', '1');
+        await click('Calculate groceries and fuel', true); await wait(text('Lowest evaluated total'));
+        await wait(text('Groceries: USD 3.90')); await wait(text('Estimated fuel: USD 0.20')); await wait(text('Total trip: USD 4.10'));
+        for (const width of [320, 390, 430]) {
+          await call('Emulation.setDeviceMetricsOverride', { width, height: 844, deviceScaleFactor: 1, mobile: true });
+          assert.equal(await evaluate('document.documentElement.scrollWidth <= innerWidth'), true, 'Fuel comparison must not overflow horizontally');
+        }
+        const fuelScreenshot = await call('Page.captureScreenshot', { format: 'png' });
+        fs.writeFileSync(path.resolve('dist/t05c-fuel.png'), Buffer.from(fuelScreenshot.data, 'base64'));
+        await fill('Fuel price per liter', '2');
+        await wait(`!(${text('Lowest evaluated total')})`);
+        await click('Calculate groceries and fuel'); await wait(text('Total trip: USD 4.30'));
+        await fill('Fuel consumption in L per 100 km', '0');
+        await wait(`(${element('Calculate groceries and fuel')})?.getAttribute('aria-disabled') === 'true'`);
+        assert.equal(await evaluate(text('Lowest evaluated total')), false);
+        await click('Grocery only'); await wait(text('Best Single Store'));
+      } finally { await setFuelFixture(false); }
+    }
     await click('Edit shopping list'); await wait(text('Saved quantity: 2 complete packages'));
     await click('Increase Coca-Cola quantity'); await wait(text('Saved quantity: 3 complete packages'));
     await click('Find Cheapest Basket'); await wait(text('USD 5.50')); await wait(text('Quantity: 3 packages'));

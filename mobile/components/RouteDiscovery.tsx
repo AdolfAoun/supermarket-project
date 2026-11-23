@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, type ReactNode } from 'react';
 import { ActivityIndicator, Linking, Platform, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useFocusEffect } from 'expo-router';
 import Slider from '@react-native-community/slider';
@@ -91,7 +91,7 @@ function RoadResults({ journey, pricing }: { journey: JourneyDraft; pricing: Opt
     </>}
   </View>;
 }
-export function RouteDiscovery({ pricing = null }: { pricing?: Optimization | null }) {
+export function RouteDiscovery({ pricing = null, renderJourney }: { pricing?: Optimization | null; renderJourney?: (journey: JourneyDraft) => ReactNode }) {
   const { lists } = useAuth();
   const [journey, setJourney] = useState(emptyJourney), [editing, setEditing] = useState(true), [url, setUrl] = useState('');
   const [openError, setOpenError] = useState<string | null>(null);
@@ -135,7 +135,7 @@ export function RouteDiscovery({ pricing = null }: { pricing?: Optimization | nu
         <Disclosure title="Journey locations"><Text style={ui.muted}>From: {journey.origin!.latitude}, {journey.origin!.longitude}</Text>
           <Text style={ui.muted}>To: {journey.destination!.latitude}, {journey.destination!.longitude}</Text></Disclosure>
       </View>
-      <RoadResults journey={journey} pricing={pricing} />
+      {renderJourney ? renderJourney(journey) : <RoadResults journey={journey} pricing={pricing} />}
     </>}
   </View>;
 }

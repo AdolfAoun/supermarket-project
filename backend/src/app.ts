@@ -35,7 +35,7 @@ export function createApp(
   app.use('/api/health', healthRoutes(checkDatabase));
   app.use('/api', catalogRoutes(catalog));
   app.use('/api/auth', authRoutes(auth));
-  app.use('/api/shopping-lists', basketRoutes(basket, auth));
+  app.use('/api/shopping-lists', basketRoutes(basket, auth, routing));
   app.use('/api/shopping-lists', shoppingListRoutes(shoppingLists, auth));
   app.use('/api/locations', locationRoutes(auth, importGoogleMaps));
   app.use('/api/journeys', journeyRoutes(auth, catalog, routing));

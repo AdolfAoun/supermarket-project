@@ -9,26 +9,30 @@ import { PageHeader, ResourceNotice, ui } from '../../../components/CatalogUI';
 import { useRemote } from '../../../hooks/useRemote';
 import { parseProductId } from '../../../services/api';
 import { colors } from '../../../components/Design';
+import { FuelComparison } from '../../../components/FuelComparison';
 
 
 function Optimize({ id }: { id: number }) {
   const { state, lists } = useAuth();
   const [maximum, setMaximum] = useState(2);
+  const [fuelMode, setFuelMode] = useState(false);
   // Reload on every focus, list/account change and control change. No cached
   // previous result is presented during a new request or after a failure.
-  const resource = useRemote(`optimization:${state.version}:${id}:${maximum}`, signal => lists.optimize(id, maximum, signal), () => false);
+  const resource = useRemote(`optimization:${state.version}:${id}:${maximum}:${fuelMode}`, signal => fuelMode ? Promise.resolve(null) : lists.optimize(id, maximum, signal), () => false);
   return <AccountPage>
     <Button title="Supermarkets Along My Route" onPress={() => router.navigate('/journey')} />
+    <View style={ui.row}><Button title="Grocery only" selected={!fuelMode} onPress={() => setFuelMode(false)} />
+      <Button title="Groceries + fuel" selected={fuelMode} onPress={() => setFuelMode(true)} /></View>
     <View style={ui.card}>
     <Text style={ui.heading}>Maximum branches: {maximum}</Text>
     <View style={[ui.row, { flexWrap: 'wrap', backgroundColor: colors.secondary, padding: 4, borderRadius: 16, gap: 4 }]}>{[1, 2, 3].map(n => <View key={n} style={{ flex: 1, minWidth: 60 }}><Button title={String(n)} accessibilityLabel={n === 1 ? 'One branch' : `Up to ${n} branches`}
       selected={maximum === n} disabled={maximum === n} onPress={() => setMaximum(n)} /></View>)}</View>
     <Text style={ui.muted}>The result may use fewer branches. Equal costs prefer fewer visits.</Text>
     </View>
-    <ResourceNotice state={resource} retry={resource.retry} />
-    <View style={[ui.row, { flexWrap: 'wrap' }]}><Button title="Refresh optimization" onPress={resource.retry} />
+    {!fuelMode && <ResourceNotice state={resource} retry={resource.retry} />}
+    <View style={[ui.row, { flexWrap: 'wrap' }]}>{!fuelMode && <Button title="Refresh optimization" onPress={resource.retry} />}
     <Button title="Edit shopping list" onPress={() => router.navigate({ pathname: '/lists/[id]', params: { id: String(id) } })} /></View>
-    {resource.data && <OptimizationResults result={resource.data} />}
+    {fuelMode ? <FuelComparison id={id} maximum={maximum} /> : resource.data && <OptimizationResults result={resource.data} />}
 
   </AccountPage>;
 }

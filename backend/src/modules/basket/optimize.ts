@@ -62,10 +62,8 @@ function compareSolutions(a: BasketSolution, b: BasketSolution): number {
   return 0;
 }
 
-export function optimizeBasket(snapshot: BasketSnapshot, maxStores = 2, now = new Date(), policy = defaultOptimizationPolicy) {
-  if (![1, 2, 3].includes(maxStores)) throw new HttpError(400, 'maxStores must be 1, 2 or 3');
-  if (!Number.isFinite(now.getTime()) || !Number.isInteger(policy.freshnessDays) || policy.freshnessDays < 1
-    || !Number.isSafeInteger(policy.maxWork) || policy.maxWork < 1) throw new Error('Invalid optimization policy');
+export function prepareBasket(snapshot: BasketSnapshot, now = new Date(), freshnessDays = 30) {
+  if (!Number.isFinite(now.getTime()) || !Number.isInteger(freshnessDays) || freshnessDays < 1) throw new Error('Invalid freshness policy');
   const items = [...snapshot.shoppingList.items].sort((a, b) => a.productId - b.productId);
   const identities = new Set<number>();
   for (const item of items) {
@@ -88,8 +86,15 @@ export function optimizeBasket(snapshot: BasketSnapshot, maxStores = 2, now = ne
     if (!Number.isFinite(age)) throw new Error('Invalid observation timestamp');
     const line = costLine(price, required.get(price.productId)!.quantity);
     branch.lines.set(price.productId, { ...line, availability: 'unknown',
-      freshness: age < 0 ? 'future' : age > policy.freshnessDays * 86400000 ? 'older' : 'recent' });
+      freshness: age < 0 ? 'future' : age > freshnessDays * 86400000 ? 'older' : 'recent' });
   }
+  return { active, excludedItems, branches, byBranch, prices };
+}
+
+export function optimizeBasket(snapshot: BasketSnapshot, maxStores = 2, now = new Date(), policy = defaultOptimizationPolicy) {
+  if (![1, 2, 3].includes(maxStores)) throw new HttpError(400, 'maxStores must be 1, 2 or 3');
+  if (!Number.isSafeInteger(policy.maxWork) || policy.maxWork < 1) throw new Error('Invalid optimization policy');
+  const { active, excludedItems, byBranch, prices } = prepareBasket(snapshot, now, policy.freshnessDays);
   const comparison = compareBasket({ ...snapshot, shoppingList: { ...snapshot.shoppingList, items: active }, prices });
   const useful = [...byBranch.values()].filter(b => b.lines.size);
   // Bound work before enumeration, without dropping any potentially useful branch.

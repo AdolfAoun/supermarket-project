@@ -4,11 +4,12 @@ On 2026-11-07 the owner confirmed successful physical-iPhone testing, including
 the corrected Product Details and Supermarkets headers, and approved the complete
 T02 milestone. See the [acceptance record](t02cde-verification.md#2026-11-07--final-owner-acceptance).
 
-**Status:** T01–T04 are complete and owner-accepted. The owner confirmed successful T04 physical-iPhone acceptance on 2026-11-17. T04 supersedes the earlier two-stop-only boundary with a configurable maximum of 1–3 branches (default 2). T05-B retains T05-A import/GPS and adds standalone list-independent road discovery/basic navigation, optional basket prices and stabilization, pending owner acceptance. T05-C fuel/basket integration, T05-D final multi-store polish and T06 have not started. See [T04 acceptance](t04-verification.md) and [T05-B checks](t05b-verification.md).
+**Status:** T01–T04 are complete and owner-accepted. T05-B discovery and T05-B2 data preparation remain pending owner acceptance/real-import approval. T05-C now implements optional fuel-aware comparison with bounded multi-store route evaluation, pending physical-iPhone acceptance. T05-D final polish and T06 remain unstarted. No new milestone acceptance is claimed. See [T05-C scope, evidence and owner checks](t05c-verification.md).
 
 T05-B2 data preparation is implemented with an offline HOT/OSM snapshot, review
 queue and approval-gated importer; application import/migration and physical-device
-acceptance are pending. It does not begin T05-C. See [data expansion](t05b2-data-import.md).
+acceptance are pending. That increment did not implement T05-C; see the separate
+[fuel-aware implementation](t05c-verification.md) and [data expansion](t05b2-data-import.md).
 
 ## Working method
 
@@ -28,7 +29,7 @@ it does not reopen the accepted T04 algorithms or begin T05. See the
 | T02 | Catalog and price comparison | Core 5 tables, seed data, product search/detail, verified branch prices and timestamps | Search -> product -> branch comparison works end to end; missing/invalid data handled | Complete; owner-approved 2026-11-07 after successful physical-iPhone testing, including corrected headers |
 | T03 | User accounts and lists | Simple email login; list CRUD; basket comparison | User lists persist; totals calculated only for complete eligible baskets | Complete; T03-A/B/C owner-approved, with final physical-iPhone acceptance on 2026-11-09 |
 | T04 | Shopping basket optimization | Up to 1, 2 (default), or 3 physical branches; complete single-store ranking, split allocations, freshness and missing-data treatment | Exact eligible merchandise optimum within the selected maximum; quantities/savings reconcile; mobile results and refresh work | Complete; owner physical-iPhone acceptance confirmed 2026-11-17; see T04 report |
-| T05 | Journey-aware supermarket shopping | A: Maps import/GPS foundations; B: OSRM/corridor/detours/slider/basic navigation; C: fuel and basket integration; D: final multi-store optimization/polish | Real road estimates, honest price coverage, total detour limits and no Google billing | T05-B implemented, owner acceptance pending; C/D not started |
+| T05 | Journey-aware supermarket shopping | A: Maps import/GPS foundations; B: OSRM/corridor/detours/slider/basic navigation; C: fuel and bounded multi-store basket integration; D: final polish | Real road estimates, honest price coverage, total detour limits and no Google billing | T05-B/C implemented, owner acceptance pending; D not started; real imports remain separately gated |
 | T06 | Receipt OCR and contribution | Free OCR candidate, photo/upload, review/match/catalog picker, duplicate/quality/privacy checks, protected price submission | Known alias matched; unknown product manually chosen; suspect price not auto-verified | Not started |
 | T07 | Supporting functions | Favorites, alerts, history, price reports, savings highlight | Each mapped requirement gets a documented acceptance check | Not started |
 | T08 | Natural-language assistant | Evaluate affordable/free design and supported requests | Uses actual backend facts; no invented prices; costs approved first | Not started |
